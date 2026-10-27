@@ -318,7 +318,9 @@ function setupMap() {
   }));
   renderLegend();
   renderPanel();
-  rerenderHooks.push(() => { if (map) map.setStyle(BASEMAP()); renderLegend(); renderPanel(); });
+  // A full style reload (no diff) fires style.load, which re-adds our layers in the new theme's colors.
+  // A diffed swap would silently drop them and never fire style.load.
+  rerenderHooks.push(() => { if (map) map.setStyle(BASEMAP(), { diff: false }); renderLegend(); renderPanel(); });
 }
 
 function addLayers() {
