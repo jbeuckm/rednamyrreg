@@ -86,6 +86,26 @@ def ohio_caps(a, b, p):
     return int((n == 1).sum()), int((n == 2).sum()), int((n >= 3).sum())
 
 
+def ohio_extra(a, b, p, k):
+    """Ohio §2(B)(4)(b), (7) and (8) measured on the block assignment."""
+    df = pd.DataFrame({"c": b.cty3.values, "m": b.Mw.values, "d": a, "p": p})[p > 0]
+    prot = [m for m in ("P16000", "P15000") if df[df.m == m].d.nunique() > 1]
+    cpop = df.groupby("c")["p"].sum()
+    nd = df.groupby("c")["d"].nunique()
+    small_split = [c for c in nd.index if nd[c] > 1 and cpop[c] < 400000]
+    pairs = {}
+    for c in small_split:
+        ds = sorted(df[df.c == c].d.unique())
+        for i in range(len(ds)):
+            for j in range(i + 1, len(ds)):
+                pairs.setdefault((ds[i], ds[j]), []).append(c)
+    shared = [pr for pr, cs in pairs.items() if len(cs) > 1]
+    whole_c = set(nd[nd == 1].index)
+    no_whole = [d for d in range(k)
+                if not (set(df[df.d == d].c.unique()) & whole_c) and df[df.d == d].c.nunique() > 1]
+    return dict(protected_split=prot, shared_pairs=shared, no_whole=no_whole)
+
+
 def pieces_per_landmass(geoms, state):
     """Largest number of separate pieces any district has on one landmass."""
     worst = []
@@ -123,7 +143,7 @@ def plan_metrics(a, k, b, p, votes, geoms_water, shore, water, extra):
         county_splits=cs, counties=cn, muni_splits=ms, munis=mn, precinct_splits=vs, precincts=vn,
         pieces=pieces, pp=pp, reock=rk, hull=hull, elections=el,
         enclaves=enclaves(geoms_water, water), slivers=precinct_slivers(a, b, p) if extra["has_vtd"] else 0,
-        ohio=ohio_caps(a, b, p),
+        ohio=ohio_caps(a, b, p), ohio_extra=ohio_extra(a, b, p, k) if extra.get("abbr") == "OH" else None,
         minority=1 - sv("vap_white"), black=sv("vap_black"), hisp=sv("vap_hisp"),
         shore_geoms=shore_geoms)
 
@@ -138,6 +158,9 @@ def checks(m, k, abbr, enacted=None):
     rng, md = m["range_people"], m["maxdev"]
     if rng <= 1:
         st, why = "pass", "within one person"
+    elif md <= TENNANT and abbr in ("IA", "WV"):
+        st, why = "justified", ("the state constitution requires whole counties, and this is the smallest gap whole "
+                                "counties allow from the rule's starting plans; Tennant v. Jefferson County (2012) upheld 0.79% for this reason")
     elif md <= TENNANT:
         st, why = "justified", ("closing the gap would split another county or municipality; "
                                 "far below the 0.79% upheld in Tennant v. Jefferson County (2012)")
@@ -172,11 +195,25 @@ def checks(m, k, abbr, enacted=None):
     if abbr == "OH":
         whole, once, more = m["ohio"]
         ok = whole >= 65 and once <= 18 and more <= 5
-        out.append(("ohio", "Ohio Art. XIX county limits", "pass" if ok else "fail",
+        out.append(("ohio", "Ohio Art. XIX §2(B)(5) county limits", "pass" if ok else "fail",
                     f"{whole} counties whole (≥65), {once} split once (≤18), {more} split more than once (≤5)"))
+        x = m["ohio_extra"]
+        out.append(("ohio_cities", "Ohio §2(B)(4)(b): Cleveland and Cincinnati not split",
+                    "pass" if not x["protected_split"] else "fail",
+                    "both whole" if not x["protected_split"] else "split: " + ", ".join(x["protected_split"])))
+        out.append(("ohio_shared", "Ohio §2(B)(7): two districts share at most one county under 400,000",
+                    "pass" if not x["shared_pairs"] else "fail",
+                    "no pair of districts shares two such counties" if not x["shared_pairs"] else f"{len(x['shared_pairs'])} pairs share more than one"))
+        out.append(("ohio_whole", "Ohio §2(B)(8): each district includes a whole county",
+                    "pass" if not x["no_whole"] else "review",
+                    "every district does" if not x["no_whole"] else f"{len(x['no_whole'])} district(s) do not (allowed if entirely inside one county)"))
     if abbr == "IA":
-        out.append(("iowa", "Iowa §42.4: each district within 1% of ideal", "pass" if md <= 0.01 else "fail",
+        out.append(("iowa", "Iowa Code §42.4: each district within 1% of ideal", "pass" if md <= 0.01 else "fail",
                     f"max deviation {md * 100:.4f}%"))
+    if abbr in ("IA", "WV"):
+        rule = "Iowa Const. art. III §37" if abbr == "IA" else "W. Va. Const. art. I §4"
+        out.append(("whole_counties", f"{rule}: no county divided", "pass" if m["county_splits"] == 0 else "fail",
+                    f"{m['county_splits']} counties split"))
     return out
 
 
@@ -197,7 +234,7 @@ def score_state(abbr):
     ours_geo = [shapely.coverage_union_all(polys[a == d]) for d in range(k)]
     ea, codes = enacted_assignment(fips, b.GEOID.values)
     en_geo = [shapely.coverage_union_all(polys[ea == d]) for d in range(len(codes))]
-    extra = dict(has_vtd=has_vtd)
+    extra = dict(has_vtd=has_vtd, abbr=abbr)
     ours = plan_metrics(a, k, b, p, votes, ours_geo, shore, water, extra)
     en = plan_metrics(ea, len(codes), b, p, votes, en_geo, shore, water, extra)
     ours["checks"] = checks(ours, k, abbr, en)

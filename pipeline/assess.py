@@ -67,6 +67,28 @@ def ours(S):
     return "\n".join(rows)
 
 
+def law(S):
+    rows = ["| State | What blocks it | Formula without the restriction | Formula obeying current law | Legal change that would allow it |",
+            "|---|---|---|---|---|"]
+    tilt = lambda b, k: "0" if abs(b * k) < 0.05 else f"{'R' if b > 0 else 'D'}+{abs(b * k):.1f}"
+    for ab, s in sorted(S.items()):
+        alt = s.get("alternatives") or {}
+        O = s["ours"]
+        if "unconstrained" in alt:
+            u = alt["unconstrained"]
+            rows.append(f"| {s['name']} | {u['law']} | tilt {tilt(u['bias'], s['seats'])} seats, gap {u['range_people']} people, "
+                        f"{u['county_splits']} counties split | tilt {tilt(O['elections']['comp']['bias'], s['seats'])} seats, "
+                        f"gap {O['range_people']} people, {O['county_splits']} counties split | {u['change']} |")
+        if "symmetric" in alt:
+            y = alt["symmetric"]
+            rows.append(f"| {s['name']} | {y['law']} | symmetric choice: efficiency gap {abs(y['alternative']['eg'])*100:.1f}% | "
+                        f"most-compact choice: efficiency gap {abs(y['chosen']['eg'])*100:.1f}% | {y['change']} |")
+    rows.append("")
+    rows.append("In California, Montana, Nebraska and New Mexico the symmetric choice and the most compact choice are the same plan, "
+                "so their bans on partisan data cost nothing in fairness here.")
+    return "\n".join(rows)
+
+
 def references():
     """The site's reference library (docs/refs.js) as a numbered Markdown list."""
     out = subprocess.run(["node", "-e", "global.window={}; require(process.argv[1]); "
@@ -85,7 +107,7 @@ def main():
     S = {s["abbr"]: s for s in json.loads((ROOT / "docs" / "data" / "summary.json").read_text())["states"]}
     path = ROOT / "ASSESSMENT.md"
     text = path.read_text()
-    for name, fn in [("redraws", redraws), ("ours", ours)]:
+    for name, fn in [("redraws", redraws), ("ours", ours), ("law", law)]:
         marker = f"<!-- MEASURED:{name} -->"
         text = re.sub(re.escape(marker) + r"\n.*?(?=\n- \*\*|\n### |\n## )",
                       lambda m: marker + "\n\n" + fn(S) + "\n", text, count=1, flags=re.S)

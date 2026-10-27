@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Case for Neutral Lines</title>
+<meta name="description" content="A state-by-state case for adopting the Neutral Lines congressional districts: what changes, why it is fairer and practical, whether it is legal under federal and state law, and the exact process to adopt it.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M2 2h13v13H2zM17 2h13v13H17zM2 17h13v13H2zM17 17h13v13H17z' fill='%236250d6'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html">Rednamyrreg <span>· Neutral Lines</span></a>
+    <div class="links">
+      <a href="#changes">What changes</a>
+      <a href="#case">The case</a>
+      <a href="#districts">District by district</a>
+      <a href="#legal">Is it legal?</a>
+      <a href="#process">How to adopt it</a>
+      <a href="#sources">Sources</a>
+    </div>
+    <label class="small" for="statePick" style="margin-left:auto" class="sr-only">State</label>
+    <select id="statePick" style="margin-left:8px"></select>
+    <button id="themeBtn" type="button" aria-label="Toggle color theme">Theme</button>
+  </div>
+</nav>
+
+<header class="hero wrap">
+  <div class="eyebrow" id="eyebrow">The case for Neutral Lines</div>
+  <h1 id="title">Loading…</h1>
+  <p class="lede" id="lede"></p>
+  <div class="tiles" id="tiles"></div>
+  <p class="note"><a id="mapLink" href="index.html">Open this state on the map →</a> · <a href="fairness.html">Fair from every side</a> · <a href="index.html#adoption">National adoption plan</a></p>
+</header>
+
+<section id="changes"><div class="wrap">
+  <div class="prose"><div class="eyebrow">What changes</div><h2>Today's map and Neutral Lines, side by side</h2></div>
+  <div class="tablewrap"><table class="cmp" id="cmpTable" style="font-size:.92rem"></table></div>
+  <p class="note prose" id="cmpNote"></p>
+</div></section>
+
+<section id="case"><div class="wrap prose">
+  <div class="eyebrow">The case</div><h2>Why this state should adopt it</h2>
+  <div id="argument"></div>
+</div></section>
+
+<section id="districts"><div class="wrap">
+  <div class="prose"><div class="eyebrow">District by district</div><h2>Every change, explained</h2>
+  <p>Each district below was drawn by the same rule: counties whole first, then cities and towns, then precincts, then single census blocks, splitting a unit only when equal population or contiguity requires it. Click a district to see it on the map.</p></div>
+  <div class="cards" id="districtCards"></div>
+</div></section>
+
+<section id="legal"><div class="wrap prose">
+  <div class="eyebrow">Legality</div><h2>Is it legal here?</h2>
+  <div id="legalText"></div>
+  <ul class="checks" id="checkList"></ul>
+</div></section>
+
+<section id="process"><div class="wrap prose">
+  <div class="eyebrow">How to adopt it</div><h2>The process in this state</h2>
+  <div id="processText"><p class="note">Loading the state's adoption process…</p></div>
+</div></section>
+
+<section id="sources"><div class="wrap prose">
+  <div class="eyebrow">Sources</div><h2>Citations</h2>
+  <ol class="refs" id="refList"></ol>
+</div></section>
+
+<footer><div class="wrap">Rednamyrreg / Neutral Lines is an independent demonstration project, not affiliated with any party, government or advocacy group. Figures are computed from 2020 Census blocks and the maps in use for November 2026; partisan figures describe 2016–20 statewide-race lean, not forecasts.</div></footer>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="refs.js"></script>
+<script src="common.js"></script>
+<script src="state.js"></script>
+</body>
+</html>

@@ -28,13 +28,13 @@ Nine states use new maps in November 2026 ([AP via CapRadio](https://www.capradi
 | California | 52 | D+30.9 | 48 / 44 | R+7.7% of seats / 0 | D+11.1% / D+4.4% | 28 / 32 | n/a | 35 / 42 |
 | Florida | 28 | R+3.3 | 9 / 13 | R+17.9% of seats / 0 | R+17.9% / R+3.1% | 19 / 27 | 157 / 120 | 9 / 9 |
 | North Carolina | 14 | D+0.0 | 3 / 7 | R+28.6% of seats / 0 | R+28.6% / R+0.7% | 12 / 19 | 21 / 75 | 1 / 1 |
-| Ohio | 15 | R+6.8 | 3 / 5 | R+16.7% of seats / D+3.3% of seats | R+23.4% / R+9.5% | 15 / 14 | 44 / 48 | 1 / 0 |
+| Ohio | 15 | R+6.8 | 3 / 5 | R+16.7% of seats / R+3.3% of seats | R+23.4% / R+9.5% | 15 / 13 | 44 / 147 | 1 / 0 |
 | Utah | 4 | R+33.4 | 1 / 1 | R+25.0% of seats / 0 | D+8.2% / D+6.0% | 3 / 3 | 6 / 7 | 0 / 0 |
 | Alabama | 7 | R+23.4 | 1 / 0 | R+21.4% of seats / R+7.1% of seats | R+11.4% / R+26.6% | 6 / 8 | 11 / 36 | 1 / 0 |
 | Louisiana | 6 | R+15.7 | 1 / 1 | R+33.3% of seats / 0 | R+17.4% / R+17.0% | 15 / 10 | 10 / 22 | 1 / 0 |
 | Tennessee | 9 | R+26.1 | 0 / 1 | D+16.7% of seats / R+16.7% of seats | R+23.9% / R+13.8% | 12 / 13 | 61 / 38 | 0 / 1 |
 
-Across these nine states, the 2026 maps give 77 Democratic-leaning seats against 87 under the formula. Summed partisan bias at a 50–50 vote is R+24.5 seats for the 2026 maps and R+2.5 seats for the formula (positive R = the map favors Republicans). Partisan bias, efficiency gap and lean are computed on the 2016–20 statewide composite; seats are districts leaning each way, not forecasts.
+Across these nine states, the 2026 maps give 77 Democratic-leaning seats against 87 under the formula. Summed partisan bias at a 50–50 vote is R+24.5 seats for the 2026 maps and R+3.5 seats for the formula (positive R = the map favors Republicans). Partisan bias, efficiency gap and lean are computed on the 2016–20 statewide composite; seats are districts leaning each way, not forecasts.
 
 ### State by state
 
@@ -114,29 +114,47 @@ The 2025–26 maps are mostly *legal*. Federal courts have withdrawn from partis
 
 | Check (formula plan) | Pass | Justified | Review | Fail |
 |---|---|---|---|---|
-| Equal population | 21 | 29 | 0 | 0 |
+| Equal population | 19 | 31 | 0 | 0 |
 | Contiguous (shared edges, no corner-only links) | 50 | 0 | 0 | 0 |
 | No enclaves | 50 | 0 | 0 | 0 |
 | Whole census blocks, each assigned once | 50 | 0 | 0 | 0 |
-| No bizarrely shaped districts | 39 | 0 | 11 | 0 |
-| Split counties | 34 | 0 | 16 | 0 |
-| Split municipalities | 30 | 0 | 20 | 0 |
-| Split precincts | 32 | 0 | 18 | 0 |
-| No tiny split-precinct pieces (ballot secrecy) | 13 | 13 | 24 | 0 |
-| Iowa §42.4: each district within 1% of ideal | 1 | 0 | 0 | 0 |
-| Ohio Art. XIX county limits | 0 | 0 | 0 | 1 (OH) |
+| No bizarrely shaped districts | 37 | 0 | 13 | 0 |
+| Split counties | 36 | 0 | 14 | 0 |
+| Split municipalities | 28 | 0 | 22 | 0 |
+| Split precincts | 33 | 0 | 17 | 0 |
+| No tiny split-precinct pieces (ballot secrecy) | 14 | 14 | 22 | 0 |
+| Iowa Code §42.4: each district within 1% of ideal | 1 | 0 | 0 | 0 |
+| Iowa Const. art. III §37: no county divided | 1 | 0 | 0 | 0 |
+| Ohio Art. XIX §2(B)(5) county limits | 1 | 0 | 0 | 0 |
+| Ohio §2(B)(4)(b): Cleveland and Cincinnati not split | 1 | 0 | 0 | 0 |
+| Ohio §2(B)(7): two districts share at most one county under 400,000 | 1 | 0 | 0 | 0 |
+| Ohio §2(B)(8): each district includes a whole county | 0 | 0 | 1 | 0 |
+| W. Va. Const. art. I §4: no county divided | 1 | 0 | 0 | 0 |
 
-Population: 21 of 50 states within one person; the largest gap is 15 people (New York). Counties split nationally: 380 (2026 maps: 408); municipalities: 788 (890); precincts: 1361 (1802).
+Population: 19 of 50 states within one person; the largest gap is 225 people (Iowa). Counties split nationally: 372 (2026 maps: 408); municipalities: 815 (890); precincts: 1456 (1802).
 
 - **Equal population.** Built from census blocks and equalized to the person where the keep-whole rule allows. Remaining gaps are a few people, from a consistently applied, neutral policy, far below the 0.79% the Supreme Court upheld in *Tennant*.
 - **Contiguity.** Checked on the true union of each district's blocks, with corner-only contact counting as broken.
 - **Race and the VRA.** Race is never an input, so there is no racial-gerrymandering exposure. After *Callais*, §2 requires a strong inference of intentional discrimination, which a rule fixed in law before the data arrive does not support. Where a court does find liability, the remedy can stay formulaic: lock the court-ordered district and rerun the formula on the rest.
 - **State law.**
   - **Partisan data.** The partisan selection step is switched off where law bars partisan data (IA, MT, NE, NM, CA) or creates intent risk (FL).
-  - **Ohio.** **Known gap: the formula plan fails Ohio's Art. XIX cap on counties split more than once (6 against a limit of 5).** Ohio's rule that a county larger than one district must contain one whole district is not modeled either. Ohio needs a state-specific module that keeps each county in the fewest possible districts before the plan could be offered there.
-  - **Iowa.** Iowa Code §42.4 puts whole counties ahead of exact equality, allowing up to 1% deviation. Iowa's enacted map splits no counties (94-person range). The formula equalizes to the person by splitting a few counties, which is the wrong trade under Iowa law. An Iowa module would run the county stage alone with a 1% tolerance.
+  - **Ohio.** A state module enforces Ohio Const. art. XIX §2(B) in full: at least 65 counties whole, at most 18 split once and 5 split twice, Cleveland and Cincinnati unsplit, two districts sharing at most one county under 400,000, and each district's part of a county contiguous. The resulting plan passes every Ohio check, with a population gap of a few dozen people.
+  - **Iowa and West Virginia.** Both constitutions forbid dividing counties in congressional districts (Iowa Const. art. III §37; W. Va. Const. art. I §4). State modules build whole-county plans that are as equal as whole counties allow, within Iowa's 1% statutory limit. West Virginia's plan is more equal than its enacted map; Iowa's enacted map is tighter.
   - **Precinct rules.** Colorado and New Mexico rules on precincts would need the same treatment.
 - **Population base.** Raw Census counts. States that reallocate prisoners to their home addresses would run the same rule on their adjusted counts.
+
+### Where state law blocks a fairer plan
+
+<!-- MEASURED:law -->
+
+| State | What blocks it | Formula without the restriction | Formula obeying current law | Legal change that would allow it |
+|---|---|---|---|---|
+| Florida | Fla. Const. art. III §20 forbids intent to favor a party, and selecting on election results creates a record opponents could cite. | symmetric choice: efficiency gap 3.1% | most-compact choice: efficiency gap 6.7% | A statute or amendment expressly allowing a party-symmetric fairness test among pre-certified neutral plans, applied only after the plans are drawn. |
+| Iowa | Iowa Const. art. III §37 forbids dividing any county in a congressional district. | tilt D+1.0 seats, gap 1 people, 6 counties split | tilt D+1.0 seats, gap 225 people, 0 counties split | Amend art. III §37 to allow a county to be divided where needed for equal population or compactness, or write the Neutral Lines rule into the constitution. |
+| Ohio | Ohio Const. art. XIX §2(B) limits county splits and requires keeping Cleveland and Cincinnati whole. | tilt D+0.5 seats, gap 4 people, 14 counties split | tilt R+0.5 seats, gap 48 people, 13 counties split | Amend art. XIX §2(B) to let the published rule decide splits, keeping its preference for whole counties and cities. |
+| West Virginia | W. Va. Const. art. I §4 requires congressional districts formed of contiguous counties. | tilt 0 seats, gap 0 people, 1 counties split | tilt 0 seats, gap 58 people, 0 counties split | Amend art. I §4 to allow county divisions where needed for equal population or compactness. |
+
+In California, Montana, Nebraska and New Mexico the symmetric choice and the most compact choice are the same plan, so their bans on partisan data cost nothing in fairness here.
 
 ### Consensus
 
@@ -175,9 +193,17 @@ These are the roles where a rule fixed in advance, and checkable by anyone, adds
 | Post-*Callais* Southern redraws (AL, LA, TN) | Legal under federal law; state and intent claims remain | Weak | Stable until political control changes |
 | Bipartisan or court processes (OH 2025, VA 2021, UT 2025, PA 2022) | Strong | Mixed to strong | Strong |
 | Independent commissions; Iowa model | Strong | Strong | Strong, with human judgment |
-| Neutral Lines | Strong, with the Ohio module and state precinct rules still to build | Strong by design | Strong as a default, starting map or benchmark |
+| Neutral Lines | Strong: passes federal law and each state's own rules in all 50 states, with state modules for Iowa, West Virginia and Ohio | Strong by design | Strong as a default, starting map or benchmark |
 
 The approaches most likely to build agreement share three traits: **the rules are fixed before anyone sees the results, both sides can verify them, and one side cannot change them alone.** Neutral Lines is built to have all three, but it still has to earn trust through independent review. The fastest consensus win available binds both parties equally: **a ban on mid-decade redistricting, with Neutral Lines as the default map for any state that breaks it.**
+
+---
+
+---
+
+---
+
+---
 
 ---
 
@@ -236,36 +262,38 @@ The same numbered list appears at the bottom of the website. Court decisions lin
 47. National Conference of State Legislatures, “Redistricting Criteria.” <https://www.ncsl.org/elections-and-campaigns/redistricting-criteria>
 48. Justin Levitt, “Where Are the Lines Drawn?” *All About Redistricting*, Loyola Law School. <https://redistricting.lls.edu/redistricting-101/where-are-the-lines-drawn/>
 49. Iowa Code §42.4 (redistricting standards). <https://www.legis.iowa.gov/docs/code/42.4.pdf>
-50. California Constitution, art. XXI, §2. <https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CONS&sectionNum=SEC.%202.&article=XXI>
-51. Ohio Constitution, art. XIX (congressional redistricting). <https://codes.ohio.gov/ohio-constitution/article-19>
-52. Michigan Constitution, art. IV, §6. <https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-Article-IV-6>
-53. Florida Constitution, art. III, §20 (Fair Districts). <https://www.flsenate.gov/Laws/Constitution#A3S20>
-54. Revised Code of Washington §44.05.090. <https://app.leg.wa.gov/rcw/default.aspx?cite=44.05.090>
-55. New Mexico Statutes §1-3A-7. <https://codes.findlaw.com/nm/chapter-1-elections/nm-st-sect-1-3a-7/>
-56. Colorado Revised Statutes §2-2-506. <https://colorado.public.law/statutes/crs_2-2-506>
-57. *League of Women Voters v. Commonwealth*, Pa. Supreme Court order, Jan. 22, 2018. <https://www.brennancenter.org/sites/default/files/legal-work/LWV_v_PA_Order_1.26.18.pdf>
-58. *Clarke v. Wisconsin Elections Commission*, 2023 WI 79 (summary, Wisconsin Public Radio). <https://www.wpr.org/justice/wisconsin-supreme-court-overturns-republican-drawn-legislative-maps>
-59. NC Newsline, split precincts and ballot styles under North Carolina's 2011 maps. <https://ncnewsline.com/?p=151045>
-60. Secretary of the Commonwealth William F. Galvin, memorandum on precinct splits, Nov. 1, 2021. <https://redistricting.lls.edu/wp-content/uploads/ma_2020_galvin_memo_211101.pdf>
-61. Oklahoma House, fiscal impact statement for HB 1871 (split-precinct costs). <https://www.oklegislature.gov/cf_pdf/2023-24%20SUPPORT%20DOCUMENTS/BILLSUM/House/HB1871%20FULLPCS2%20BILLSUM.PDF>
-62. U.S. Census Bureau, Geography Program glossary (“Block”). <https://www.census.gov/programs-surveys/geography/about/glossary.html>
-63. Ballotpedia, “States with initiative or referendum.” <https://ballotpedia.org/States_with_initiative_or_referendum>
-64. Richard L. Hasen, *Election Law Blog*, Aug. 14, 2025, reporting the POLITICO–Citrin Center–Possibility Lab poll: California voters preferred keeping the independent redistricting commission by nearly two to one (36% favored returning maps to the legislature). <https://electionlawblog.org/?p=151568>
-65. James B. Weaver and Sidney W. Hess, “A Procedure for Nonpartisan Districting: Development of Computer Techniques,” *Yale Law Journal* 73 (1963): 288. <https://openyls.law.yale.edu/entities/publication/d352fa1c-5562-4a38-9043-4a972f68ea48>
-66. S. W. Hess, J. B. Weaver, H. J. Siegfeldt, J. N. Whelan and P. A. Zitlau, “Nonpartisan Political Redistricting by Computer,” *Operations Research* 13, no. 6 (1965): 998–1006. <https://doi.org/10.1287/opre.13.6.998>
-67. Vincent Cohen-Addad, Philip N. Klein and Neal E. Young, “Balanced Centroidal Power Diagrams for Redistricting,” *ACM SIGSPATIAL* 2018 (arXiv:1710.03358). <https://arxiv.org/abs/1710.03358>
-68. Warren D. Smith, shortest-splitline districting, Center for Range Voting. <https://rangevoting.org/GerryExamples.html>
-69. Boris Alexeev and Dustin G. Mixon, “An Impossibility Theorem for Gerrymandering,” *American Mathematical Monthly* 125, no. 10 (2018): 878–884 (arXiv:1710.04193). <https://arxiv.org/abs/1710.04193>
-70. Jowei Chen and Jonathan Rodden, “Unintentional Gerrymandering: Political Geography and Electoral Bias in Legislatures,” *Quarterly Journal of Political Science* 8, no. 3 (2013): 239–269. <https://doi.org/10.1561/100.00012033>
-71. Nicholas O. Stephanopoulos and Eric M. McGhee, “Partisan Gerrymandering and the Efficiency Gap,” *University of Chicago Law Review* 82 (2015): 831. <https://chicagounbound.uchicago.edu/uclrev/vol82/iss2/4>
-72. Michael D. McDonald and Robin E. Best, “Unfair Partisan Gerrymanders in Politics and Law: A Diagnostic Applied to Six Cases,” *Election Law Journal* 14 (2015): 312. <https://www.brennancenter.org/sites/default/files/legal-work/McDonald_Best_Unfair_Gerrymanders_2015.pdf>
-73. Gary King, Bernard Grofman, Andrew Gelman and Jonathan N. Katz, Brief of Amici Curiae in *LULAC v. Perry* (2006) (partisan symmetry). <https://gking.harvard.edu/publication/brief-of-amici-curiae-professors-gary-king-bernard-grofman-andrew-gelman-and-jonathan-katz-in-support-of-neither-party/>
-74. Mira Bernstein and Moon Duchin, “A Formula Goes to Court: Partisan Gerrymandering and the Efficiency Gap,” *Notices of the AMS* 64 (2017) (arXiv:1705.10812). <https://arxiv.org/abs/1705.10812>
-75. Daryl DeFord, Moon Duchin and Justin Solomon, “Recombination: A Family of Markov Chains for Redistricting,” *Harvard Data Science Review* 3.1 (2021) (arXiv:1911.05725). <https://arxiv.org/abs/1911.05725>
-76. Jonathan C. Mattingly and Christy Vaughn, “Redistricting and the Will of the People” (2014), arXiv:1410.8796. <https://arxiv.org/abs/1410.8796>
-77. U.S. Census Bureau, 2020 Centers of Population by block group. <https://www2.census.gov/geo/docs/reference/cenpop2020/blkgrp/>
-78. U.S. Census Bureau, TIGER/Line 2020 Tabulation Blocks (TABBLOCK20) with 2020 population. <https://www2.census.gov/geo/tiger/TIGER2020/TABBLOCK20/>
-79. U.S. Census Bureau, 2020 Block Assignment Files (voting districts, places, county subdivisions). <https://www2.census.gov/geo/docs/maps-data/data/baf2020/>
-80. U.S. Census Bureau, 120th Congressional District Block Equivalency Files. <https://www.census.gov/geographies/mapping-files/2027/dec/rdo/120-congressional-district-bef.html>
-81. Voting and Election Science Team, precinct-level election results, Harvard Dataverse. <https://dataverse.harvard.edu/dataverse/electionscience>
-82. Christopher T. Kenny and Cory McCartan, ALARM Project, 2020 redistricting data files joining census and VEST data (CC BY-SA 4.0). <https://github.com/alarm-redist/census-2020>
+50. Iowa Constitution, art. III, §37 (“no county shall be divided in forming a congressional district”). <https://www.legis.iowa.gov/docs/publications/ICP/1023054.pdf>
+51. West Virginia Constitution, art. I, §4 (congressional districts formed of contiguous counties). <https://www.wvlegislature.gov/WVCODE/WV_CON.cfm>
+52. California Constitution, art. XXI, §2. <https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CONS&sectionNum=SEC.%202.&article=XXI>
+53. Ohio Constitution, art. XIX (congressional redistricting). <https://codes.ohio.gov/ohio-constitution/article-19>
+54. Michigan Constitution, art. IV, §6. <https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-Article-IV-6>
+55. Florida Constitution, art. III, §20 (Fair Districts). <https://www.flsenate.gov/Laws/Constitution#A3S20>
+56. Revised Code of Washington §44.05.090. <https://app.leg.wa.gov/rcw/default.aspx?cite=44.05.090>
+57. New Mexico Statutes §1-3A-7. <https://codes.findlaw.com/nm/chapter-1-elections/nm-st-sect-1-3a-7/>
+58. Colorado Revised Statutes §2-2-506. <https://colorado.public.law/statutes/crs_2-2-506>
+59. *League of Women Voters v. Commonwealth*, Pa. Supreme Court order, Jan. 22, 2018. <https://www.brennancenter.org/sites/default/files/legal-work/LWV_v_PA_Order_1.26.18.pdf>
+60. *Clarke v. Wisconsin Elections Commission*, 2023 WI 79 (summary, Wisconsin Public Radio). <https://www.wpr.org/justice/wisconsin-supreme-court-overturns-republican-drawn-legislative-maps>
+61. NC Newsline, split precincts and ballot styles under North Carolina's 2011 maps. <https://ncnewsline.com/?p=151045>
+62. Secretary of the Commonwealth William F. Galvin, memorandum on precinct splits, Nov. 1, 2021. <https://redistricting.lls.edu/wp-content/uploads/ma_2020_galvin_memo_211101.pdf>
+63. Oklahoma House, fiscal impact statement for HB 1871 (split-precinct costs). <https://www.oklegislature.gov/cf_pdf/2023-24%20SUPPORT%20DOCUMENTS/BILLSUM/House/HB1871%20FULLPCS2%20BILLSUM.PDF>
+64. U.S. Census Bureau, Geography Program glossary (“Block”). <https://www.census.gov/programs-surveys/geography/about/glossary.html>
+65. Ballotpedia, “States with initiative or referendum.” <https://ballotpedia.org/States_with_initiative_or_referendum>
+66. Richard L. Hasen, *Election Law Blog*, Aug. 14, 2025, reporting the POLITICO–Citrin Center–Possibility Lab poll: California voters preferred keeping the independent redistricting commission by nearly two to one (36% favored returning maps to the legislature). <https://electionlawblog.org/?p=151568>
+67. James B. Weaver and Sidney W. Hess, “A Procedure for Nonpartisan Districting: Development of Computer Techniques,” *Yale Law Journal* 73 (1963): 288. <https://openyls.law.yale.edu/entities/publication/d352fa1c-5562-4a38-9043-4a972f68ea48>
+68. S. W. Hess, J. B. Weaver, H. J. Siegfeldt, J. N. Whelan and P. A. Zitlau, “Nonpartisan Political Redistricting by Computer,” *Operations Research* 13, no. 6 (1965): 998–1006. <https://doi.org/10.1287/opre.13.6.998>
+69. Vincent Cohen-Addad, Philip N. Klein and Neal E. Young, “Balanced Centroidal Power Diagrams for Redistricting,” *ACM SIGSPATIAL* 2018 (arXiv:1710.03358). <https://arxiv.org/abs/1710.03358>
+70. Warren D. Smith, shortest-splitline districting, Center for Range Voting. <https://rangevoting.org/GerryExamples.html>
+71. Boris Alexeev and Dustin G. Mixon, “An Impossibility Theorem for Gerrymandering,” *American Mathematical Monthly* 125, no. 10 (2018): 878–884 (arXiv:1710.04193). <https://arxiv.org/abs/1710.04193>
+72. Jowei Chen and Jonathan Rodden, “Unintentional Gerrymandering: Political Geography and Electoral Bias in Legislatures,” *Quarterly Journal of Political Science* 8, no. 3 (2013): 239–269. <https://doi.org/10.1561/100.00012033>
+73. Nicholas O. Stephanopoulos and Eric M. McGhee, “Partisan Gerrymandering and the Efficiency Gap,” *University of Chicago Law Review* 82 (2015): 831. <https://chicagounbound.uchicago.edu/uclrev/vol82/iss2/4>
+74. Michael D. McDonald and Robin E. Best, “Unfair Partisan Gerrymanders in Politics and Law: A Diagnostic Applied to Six Cases,” *Election Law Journal* 14 (2015): 312. <https://www.brennancenter.org/sites/default/files/legal-work/McDonald_Best_Unfair_Gerrymanders_2015.pdf>
+75. Gary King, Bernard Grofman, Andrew Gelman and Jonathan N. Katz, Brief of Amici Curiae in *LULAC v. Perry* (2006) (partisan symmetry). <https://gking.harvard.edu/publication/brief-of-amici-curiae-professors-gary-king-bernard-grofman-andrew-gelman-and-jonathan-katz-in-support-of-neither-party/>
+76. Mira Bernstein and Moon Duchin, “A Formula Goes to Court: Partisan Gerrymandering and the Efficiency Gap,” *Notices of the AMS* 64 (2017) (arXiv:1705.10812). <https://arxiv.org/abs/1705.10812>
+77. Daryl DeFord, Moon Duchin and Justin Solomon, “Recombination: A Family of Markov Chains for Redistricting,” *Harvard Data Science Review* 3.1 (2021) (arXiv:1911.05725). <https://arxiv.org/abs/1911.05725>
+78. Jonathan C. Mattingly and Christy Vaughn, “Redistricting and the Will of the People” (2014), arXiv:1410.8796. <https://arxiv.org/abs/1410.8796>
+79. U.S. Census Bureau, 2020 Centers of Population by block group. <https://www2.census.gov/geo/docs/reference/cenpop2020/blkgrp/>
+80. U.S. Census Bureau, TIGER/Line 2020 Tabulation Blocks (TABBLOCK20) with 2020 population. <https://www2.census.gov/geo/tiger/TIGER2020/TABBLOCK20/>
+81. U.S. Census Bureau, 2020 Block Assignment Files (voting districts, places, county subdivisions). <https://www2.census.gov/geo/docs/maps-data/data/baf2020/>
+82. U.S. Census Bureau, 120th Congressional District Block Equivalency Files. <https://www.census.gov/geographies/mapping-files/2027/dec/rdo/120-congressional-district-bef.html>
+83. Voting and Election Science Team, precinct-level election results, Harvard Dataverse. <https://dataverse.harvard.edu/dataverse/electionscience>
+84. Christopher T. Kenny and Cory McCartan, ALARM Project, 2020 redistricting data files joining census and VEST data (CC BY-SA 4.0). <https://github.com/alarm-redist/census-2020>

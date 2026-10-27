@@ -25,7 +25,7 @@ import shapely.geometry
 from pyproj import Transformer
 from shapely.geometry import mapping
 
-from build import ALPHA, K, MAXDEV, YEARS
+from build import ALPHA, K, MAXDEV, NO_PARTISAN, YEARS, select
 from blocks import load_blocks
 from geometry import project, states_shoreline
 from load import RAW
@@ -116,6 +116,44 @@ def district_details(a, other, other_labels, b, p, fips, k, target, formula):
     return out
 
 
+LAW_CHANGE = {
+    "IA": ("Iowa Const. art. III §37 forbids dividing any county in a congressional district.",
+           "Amend art. III §37 to allow a county to be divided where needed for equal population or compactness, "
+           "or write the Neutral Lines rule into the constitution."),
+    "WV": ("W. Va. Const. art. I §4 requires congressional districts formed of contiguous counties.",
+           "Amend art. I §4 to allow county divisions where needed for equal population or compactness."),
+    "OH": ("Ohio Const. art. XIX §2(B) limits county splits and requires keeping Cleveland and Cincinnati whole.",
+           "Amend art. XIX §2(B) to let the published rule decide splits, keeping its preference for whole counties and cities."),
+}
+PARTISAN_LAW = {
+    "IA": "Iowa Code §42.4(5) bars using previous election results.",
+    "MT": "Montana's 2021 law (HB 506) bars previous election results except as a court remedy.",
+    "NE": "Nebraska's redistricting guidelines (LR 134) bar political data.",
+    "NM": "N.M. Stat. §1-3A-7 bars the advisory committee from using partisan data.",
+    "CA": "Cal. Const. art. XXI §2(e) forbids drawing for or against a party, which a selection step on election results could be argued to do.",
+    "FL": "Fla. Const. art. III §20 forbids intent to favor a party, and selecting on election results creates a record opponents could cite.",
+}
+
+
+def alternatives(abbr, res, unconstrained):
+    """What the formula would produce if a state's law were changed."""
+    out = {}
+    if abbr in unconstrained:
+        out["unconstrained"] = dict(unconstrained[abbr], law=LAW_CHANGE[abbr][0], change=LAW_CHANGE[abbr][1])
+    if abbr in NO_PARTISAN and res["k"] > 1:
+        sym, _, _ = select(res["cands"], True)
+        if sym != res["chosen"]:
+            def est(i):
+                el = res["cands"][i]["elections"]
+                return dict(seed=res["cands"][i]["seed"], seatsD=el["comp"]["seatsD"], eg=r(el["comp"]["eg"]),
+                            bias=r(np.mean([el[y]["bias"] for y in YEARS if y in el])),
+                            county_splits=res["cands"][i]["county_splits"])
+            out["symmetric"] = dict(chosen=est(res["chosen"]), alternative=est(sym), law=PARTISAN_LAW[abbr],
+                                    change="A statute or amendment expressly allowing a party-symmetric fairness test among "
+                                           "pre-certified neutral plans, applied only after the plans are drawn.")
+    return out
+
+
 def plan_out(m, order):
     order = np.asarray(order)
     el = {key: dict(V=r(e["V"]), seatsD=e["seatsD"], eg=r(e["eg"]), mm=r(e["mm"]), bias=r(e["bias"]),
@@ -141,6 +179,8 @@ def main(only=None):
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "plans").mkdir(exist_ok=True)
     feats, efeats, sfeats, states = [], [], [], []
+    ufile = BUILD / "unconstrained.json"
+    unconstrained = json.loads(ufile.read_text()) if ufile.exists() else {}
     for fips, abbr, name, k in STATES:
         if only and abbr not in only:
             continue
@@ -200,9 +240,11 @@ def main(only=None):
         )
         (OUT / "plans" / f"{abbr}.json").write_text(json.dumps(cert))
         a = rank[sc["assign"]] + 1
-        with gzip.open(OUT / "plans" / f"{abbr}.csv.gz", "wt") as f:
-            f.write("GEOID20,district\n")
-            f.writelines(f"{g},{d}\n" for g, d in zip(sc["GEOID"], a))
+        # mtime=0 and no filename: identical inputs give a byte-identical file.
+        body = "GEOID20,district\n" + "".join(f"{g},{d}\n" for g, d in zip(sc["GEOID"], a))
+        with open(OUT / "plans" / f"{abbr}.csv.gz", "wb") as raw, \
+                gzip.GzipFile(filename="", mode="wb", fileobj=raw, mtime=0) as f:
+            f.write(body.encode())
 
         blk, _, _ = load_blocks(fips, abbr)
         pb = blk["pop"].values
@@ -220,7 +262,7 @@ def main(only=None):
             prison_adjusted=bool(E.get("prison_adjusted", False)),
             ours=dict(plan_out(O, order), detail=O_det),
             enacted=dict(plan_out(E, np.arange(len(E["labels"]))), detail=E_det),
-            enacted_labels=E["labels"], ensemble=ens))
+            enacted_labels=E["labels"], ensemble=ens, alternatives=alternatives(abbr, res, unconstrained)))
         print(abbr, flush=True)
 
     summary = dict(generated=str(date.today()),

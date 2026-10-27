@@ -194,12 +194,14 @@ function nationals() {
 
 function renderHero() {
   const n = nationals();
+  const S = state.data.summary.states;
+  const legal = S.filter((s) => !s.ours.checks.some((c) => c.status === "fail")).length;
   const tiles = [
-    [`435`, `districts computed for all 50 states by one public formula`],
-    [`${n.contiguous}/50`, `states where every district is contiguous on true census-block geometry`],
-    [`≤ ${n.maxRange}`, `people between the largest and smallest district in any state (${n.exact} states within 1 person)`],
-    [`${fmt(n.oursSplits)} vs ${fmt(n.enSplits)}`, `county splits: formula vs enacted maps`],
-    [`${n.oursPP.toFixed(2)} vs ${n.enPP.toFixed(2)}`, `average Polsby–Popper compactness (higher is more compact)`],
+    [`${legal}/50`, `states whose plan passes every federal and state legal check we run, including each state's own constitution and statutes`],
+    [`0`, `partisan, racial or incumbent inputs while drawing. The rule is public, deterministic and checkable by anyone`],
+    [`${n.contiguous}/50 · ≤ ${n.maxRange}`, `states with every district contiguous on true block geometry · largest population gap anywhere, in people`],
+    [`${seatsFavor(n.oursBias).replace(" seats", "")} vs ${seatsFavor(n.enBias).replace(" seats", "")}`, `summed partisan bias, in seats, at a 50–50 vote: Neutral Lines vs today's maps (closer to 0 is fairer)`],
+    [`${fmt(n.oursSplits)} vs ${fmt(n.enSplits)}`, `counties split, Neutral Lines vs today's maps. Towns: ${fmt(n.oursMuni)} vs ${fmt(n.enMuni)}; precincts: ${fmt(n.oursPrec)} vs ${fmt(n.enPrec)}`],
   ];
   document.getElementById("heroTiles").innerHTML = tiles.map(([v, l]) =>
     `<div class="tile"><div class="v num">${v}</div><div class="l">${l}</div></div>`).join("");
@@ -236,29 +238,76 @@ function fillFor(f, scales) {
   return css(ID_VARS[Math.min(f.properties.c || 0, 4)]);
 }
 
-// ---------------------------------------------------------------- map
-let svg, gAll, gDist, gStates, gSel, gHl, gLabels, path, zoom, W = 975, H = 610;
+// ---------------------------------------------------------------- map (MapLibre GL)
+let map = null;
+const BASEMAP = () => `https://tiles.openfreemap.org/styles/${isDark() ? "dark" : "positron"}`;
+const US_BOUNDS = [[-125.0, 24.2], [-66.8, 49.6]];
+const FILL_OPACITY = 0.62;
+
+function bboxOf(geom) {
+  let x0 = 180, y0 = 90, x1 = -180, y1 = -90;
+  const walk = (c) => {
+    if (typeof c[0] === "number") {
+      if (c[0] < x0) x0 = c[0]; if (c[0] > x1) x1 = c[0];
+      if (c[1] < y0) y0 = c[1]; if (c[1] > y1) y1 = c[1];
+    } else c.forEach(walk);
+  };
+  walk(geom.coordinates);
+  return [[x0, y0], [x1, y1]];
+}
+
+// Label at the area-weighted centre of the largest outer ring.
+function labelPoint(f) {
+  const polys = f.geometry.type === "MultiPolygon" ? f.geometry.coordinates : [f.geometry.coordinates];
+  let best = null, bestA = -1;
+  polys.forEach((poly) => {
+    const r = poly[0];
+    let A = 0, cx = 0, cy = 0;
+    for (let i = 0, j = r.length - 1; i < r.length; j = i++) {
+      const cr = r[j][0] * r[i][1] - r[i][0] * r[j][1];
+      A += cr; cx += (r[j][0] + r[i][0]) * cr; cy += (r[j][1] + r[i][1]) * cr;
+    }
+    if (Math.abs(A) > bestA && A !== 0) { bestA = Math.abs(A); best = [cx / (3 * A), cy / (3 * A)]; }
+  });
+  return best;
+}
+
+function labelText(f) {
+  return state.plan === "ours" ? String(f.properties.d)
+    : state.plan === "history" ? (f.properties.d === 0 ? "AL" : String(f.properties.d))
+    : (f.properties.label === "00" ? "AL" : String(+f.properties.label));
+}
 
 function setupMap() {
-  const { states } = state.data;
-  const proj = d3.geoAlbersUsa().fitExtent([[10, 10], [W - 10, H - 10]], states);
-  path = d3.geoPath(proj);
-  svg = d3.select("#map").insert("svg", ":first-child")
-    .attr("viewBox", `0 0 ${W} ${H}`).attr("role", "img")
-    .attr("aria-label", "Map of U.S. congressional districts");
-  gAll = svg.append("g");
-  gDist = gAll.append("g");
-  gStates = gAll.append("g");
-  gSel = gAll.append("g");
-  gHl = gAll.append("g");
-  gLabels = gAll.append("g");
-  gStates.selectAll("path").data(states.features).join("path")
-    .attr("class", "state-border").attr("d", path);
-  zoom = d3.zoom().scaleExtent([1, 40]).on("zoom", (e) => {
-    gAll.attr("transform", e.transform);
-    gLabels.selectAll("text").attr("font-size", 11 / e.transform.k).style("stroke-width", 3 / e.transform.k);
+  map = new maplibregl.Map({
+    container: "mapgl", style: BASEMAP(), bounds: US_BOUNDS,
+    fitBoundsOptions: { padding: 20 }, dragRotate: false, pitchWithRotate: false,
+    attributionControl: { compact: true }, cooperativeGestures: false,
   });
-  svg.call(zoom).on("wheel.zoom", null).on("dblclick.zoom", null);
+  map.touchZoomRotate.disableRotation();
+  map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-left");
+  map.on("style.load", () => { addLayers(); drawDistricts(); });
+  map.on("mousemove", "district-fill", (e) => {
+    const f = e.features[0];
+    map.getCanvas().style.cursor = "pointer";
+    map.setFilter("hover-line", ["==", ["id"], f.id]);
+    showTip(e.originalEvent, f);
+  });
+  map.on("mouseleave", "district-fill", () => {
+    map.getCanvas().style.cursor = "";
+    map.setFilter("hover-line", ["==", ["id"], -1]);
+    tip.style.display = "none";
+  });
+  map.on("click", "district-fill", (e) => {
+    const f = e.features[0];
+    if (state.plan === "history") {
+      const c = hist.snaps[hist.i].congress;
+      const ann = hist.anns.find((x) => x.congress === c && x.st === f.properties.st && x.d === f.properties.d);
+      if (ann) return focusAnnotation(ann);
+    }
+    state.selDistrict = state.plan === "history" ? null : f.properties.d - 1;
+    if (state.sel === f.properties.st) { renderPanel(); drawHighlight(); } else selectState(f.properties.st, true);
+  });
   document.getElementById("resetBtn").addEventListener("click", () => selectState(null));
   document.querySelectorAll("[data-plan]").forEach((b) => b.addEventListener("click", () => setPlan(b.dataset.plan)));
   setupHistoryControls();
@@ -267,10 +316,32 @@ function setupMap() {
     document.querySelectorAll("[data-color]").forEach((x) => x.setAttribute("aria-pressed", x === b));
     recolor(); renderLegend();
   }));
-  drawDistricts();
   renderLegend();
   renderPanel();
-  rerenderHooks.push(() => { recolor(); renderLegend(); renderPanel(); });
+  rerenderHooks.push(() => { if (map) map.setStyle(BASEMAP()); renderLegend(); renderPanel(); });
+}
+
+function addLayers() {
+  const empty = { type: "FeatureCollection", features: [] };
+  // Draw our layers beneath the basemap's place labels so town names stay readable.
+  const firstSymbol = (map.getStyle().layers || []).find((l) => l.type === "symbol")?.id;
+  const add = (layer, before = firstSymbol) => { if (!map.getLayer(layer.id)) map.addLayer(layer, before); };
+  for (const id of ["districts", "labels", "hl"]) if (!map.getSource(id)) map.addSource(id, { type: "geojson", data: empty });
+  if (!map.getSource("states")) map.addSource("states", { type: "geojson", data: state.data.states });
+  add({ id: "district-fill", type: "fill", source: "districts",
+        paint: { "fill-color": ["get", "fill"], "fill-opacity": FILL_OPACITY } });
+  add({ id: "district-line", type: "line", source: "districts",
+        paint: { "line-color": css("--surface"), "line-width": ["interpolate", ["linear"], ["zoom"], 3, 0.4, 8, 1.4] } });
+  add({ id: "state-line", type: "line", source: "states",
+        paint: { "line-color": css("--ink-2"), "line-width": ["interpolate", ["linear"], ["zoom"], 3, 0.8, 8, 2] } });
+  add({ id: "state-sel", type: "line", source: "states", filter: ["==", ["get", "st"], ""],
+        paint: { "line-color": css("--ink"), "line-width": 2.6 } });
+  add({ id: "hover-line", type: "line", source: "districts", filter: ["==", ["id"], -1],
+        paint: { "line-color": css("--ink"), "line-width": 2 } });
+  add({ id: "hl-line", type: "line", source: "hl", paint: { "line-color": css("--accent"), "line-width": 3.5 } });
+  add({ id: "dlabels", type: "symbol", source: "labels", layout: {
+          "text-field": ["get", "t"], "text-size": 13, "text-font": ["Noto Sans Bold"], "text-allow-overlap": false },
+        paint: { "text-color": css("--ink"), "text-halo-color": css("--surface"), "text-halo-width": 2 } }, undefined);
 }
 
 function scales() { return { lean: leanScale(), min: minorityScale() }; }
@@ -281,63 +352,24 @@ function currentFeatures() {
 }
 
 function drawDistricts() {
-  const feats = currentFeatures();
+  if (!map || !map.getSource("districts")) return;
   const sc = scales();
-  gDist.selectAll("path").data(feats, (f) => state.plan + f.properties.st + f.properties.d)
-    .join("path")
-    .attr("class", "district")
-    .attr("d", path)
-    .attr("fill", (f) => fillFor(f, sc))
-    .on("mousemove", (e, f) => showTip(e, f))
-    .on("mouseleave", () => { tip.style.display = "none"; })
-    .on("click", (e, f) => {
-      if (state.plan === "history") {
-        const c = hist.snaps[hist.i].congress;
-        const ann = hist.anns.find((x) => x.congress === c && x.st === f.properties.st && x.d === f.properties.d);
-        if (ann) return focusAnnotation(ann);
-      }
-      state.selDistrict = state.plan === "history" ? null : f.properties.d - 1;
-      if (state.sel === f.properties.st) renderPanel(); else selectState(f.properties.st, true);
-    });
+  const feats = currentFeatures().map((f, i) => ({ type: "Feature", id: i, geometry: f.geometry,
+    properties: { ...f.properties, fill: fillFor(f, sc) } }));
+  map.getSource("districts").setData({ type: "FeatureCollection", features: feats });
   drawLabels();
   drawHighlight();
+  map.setFilter("state-sel", ["==", ["get", "st"], state.sel || ""]);
 }
 
-function recolor() {
-  const sc = scales();
-  gDist.selectAll("path").attr("fill", (f) => fillFor(f, sc));
-}
+function recolor() { drawDistricts(); }
 
 function drawLabels() {
-  const k = d3.zoomTransform(svg.node()).k;
-  const feats = !state.sel ? [] : currentFeatures().filter((f) => f.properties.st === state.sel);
-  gLabels.selectAll("text").data(feats, (f) => f.properties.st + f.properties.d).join("text")
-    .attr("class", "dlabel")
-    .attr("transform", (f) => {
-      const c = labelPoint(f);
-      return c ? `translate(${c})` : "translate(-999,-999)";
-    })
-    .attr("font-size", 11 / k).style("stroke-width", 3 / k)
-    .text((f) => state.plan === "ours" ? f.properties.d
-      : state.plan === "history" ? (f.properties.d === 0 ? "AL" : f.properties.d)
-      : (f.properties.label === "00" ? "AL" : +f.properties.label));
-}
-
-// Label at the centroid of the largest polygon part.
-function labelPoint(f) {
-  const g = f.geometry;
-  if (g.type === "MultiPolygon") {
-    let best = null, area = -1;
-    g.coordinates.forEach((poly) => {
-      const p = { type: "Polygon", coordinates: poly };
-      const a = path.area(p);
-      if (a > area) { area = a; best = p; }
-    });
-    const c = path.centroid(best);
-    return isFinite(c[0]) ? c : null;
-  }
-  const c = path.centroid(f);
-  return isFinite(c[0]) ? c : null;
+  if (!map || !map.getSource("labels")) return;
+  const feats = !state.sel ? [] : currentFeatures().filter((f) => f.properties.st === state.sel)
+    .map((f) => ({ f, c: labelPoint(f) })).filter((x) => x.c)
+    .map(({ f, c }) => ({ type: "Feature", geometry: { type: "Point", coordinates: c }, properties: { t: labelText(f) } }));
+  map.getSource("labels").setData({ type: "FeatureCollection", features: feats });
 }
 
 function showTip(e, f) {
@@ -348,15 +380,15 @@ function showTip(e, f) {
     (f.properties.label === "00" ? "At-large district" : `District ${+f.properties.label} (enacted)`);
   const rows = [
     ["Population", fmt(plan.pop[i])],
-    state.plan === "ours" ? ["Deviation", (plan.dev[i] >= 0 ? "+" : "") + pct(plan.dev[i], 2)] : null,
     ["Lean, 2016–20 statewide", lean(el.comp.shares[i])],
     ["Lean, 2020 president", lean(el.pres20.shares[i])],
     ["Minority share of adults", pct(plan.minority[i], 0)],
     ["Polsby–Popper", plan.pp[i].toFixed(2)],
     ["Reock", plan.reock[i].toFixed(2)],
-  ].filter(Boolean);
+  ];
   tip.innerHTML = `<b>${esc(s.name)} · ${name}</b>` +
-    rows.map(([a, b]) => `<div class="row"><span>${a}</span><span>${b}</span></div>`).join("");
+    rows.map(([a, b]) => `<div class="row"><span>${a}</span><span>${b}</span></div>`).join("") +
+    `<div class="note" style="margin-top:4px">Click for why it looks like this</div>`;
   tip.style.display = "block";
   const x = Math.min(e.clientX + 14, innerWidth - tip.offsetWidth - 8);
   const y = Math.min(e.clientY + 14, innerHeight - tip.offsetHeight - 8);
@@ -369,20 +401,18 @@ function selectState(abbr, keepDistrict) {
   try {
     const u = new URL(location.href);
     if (abbr) u.searchParams.set("state", abbr); else u.searchParams.delete("state");
+    if (!abbr || !keepDistrict) u.searchParams.delete("district");
     history.replaceState(null, "", u);
   } catch (e) {}
   document.getElementById("stateSel").value = abbr || "";
   document.getElementById("resetBtn").style.display = abbr ? "block" : "none";
   const feat = abbr && state.data.states.features.find((f) => f.properties.st === abbr);
-  gSel.selectAll("path").data(feat ? [feat] : []).join("path").attr("class", "state-sel").attr("d", path);
-  let t = d3.zoomIdentity;
-  if (feat) {
-    const [[x0, y0], [x1, y1]] = path.bounds(feat);
-    const k = Math.min(40, 0.88 / Math.max((x1 - x0) / W, (y1 - y0) / H));
-    t = d3.zoomIdentity.translate(W / 2, H / 2).scale(k).translate(-(x0 + x1) / 2, -(y0 + y1) / 2);
+  if (map) {
+    if (map.getLayer("state-sel")) map.setFilter("state-sel", ["==", ["get", "st"], abbr || ""]);
+    map.fitBounds(feat ? bboxOf(feat.geometry) : US_BOUNDS, { padding: 30, maxZoom: 9, duration: 700 });
   }
-  svg.transition().duration(650).call(zoom.transform, t);
   drawLabels();
+  drawHighlight();
   renderPanel();
 }
 
@@ -500,10 +530,15 @@ function focusAnnotation(ann) {
 }
 
 function drawHighlight() {
-  const ann = state.plan === "history" ? hist.focus : null;
-  const feats = !ann || ann.d == null ? [] : currentFeatures()
-    .filter((f) => f.properties.st === ann.st && f.properties.d === ann.d);
-  gHl.selectAll("path").data(feats).join("path").attr("class", "hl").attr("d", path);
+  if (!map || !map.getSource("hl")) return;
+  let feats = [];
+  if (state.plan === "history") {
+    const ann = hist.focus;
+    if (ann && ann.d != null) feats = currentFeatures().filter((f) => f.properties.st === ann.st && f.properties.d === ann.d);
+  } else if (state.sel && state.selDistrict != null) {
+    feats = currentFeatures().filter((f) => f.properties.st === state.sel && f.properties.d === state.selDistrict + 1);
+  }
+  map.getSource("hl").setData({ type: "FeatureCollection", features: feats });
 }
 
 function showHistTip(e, f) {
@@ -605,6 +640,7 @@ function renderPanel() {
     ${di != null && (formula ? O : E).pop[di] != null ? districtWhy(s, formula ? O : E, di, formula) :
       `<p class="note">Click a district on the map to see why its lines are where they are.</p>`}
     <p class="note"><b>Today's map:</b> ${origin[0]}${cites(origin[1])}</p>
+    <p><a class="btn" href="state.html?st=${s.abbr}">The case for Neutral Lines in ${esc(s.name)}: legality and how to adopt it →</a></p>
     <table class="cmp"><thead><tr><th></th><th>Formula</th><th>Enacted</th></tr></thead><tbody>
       <tr><td>D-leaning seats (2016–20)</td><td>${O.elections.comp.seatsD}</td><td>${E.elections.comp.seatsD}</td></tr>
       <tr><td>D-leaning seats (Pres. 2020)</td><td>${O.elections.pres20.seatsD}</td><td>${E.elections.pres20.seatsD}</td></tr>
@@ -753,12 +789,12 @@ function renderAdoption() {
   const shiftTxt = (v) => v === 0 ? "none" : (v > 0 ? `+${v} D` : `+${-v} R`);
   document.getElementById("adoptTable").innerHTML = `<thead><tr><th>State</th><th class="n">Seats</th><th>Path</th>
     <th class="n">Seat shift vs 2026 map</th><th class="n">Checklist clean</th><th class="n">Score</th><th>Outlook</th></tr></thead><tbody>` +
-    S.map(({ s, o }) => `<tr data-st="${s.abbr}"><td>${esc(s.name)}</td><td class="n">${s.seats}</td><td>${o.path}</td>
+    S.map(({ s, o }) => `<tr data-st="${s.abbr}"><td><a href="state.html?st=${s.abbr}">${esc(s.name)}</a></td><td class="n">${s.seats}</td><td>${o.path}</td>
       <td class="n">${shiftTxt(o.shift)}</td><td class="n">${o.clean ? "yes" : "no"}</td><td class="n">${o.score}</td>
       <td><span class="mini ${o.level === "High" ? "pass" : o.level === "Medium" ? "justified" : "review"}" aria-hidden="true">${o.level[0]}</span> ${o.level}</td></tr>`).join("") + "</tbody>";
   document.getElementById("adoptTable").addEventListener("click", (e) => {
     const tr = e.target.closest("tr[data-st]");
-    if (tr) { selectState(tr.dataset.st); document.getElementById("map-section").scrollIntoView(); }
+    if (tr && !e.target.closest("a")) { selectState(tr.dataset.st); document.getElementById("map-section").scrollIntoView(); }
   });
 
   // Compact: pair states whose seat shifts offset (greedy, largest first).

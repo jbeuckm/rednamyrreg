@@ -39,23 +39,7 @@ document.getElementById("refList").innerHTML = (window.REFS || []).map(([k, text
 const CHECK = { pass: ["✓", "Pass"], justified: ["≈", "Justified"], review: ["!", "Review"], fail: ["✕", "Fail"] };
 const mark = (c) => c ? `<span class="mini ${c.status}" title="${esc(c.label)}: ${esc(c.detail)}">${CHECK[c.status][0]}</span>` : "–";
 
-// State-law notes that the automated checks don't capture on their own.
-const NO_PARTISAN = ["IA", "MT", "NE", "NM", "CA", "FL"];
-const STATE_LAW = {
-  IA: ["Iowa Code §42.4 puts whole counties ahead of exact equality (up to 1%) and bars political data. The partisan step is off; an Iowa module (whole counties within 1%) is still needed.", ["iowa-424"]],
-  OH: ["Ohio Art. XIX caps county splits (at most 18 split once and 5 split more than once) and requires a county larger than one district to contain a whole district. See the Ohio check.", ["oh-xix"]],
-  CA: ["The partisan step is off (California law bars considering party).", ["ca-xxi"]],
-  FL: ["The partisan step is off (Fair Districts tier 1 forbids intent to favor a party).", ["fl-iii20"]],
-  MT: ["The partisan step is off (Montana bars previous election results).", ["levitt"]],
-  NE: ["The partisan step is off (Nebraska bars political data).", ["ncsl-criteria"]],
-  NM: ["The partisan step is off. The New Mexico committee may not split precincts; the formula still splits some, so a module is needed.", ["nm-13a7"]],
-  MI: ["Michigan requires accepted measures of partisan fairness; the symmetry step fits, but the state's named measures should be reported.", ["mi-iv6"]],
-  CO: ["Colorado requires competitiveness analysis, and precincts may not span districts (they would be re-precincted).", ["co-precinct", "ncsl-criteria"]],
-  UT: ["Utah's Prop 4 requires partisan-symmetry testing; the selection step uses symmetry.", ["ut-2025"]],
-  AZ: ["Arizona allows partisan data only to test maps after drawing, which is exactly the formula's two-phase design.", ["airc", "ncsl-criteria"]],
-  WA: ["Washington keeps precincts whole where practicable and allows contiguity by ferry or bridge.", ["wa-rcw"]],
-  PA: ["The Pennsylvania Supreme Court's standard: do not divide counties, cities, boroughs, townships or wards except as needed for equality.", ["pa-2018"]],
-};
+const NO_PARTISAN = window.NO_PARTISAN, STATE_LAW = window.STATE_LAW;
 
 d3.json("data/summary.json").then((summary) => {
   const S = summary.states;
@@ -152,7 +136,7 @@ d3.json("data/summary.json").then((summary) => {
       const oh = get(s, "ohio"), ia = get(s, "iowa");
       const origin = window.ORIGIN[s.abbr] || window.ORIGIN_DEFAULT;
       const pop = get(s, "population");
-      return `<tr data-st="${s.abbr}"><td>${esc(s.name)}</td><td class="n">${s.seats}</td>
+      return `<tr data-st="${s.abbr}"><td><a href="state.html?st=${s.abbr}">${esc(s.name)}</a></td><td class="n">${s.seats}</td>
         <td>${mark(pop)} ${s.ours.range_people} ppl</td><td>${mark(get(s, "contiguity"))}</td><td>${mark(get(s, "compactness"))}</td>
         <td>${s.ours.county_splits}/${s.ours.muni_splits}/${s.has_vtd ? s.ours.precinct_splits : "–"} vs ${s.enacted.county_splits}/${s.enacted.muni_splits}/${s.has_vtd ? s.enacted.precinct_splits : "–"}</td>
         <td>${oh ? mark(oh) + " " : ""}${ia ? mark(ia) + " " : ""}${law ? law[0] + cites(law[1]) : (s.partisan_step ? "No conflicting state rule found; partisan step on." : "Partisan step off.")}</td>
@@ -160,7 +144,7 @@ d3.json("data/summary.json").then((summary) => {
     }).join("") + "</tbody>";
   lt.addEventListener("click", (e) => {
     const tr = e.target.closest("tr[data-st]");
-    if (tr && !e.target.closest("a")) location.href = `index.html?state=${tr.dataset.st}#map-section`;
+    if (tr && !e.target.closest("a")) location.href = `state.html?st=${tr.dataset.st}`;
   });
 
   // ---- 2026 redraws vs formula

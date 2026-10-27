@@ -34,6 +34,7 @@ import shapely
 from pyproj import Transformer
 
 from blocks import load_blocks
+import statelaw
 from district import assign, balance, polish
 from geometry import counties as county_polys, parts, project, states_with_water
 from load import RAW, block_groups
@@ -315,7 +316,7 @@ def adjacency(polys):
     return i[edge], j[edge]
 
 
-def finish(a, p, k, free, ei, ej, nbrs, units, max_moves=3000):
+def finish(a, p, k, free, ei, ej, nbrs, units, max_moves=3000, hard=()):
     """Move boundary blocks between neighbouring districts to exact equality.
 
     Stops when the largest and smallest districts differ by at most one
@@ -400,6 +401,18 @@ def finish(a, p, k, free, ei, ej, nbrs, units, max_moves=3000):
         pb = p[blk]
         gain = dev[src] ** 2 + dev[dst] ** 2 - (dev[src] - pb) ** 2 - (dev[dst] + pb) ** 2
         good = np.flatnonzero(gain > 1e-9)
+        if len(good) and hard:
+            # Hard state-law constraint: a block may only join a district already
+            # present in its unit (e.g. Ohio counties), so no new split appears.
+            def allowed(t):
+                x, d = blk[t], dst[t]
+                for kind in hard:
+                    g, c = units[kind], cnt[kind]
+                    u = g[x] if x < n else -1
+                    if u >= 0 and u in c and d not in c[u]:
+                        return False
+                return True
+            good = np.array([t for t in good if allowed(t)], dtype=int)
         if len(good):
             ds = np.array([dsplit(blk[t], src[t], dst[t]) for t in good])
             done = False
@@ -434,6 +447,8 @@ def finish(a, p, k, free, ei, ej, nbrs, units, max_moves=3000):
                         if g > 1e-9:
                             options.append((g, gx[px], gy[py], u, v, w))
         options.sort(key=lambda o: -o[0])
+        if hard:
+            options = []                    # chains could break the hard constraint
         done = False
         for g, xs, ys, u, v, w in options[:50]:
             pairs = [(tx, ty) for tx in xs for ty in ys if blk[tx] != blk[ty]]
@@ -628,6 +643,14 @@ def refine_state(abbr):
 
     if k == 1:
         a = np.zeros(n, int)
+    elif abbr in statelaw.WHOLE_COUNTY:
+        # State constitution forbids dividing counties: whole-county plan.
+        bgs = block_groups()
+        bgc = bgs[bgs.STATEFP == fips].COUNTYFP.values.astype(int)
+        cp = county_polys(fips, fwd, water=True)
+        starts = [res["cands"][i]["a"] for i in res["uniq"]]
+        a = statelaw.whole_county_plan(county, p, k, starts, bgc, statelaw.polygon_graph(cp), X)
+        released = [("law", "whole counties: " + ("Iowa Const. art. III §37" if abbr == "IA" else "W. Va. Const. art. I §4"))]
     else:
         C, w0 = c["C"], c["w"].copy()
         target = p.sum() / k
@@ -760,6 +783,31 @@ def refine_state(abbr):
                 # on the true geometry takes priority over the last few people.
                 a_ext = finish(a_ext, p_ext, k, F & ~frozen, eu, ev, nbrs, [Bf, Mf, cty64])
             a = a_ext[:n]
+
+    if abbr == "OH":
+        # Ohio Const. art. XIX §2(B): county-split caps, Cleveland and
+        # Cincinnati whole, one shared county per pair of districts.
+        polys_all = project(shapely.from_wkb(wkb), fwd)
+        ai, aj = adjacency(polys_all)
+        nb_all = {}
+        for u, v in zip(ai, aj):
+            nb_all.setdefault(u, []).append(v)
+            nb_all.setdefault(v, []).append(u)
+        a, free_oh, split_c = statelaw.ohio_plan(b, p, k, a.copy(), ai, aj, nb_all, finish, locally_connected, X)
+        A, _ = pd.factorize(b.A)
+        Bf, _ = pd.factorize(b.B)
+        Mf = np.where(np.array([("|P" in s) or ("|T" in s) for s in pd.factorize(b.A)[1]])[A], A, -1)
+        cty64 = county.astype(np.int64)
+        nodes_all = list(range(n))
+        for _r in range(8):
+            a = finish(a, p, k, free_oh, ai, aj, nb_all, [Bf, Mf, cty64], hard=(2,))
+            fr = graph_fragments(a, nodes_all, nb_all, p + 1e-6)
+            if not fr:
+                break
+            for m, to in fr:
+                a[np.array(m)] = to
+                frag_moves += len(m)
+        released = released + [("law", "Ohio art. XIX: split counties " + ",".join(f"{c:03d}" for c in split_c))]
 
     out = dict(abbr=abbr, fips=fips, k=k, GEOID=b.GEOID.values, assign=a.astype(np.int16),
                released=released, frag_moves=frag_moves, has_vtd=has_vtd, secs=time.time() - t0)

@@ -6,6 +6,7 @@
 <title>Neutral Lines: Districts by Rule</title>
 <meta name="description" content="The history of U.S. congressional districts and gerrymandering, a set of provable principles for fair redistricting, and all 435 districts computed by a public formula, compared with the enacted maps.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M2 2h13v13H2zM17 2h13v13H17zM2 17h13v13H2zM17 17h13v13H17z' fill='%236250d6'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -22,6 +23,7 @@
       <a href="#results">Results</a>
       <a href="#adoption">Adoption</a>
       <a href="fairness.html">Fair from every side</a>
+      <a href="state.html?st=NC">State-by-state case</a>
       <a href="#limits">Limits &amp; data</a>
       <a href="#sources">Sources</a>
     </div>
@@ -30,10 +32,12 @@
 </nav>
 
 <header class="hero wrap">
-  <div class="eyebrow">Rednamyrreg (gerrymander, spelled backwards) · the Neutral Lines proposal</div>
-  <h1>What if districts were drawn by a formula anyone can check?</h1>
-  <p class="lede">For two centuries the people who benefit from district lines have drawn them. This site sets out the history, proposes a short list of principles that can actually be proved, and applies them to all 50 states: 435 congressional districts computed from 2020 Census data by a published rule, then measured against the maps in use today.</p>
+  <div class="eyebrow">Neutral Lines · Rednamyrreg (gerrymander, spelled backwards)</div>
+  <h1>Fair congressional districts, ready to use.</h1>
+  <p class="lede"><b>Fair:</b> all 435 districts are drawn by one published rule that never sees party, race or incumbents. It is fixed before the data arrive, and anyone can rerun it and get the same map.<br>
+  <b>Practical:</b> every district is equal in population to within a few people and contiguous, and it is built from whole counties, towns and precincts wherever the law allows. Each state's plan is checked against federal law and that state's own law, and each comes as a standard block file that election offices can load.</p>
   <div class="tiles" id="heroTiles" aria-live="polite"></div>
+  <p class="note" style="margin-top:6px">Every figure is computed from 2020 Census blocks and compared with the maps in use for November 2026. <a href="#usable">How each claim is checked</a> · <a href="fairness.html">How it looks from every side</a> · <a href="#sources">Sources</a></p>
 </header>
 
 <!-- ============================ MAP ============================ -->
@@ -69,8 +73,9 @@
       </div>
       <div class="mapgrid">
         <div id="map">
+          <div id="mapgl" role="region" aria-label="Map of U.S. congressional districts"></div>
           <button id="resetBtn" class="btn" type="button">← All states</button>
-          <div class="map-hint">Click a state to zoom</div>
+          <div class="map-hint">Scroll or pinch to zoom · drag to pan · click a district for its story</div>
         </div>
         <aside id="panel" aria-live="polite"></aside>
       </div>
@@ -322,6 +327,7 @@
 
 <div id="tooltip" role="tooltip"></div>
 <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script src="refs.js"></script>
 <script src="common.js"></script>
 <script src="app.js"></script>

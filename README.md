@@ -42,6 +42,11 @@ This repository holds:
    - an interactive map with three modes: the formula's 435 districts, the districts in use for the November 2026 elections, and an annotated history of congressional maps since 1813.
 2. **The pipeline** in `pipeline/`, which builds every district from 2020 Census blocks.
 
+The site has three pages:
+- `index.html`: the interactive map, built on MapLibre GL with OpenFreeMap / OpenStreetMap basemaps. It shows the formula plan, the 2026 maps and the history, with per-district explanations.
+- `fairness.html`: the plan from every perspective, legality state by state, and the assessment.
+- `state.html?st=XX`: one page per state. Each has the case for adoption, every district explained, a federal and state legal analysis, what a change in state law would allow, and the step-by-step process to adopt the plan there, with links to the official sources.
+
 ## The rule
 
 For each state with *k* seats, a place *x* belongs to district
@@ -56,6 +61,11 @@ The centers *c_j* are the population centers of their districts, and the weights
 2. **Inside split counties, municipalities stay whole, then precincts.** A municipality is a city, town, or (in the 12 states where they govern) township. Each whole unit is placed by the same rule at its population center.
 3. **Boundary transfers settle the last few hundred people.** They run along a spanning tree of district borders: whole precincts move first, then blocks are peeled off one precinct per border.
 4. **Single-block moves finish to the person.** A move is allowed only if it keeps districts contiguous and avoids new splits or tiny precinct pieces.
+
+**State-law modules** (`pipeline/statelaw.py`) handle states whose own law forbids parts of the general rule:
+- **Iowa and West Virginia:** whole counties only (Iowa Const. art. III §37; W. Va. Const. art. I §4).
+- **Ohio:** the full Art. XIX §2(B) rules. These cap county splits, keep Cleveland and Cincinnati whole, and allow two districts to share at most one county under 400,000.
+- **Colorado and Arizona:** the final selection maximizes competitive districts, as their constitutions ask.
 
 Choosing among the 24 deterministic candidate plans:
 
@@ -89,6 +99,7 @@ The 120th-Congress block equivalency file (`cd120.zip`) is not fetched by `downl
 | `plans/XX.csv.gz` | **Block assignment file**: 2020 block GEOID → district (the authoritative plan) |
 | `plans/XX.json` | Certificate: projection, centers, weights, whole counties, split counties, refinement log |
 | `history/` | 15 historical maps (13th–119th Congress) and 34 annotated districts |
+| `process/` | For each state: who has authority, legal basis, criteria, mid-decade rules, every adoption path (with signature counts and deadlines), the best window, and official links |
 
 ## Validation
 

@@ -1,0 +1,1919 @@
+{
+  "AL": {
+    "authority": "Legislature by ordinary statute; governor may veto, and a veto is overridden by a simple majority of the elected members of each house. Federal courts imposed a special master's map (Milligan) for 2024, but since the U.S. Supreme Court's June 2, 2026 stay the legislature's 2023 plan is in effect while litigation continues.",
+    "legal_basis": [
+      {
+        "cite": "Ala. Const. art. IX, §§ 198-200 (legislative districts only; no congressional provision)",
+        "url": "https://alison.legislature.state.al.us/constitution?section=198"
+      },
+      {
+        "cite": "Ala. Const. art. XVIII, § 284 (amendments: 3/5 of each house, then voters)",
+        "url": "https://alison.legislature.state.al.us/constitution?section=284"
+      }
+    ],
+    "criteria": "No constitutional or statutory criteria for congressional districts beyond federal equal-population and VRA/14th-Amendment rules. The Reapportionment Committee adopts non-binding guidelines each cycle (2021 guidelines: contiguity, compactness, communities of interest, respecting county lines where possible).",
+    "mid_decade": "Allowed for Congress: the mid-decade bar in art. IX covers only legislative districts (Loyola). The legislature redrew in 2023 and the 2023 plan is now in use.",
+    "paths": [
+      {
+        "path": "Legislation",
+        "how": "Bill (typically from the Permanent Legislative Committee on Reapportionment) passes both houses by majority; governor signs or vetoes; override needs only a majority of elected members of each house. Annual regular session early in the year (30 legislative days); the governor may call special sessions, as in May 2026.",
+        "links": [
+          {
+            "label": "Alabama Legislature",
+            "url": "https://alison.legislature.state.al.us/reapportionment-committee-members"
+          },
+          {
+            "label": "2021 Reapportionment Guidelines (PDF)",
+            "url": "https://alison.legislature.state.al.us/files/pdf/2021-Reapportionment/Notices/Reapportionment_Guidelines_for_Redistricting.pdf"
+          }
+        ]
+      },
+      {
+        "path": "Legislatively referred amendment",
+        "how": "To lock in neutral criteria or a commission: an amendment bill passes 3/5 of each house, then a majority of voters at the next election. Alabama has no citizen initiative or referendum, so legislators must sponsor it.",
+        "links": [
+          {
+            "label": "Ala. Const. § 284",
+            "url": "https://alison.legislature.state.al.us/constitution?section=284"
+          }
+        ]
+      },
+      {
+        "path": "Court remedy",
+        "how": "Milligan v. Allen continues on remand after Callais. If a court again finds the 2023 plan unlawful, it can order a remedial plan; parties and amici may submit proposed maps to the court or special master.",
+        "links": [
+          {
+            "label": "Loyola: Milligan v. Allen",
+            "url": "https://redistricting.lls.edu/case/milligan-v-allen/"
+          }
+        ]
+      }
+    ],
+    "best_window": "Realistically after the 2030 census (2031 session). A 2027 or 2028 statute is legally possible but needs legislative sponsors; a court remedy is possible only if the Milligan plaintiffs prevail on remand.",
+    "notes": "May 2026 special session passed HB 1 postponing four congressional primaries; SCOTUS vacated the injunction against the 2023 map on May 11, 2026 and stayed a renewed injunction on June 2, 2026, so the 2023 plan (SB 5) governs pending litigation. No initiative, referendum, or recall in Alabama.",
+    "sources": [
+      {
+        "label": "Loyola All About Redistricting: Alabama",
+        "url": "https://redistricting.lls.edu/state/alabama/"
+      },
+      {
+        "label": "Ballotpedia: Redistricting in Alabama",
+        "url": "https://ballotpedia.org/Redistricting_in_Alabama"
+      },
+      {
+        "label": "Loyola: Milligan v. Allen",
+        "url": "https://redistricting.lls.edu/case/milligan-v-allen/"
+      },
+      {
+        "label": "Loyola: Louisiana v. Callais case page",
+        "url": "https://redistricting.lls.edu/case/callais-v-landry/"
+      },
+      {
+        "label": "NCSL: Redistricting Criteria",
+        "url": "https://www.ncsl.org/elections-and-campaigns/redistricting-criteria"
+      }
+    ]
+  },
+  "AK": {
+    "authority": "Single at-large seat; no congressional map is drawn. If Alaska gained a second seat, the constitution's Redistricting Board covers only legislative districts, so the legislature would presumably draw congressional lines by ordinary statute (UNVERIFIED: no statute addresses it).",
+    "legal_basis": [
+      {
+        "cite": "Alaska Const. art. VI, §§ 6, 8, 10 (Redistricting Board; legislative districts)",
+        "url": "https://ltgov.alaska.gov/information/alaskas-constitution/"
+      },
+      {
+        "cite": "Alaska Stat. ch. 15.45 (initiative and referendum)",
+        "url": "https://www.akleg.gov/basis/statutes.asp#15.45.010"
+      }
+    ],
+    "criteria": "No congressional criteria exist (one seat). For legislative districts the constitution requires contiguous, compact, relatively socio-economically integrated districts using drainage and geographic features, and courts bar intentional partisan discrimination (In re 2021 Redistricting Cases).",
+    "mid_decade": "Not applicable to Congress. Art. VI, § 10 bars mid-decade legislative redistricting; there is no rule for a hypothetical congressional map.",
+    "paths": [
+      {
+        "path": "Legislation",
+        "how": "If a second seat were apportioned, a bill would pass both houses by majority; the governor may veto, and an override needs 2/3 of the legislature in joint session. Regular session runs January to mid-May (121 days).",
+        "links": [
+          {
+            "label": "Alaska State Legislature",
+            "url": "https://www.akleg.gov/"
+          }
+        ]
+      },
+      {
+        "path": "Citizen-initiated statute",
+        "how": "Could pre-set neutral rules for a future map. Apply with 100 sponsors and $100; once certified, gather signatures of 10% of last general-election voters, incl. 7% in 30 of 40 House districts, within one year; file before session; goes on the first statewide ballot 120+ days after adjournment unless the legislature enacts a similar law.",
+        "links": [
+          {
+            "label": "Alaska Division of Elections: Initiative and Referendum Process",
+            "url": "https://www.elections.alaska.gov/petitions-and-ballot-measures/the-process/"
+          }
+        ]
+      },
+      {
+        "path": "Referendum",
+        "how": "A statute enacted by the legislature can be referred: same signature formula (10% statewide, 7% in 30 of 40 House districts), filed within 90 days after the session adjourns.",
+        "links": [
+          {
+            "label": "Alaska Division of Elections: Initiative and Referendum Process",
+            "url": "https://www.elections.alaska.gov/petitions-and-ballot-measures/the-process/"
+          }
+        ]
+      },
+      {
+        "path": "Legislatively referred amendment",
+        "how": "Constitutional amendments can only be proposed by 2/3 of each house and ratified by voters; Alaska has no citizen-initiated constitutional amendment.",
+        "links": [
+          {
+            "label": "Alaska Constitution (Lt. Governor)",
+            "url": "https://ltgov.alaska.gov/information/alaskas-constitution/"
+          }
+        ]
+      }
+    ],
+    "best_window": "Not applicable unless Alaska gains a seat (earliest the 2031 apportionment after the 2030 census). A criteria statute could reach the Nov 2028 ballot via initiative filed before the January 2028 session.",
+    "notes": "Alaska held its 2022 constitutional-convention question (rejected); the next automatic one is due in 2032 (UNVERIFIED date). Redistricting Board drew 2021-2023 legislative maps after two state supreme court rejections.",
+    "sources": [
+      {
+        "label": "Loyola All About Redistricting: Alaska",
+        "url": "https://redistricting.lls.edu/state/alaska/"
+      },
+      {
+        "label": "Ballotpedia: Redistricting in Alaska",
+        "url": "https://ballotpedia.org/Redistricting_in_Alaska"
+      },
+      {
+        "label": "Ballotpedia: Laws governing the initiative process in Alaska",
+        "url": "https://ballotpedia.org/Laws_governing_the_initiative_process_in_Alaska"
+      },
+      {
+        "label": "NCSL: Initiative and Referendum Processes",
+        "url": "https://www.ncsl.org/elections-and-campaigns/initiative-and-referendum-processes"
+      }
+    ]
+  },
+  "AZ": {
+    "authority": "Five-member Arizona Independent Redistricting Commission (four chosen by legislative leaders from a 25-person appellate-commission pool; the four pick an independent chair) adopts congressional maps directly; the legislature may only comment and the governor has no role.",
+    "legal_basis": [
+      {
+        "cite": "Ariz. Const. art. IV, pt. 2, § 1 (IRC; criteria; mid-decade bar at § 1(23))",
+        "url": "https://www.azleg.gov/viewDocument/?docName=http://www.azleg.gov/const/4/1.p2.htm"
+      },
+      {
+        "cite": "Ariz. Const. art. IV, pt. 1, § 1 (initiative and referendum)",
+        "url": "https://www.azleg.gov/viewDocument/?docName=http://www.azleg.gov/const/4/1.p1.htm"
+      }
+    ],
+    "criteria": "Start from a grid, then adjust for equal population, VRA, compactness, contiguity, communities of interest, visible geographic features and city/town/county boundaries and undivided census tracts, and favor competitive districts where that causes no significant detriment; party registration and voting history may not be used in the initial phase, and incumbent/candidate residences may not be considered.",
+    "mid_decade": "Prohibited: commission maps remain in force until the next decennial census (art. IV, pt. 2, § 1(23)).",
+    "paths": [
+      {
+        "path": "Commission adoption",
+        "how": "New IRC forms after the 2030 census (nominations late 2030, commission seated early 2031). It draws a grid map, holds hearings, accepts public plans, posts drafts for at least 30 days of comment, then adopts final maps by majority vote. A citizen group would submit its rule-drawn plan and testimony in 2031.",
+        "links": [
+          {
+            "label": "Arizona Independent Redistricting Commission",
+            "url": "https://irc.az.gov/"
+          }
+        ]
+      },
+      {
+        "path": "Citizen-initiated constitutional amendment",
+        "how": "Apply to the Secretary of State for a serial number; collect valid signatures equal to 15% of the last governor vote (383,923 for 2026; the 2028 figure will be based on the Nov 2026 vote); file at least four months before the election (early July 2028); majority approval; protected from legislative repeal.",
+        "links": [
+          {
+            "label": "Arizona SOS: Initiatives",
+            "url": "https://azsos.gov/elections/ballot-measures/initiative-referendum-recall/initiatives"
+          }
+        ]
+      },
+      {
+        "path": "Legislatively referred amendment",
+        "how": "A concurrent resolution passed by a majority of each house goes directly to the next general-election ballot (no governor role).",
+        "links": [
+          {
+            "label": "Arizona Legislature",
+            "url": "https://www.azleg.gov/"
+          }
+        ]
+      }
+    ],
+    "best_window": "Nov 2028 ballot via initiated constitutional amendment (signatures due early July 2028); otherwise submit a rule-drawn plan to the IRC in 2031.",
+    "notes": "No mid-decade redraw possible without a constitutional amendment. A 2026 Senate-passed referral to expand the IRC to nine members (Axios, Mar 2026) was not among the legislative referrals reported for the Nov 2026 ballot (AZ Mirror); final status UNVERIFIED. Signature thresholds are recalculated after each gubernatorial election.",
+    "sources": [
+      {
+        "label": "Loyola All About Redistricting: Arizona",
+        "url": "https://redistricting.lls.edu/state/arizona/"
+      },
+      {
+        "label": "Ballotpedia: Redistricting in Arizona",
+        "url": "https://ballotpedia.org/Redistricting_in_Arizona"
+      },
+      {
+        "label": "Axios Phoenix: Lawmaker seeks voter-approved overhaul of redistricting process",
+        "url": "https://www.axios.com/local/phoenix/2026/03/11/arizona-independent-redistricting-commission-overhaul-population"
+      },
+      {
+        "label": "AZ Mirror: Arizona voters will decide 10 GOP-backed ballot measures",
+        "url": "https://azmirror.com/briefs/arizona-voters-will-decide-10-gop-backed-ballot-measures-in-november-on-schools-elections-taxes/"
+      },
+      {
+        "label": "NCSL: Initiative and Referendum Processes",
+        "url": "https://www.ncsl.org/elections-and-campaigns/initiative-and-referendum-processes"
+      }
+    ]
+  },
+  "AR": {
+    "authority": "Legislature by ordinary statute; governor may veto, but a simple majority of each house overrides. (State legislative maps are drawn by the Board of Apportionment, not the legislature.)",
+    "legal_basis": [
+      {
+        "cite": "Ark. Const. art. 8 (Board of Apportionment; legislative districts only)",
+        "url": "https://arkansasredistricting.org/about-the-process/article-8/"
+      },
+      {
+        "cite": "Ark. Const. art. 5, § 1 (Amendment 7: initiative and referendum), as summarized in SOS 2025-26 handbook",
+        "url": "https://www.sos.arkansas.gov/uploads/elections/2025-2026_I_R_Handbook_-_December_2025_(00000005)_Final_copy_12.31_.25_.pdf"
+      }
+    ],
+    "criteria": "No state constitutional or statutory criteria for congressional districts beyond federal equal-population and VRA rules.",
+    "mid_decade": "No provision bars mid-decade congressional redistricting; art. 8 ties only legislative lines to the census (Loyola).",
+    "paths": [
+      {
+        "path": "Legislation",
+        "how": "Bill passes both houses by majority; governor signs or vetoes; simple-majority override. Regular sessions in odd years (Jan-Apr, e.g., 2027); even-year fiscal sessions require 2/3 to take up non-appropriation bills; governor may call special sessions.",
+        "links": [
+          {
+            "label": "Arkansas State Legislature",
+            "url": "https://arkleg.state.ar.us/"
+          }
+        ]
+      },
+      {
+        "path": "Citizen-initiated constitutional amendment",
+        "how": "File petition and ballot title per current law; collect signatures equal to 10% of the last governor vote (90,704 for 2026) with county distribution (Act 236's 50-county rule was blocked by a circuit court in Feb 2026; constitution says at least 15 counties); file four months before the election (early July 2028); majority approval.",
+        "links": [
+          {
+            "label": "Arkansas SOS: Initiatives and Referenda",
+            "url": "https://www.sos.arkansas.gov/elections/initiatives-and-referenda/"
+          },
+          {
+            "label": "SOS 2025-26 I&R Handbook (PDF)",
+            "url": "https://www.sos.arkansas.gov/uploads/elections/2025-2026_I_R_Handbook_-_December_2025_(00000005)_Final_copy_12.31_.25_.pdf"
+          }
+        ]
+      },
+      {
+        "path": "Citizen-initiated statute",
+        "how": "Same process with 8% of the last governor vote (72,563 for 2026); could impose statutory neutral criteria or a commission for congressional maps, but the legislature can amend initiated acts by 2/3 vote.",
+        "links": [
+          {
+            "label": "Arkansas SOS: Initiatives and Referenda",
+            "url": "https://www.sos.arkansas.gov/elections/initiatives-and-referenda/"
+          }
+        ]
+      },
+      {
+        "path": "Referendum",
+        "how": "A newly enacted congressional map can be referred with signatures equal to 6% of the last governor vote (54,422 for 2026), filed within 90 days after the session adjourns.",
+        "links": [
+          {
+            "label": "SOS 2025-26 I&R Handbook (PDF)",
+            "url": "https://www.sos.arkansas.gov/uploads/elections/2025-2026_I_R_Handbook_-_December_2025_(00000005)_Final_copy_12.31_.25_.pdf"
+          }
+        ]
+      },
+      {
+        "path": "Legislatively referred amendment",
+        "how": "Majority of each house may refer up to three amendments per regular session to the next general election.",
+        "links": [
+          {
+            "label": "Arkansas State Legislature",
+            "url": "https://arkleg.state.ar.us/"
+          }
+        ]
+      }
+    ],
+    "best_window": "Nov 2028 ballot via initiated constitutional amendment creating a commission or rule-drawn map (signatures due early July 2028; 2028 thresholds set by the Nov 2026 governor vote).",
+    "notes": "A 2020 commission initiative was disqualified over canvasser background-check certifications; a 2025 commission bill died in committee; a 2025 federal panel rejected a racial-gerrymandering claim against the 2021 map. A Pulaski County judge blocked Act 236 of 2023 (50-county rule) in Feb 2026; appeal status UNVERIFIED.",
+    "sources": [
+      {
+        "label": "Loyola All About Redistricting: Arkansas",
+        "url": "https://redistricting.lls.edu/state/arkansas/"
+      },
+      {
+        "label": "Ballotpedia: Redistricting in Arkansas",
+        "url": "https://ballotpedia.org/Redistricting_in_Arkansas"
+      },
+      {
+        "label": "Ballotpedia: Laws governing the initiative process in Arkansas",
+        "url": "https://ballotpedia.org/Laws_governing_the_initiative_process_in_Arkansas"
+      },
+      {
+        "label": "Arkansas Advocate: Judge blocks law increasing signature requirement (Feb 13, 2026)",
+        "url": "https://arkansasadvocate.com/2026/02/13/arkansas-judge-blocks-state-law-increasing-signature-requirement-for-ballot-measures/"
+      },
+      {
+        "label": "NCSL: Initiative and Referendum Processes",
+        "url": "https://www.ncsl.org/elections-and-campaigns/initiative-and-referendum-processes"
+      }
+    ]
+  },
+  "CA": {
+    "authority": "For the 2026-2030 elections the legislature's map (AB 604), approved by voters as Proposition 50 on Nov 4, 2025, is in effect; the 14-member Citizens Redistricting Commission resumes drawing congressional maps after the 2030 census (2031).",
+    "legal_basis": [
+      {
+        "cite": "Cal. Const. art. XXI, § 2 (Citizens Redistricting Commission; criteria)",
+        "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CONS&sectionNum=SEC.%202.&article=XXI"
+      },
+      {
+        "cite": "ACA 8 (2025) / Proposition 50 (temporary legislative congressional map through 2030)",
+        "url": "https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=202520260ACA8"
+      },
+      {
+        "cite": "Cal. Const. art. II, § 8 (initiative)",
+        "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CONS&sectionNum=SEC.%208.&article=II"
+      },
+      {
+        "cite": "Cal. Const. art. II, § 9 (referendum)",
+        "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CONS&sectionNum=SEC.%209.&article=II"
+      }
+    ],
+    "criteria": "Commission maps (from 2031) must, in priority order, meet equal population and the VRA, be contiguous, preserve cities, counties, neighborhoods and communities of interest to the extent possible, and be compact where practicable; maps may not consider incumbent residences or favor/discriminate against any candidate or party. The Prop 50 map is exempt from these criteria through 2030.",
+    "mid_decade": "Normally prohibited (Legislature v. Deukmejian, 1983, and art. XXI); Prop 50 created a voter-approved temporary exception for 2026-2030, after which the 2031 commission map governs the decade.",
+    "paths": [
+      {
+        "path": "Commission adoption",
+        "how": "State Auditor screens applicants in 2030; 8 commissioners drawn randomly pick 6 more (5 D, 5 R, 4 other). Commission holds hearings, accepts public maps and community-of-interest input, and needs 9 votes (3 D, 3 R, 3 other) to adopt by Aug 15, 2031.",
+        "links": [
+          {
+            "label": "California Citizens Redistricting Commission",
+            "url": "https://wedrawthelines.ca.gov/"
+          }
+        ]
+      },
+      {
+        "path": "Citizen-initiated constitutional amendment",
+        "how": "Submit text to the Attorney General (fee, 30-day public review), receive title and summary, then 180 days to gather signatures equal to 8% of the last governor vote (874,641 for the 2026 cycle; 2028 figure set by the Nov 2026 vote); must qualify 131 days before the Nov 2028 election; majority approval.",
+        "links": [
+          {
+            "label": "California SOS: How to Qualify an Initiative",
+            "url": "https://www.sos.ca.gov/elections/ballot-measures/how-qualify-initiative"
+          },
+          {
+            "label": "California SOS: Initiative and Referendum Status",
+            "url": "https://www.sos.ca.gov/elections/ballot-measures/initiative-and-referendum-status"
+          }
+        ]
+      },
+      {
+        "path": "Referendum",
+        "how": "A commission-adopted map can be challenged by referendum: signatures equal to 5% of the last governor vote within 90 days of enactment; if the map is rejected, the California Supreme Court appoints special masters to draw it.",
+        "links": [
+          {
+            "label": "Cal. Const. art. II, § 9",
+            "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CONS&sectionNum=SEC.%209.&article=II"
+          }
+        ]
+      },
+      {
+        "path": "Legislatively referred amendment",
+        "how": "2/3 of each house places an amendment on the ballot (as ACA 8 did for Prop 50); majority approval.",
+        "links": [
+          {
+            "label": "ACA 8 (2025) bill text",
+            "url": "https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=202520260ACA8"
+          }
+        ]
+      },
+      {
+        "path": "Court remedy",
+        "how": "If the commission fails to adopt a map by its deadline, the California Supreme Court appoints special masters to draw it (art. XXI, § 2(j)); the court has original jurisdiction over map challenges.",
+        "links": [
+          {
+            "label": "Cal. Const. art. XXI, § 2",
+            "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CONS&sectionNum=SEC.%202.&article=XXI"
+          }
+        ]
+      }
+    ],
+    "best_window": "Nov 2028 ballot via initiated constitutional amendment (signatures due spring 2028) to replace the Prop 50 map early or harden neutral rules; otherwise engage the commission in 2031.",
+    "notes": "Prop 50 passed with about 64% on Nov 4, 2025; Ballotpedia reports the CRC will redraw in 2031. Federal challenges (Tangipa v. Newsom) failed (reported SCOTUS denial Feb 4, 2026; UNVERIFIED in official docket). Initiative 25-0031 (SOS #2008), cleared Jan 12, 2026, would restore the 2021 commission map for 2028 and 2030 (signatures due July 13, 2026); whether it qualified is UNVERIFIED (SOS status page lists one unnamed measure eligible for Nov 2028).",
+    "sources": [
+      {
+        "label": "Loyola All About Redistricting: California",
+        "url": "https://redistricting.lls.edu/state/california/"
+      },
+      {
+        "label": "Ballotpedia: Proposition 50 (2025)",
+        "url": "https://ballotpedia.org/California_Proposition_50,_Use_of_Legislative_Congressional_Redistricting_Map_Amendment_(2025)"
+      },
+      {
+        "label": "Ballotpedia: Redistricting in California",
+        "url": "https://ballotpedia.org/Redistricting_in_California"
+      },
+      {
+        "label": "CA SOS release: initiative to limit Prop 50 maps to 2026 enters circulation",
+        "url": "https://www.sos.ca.gov/administration/news-releases-and-advisories/2026-news-releases-and-advisories/proposed-initiative-enters-circulation-prohibits-use-after-2026-temporary-congressional-district-maps-adopted-voters-2025-respon"
+      },
+      {
+        "label": "NCSL: Initiative and Referendum Processes",
+        "url": "https://www.ncsl.org/elections-and-campaigns/initiative-and-referendum-processes"
+      }
+    ]
+  },
+  "CO": {
+    "authority": "Twelve-member Independent Congressional Redistricting Commission (4 D, 4 R, 4 unaffiliated, chosen by random draw and a retired-judges panel) adopts the map with 8 votes including 2 unaffiliated members; the Colorado Supreme Court must approve it. The legislature and governor have no role.",
+    "legal_basis": [
+      {
+        "cite": "Colo. Const. art. V, §§ 44-44.6 (congressional commission, criteria, court review)",
+        "url": "https://leg.colorado.gov/colorado-constitution"
+      },
+      {
+        "cite": "Colo. Const. art. V, § 1 (initiative; 2% per senate district and 55% vote for amendments)",
+        "url": "https://leg.colorado.gov/colorado-constitution"
+      }
+    ],
+    "criteria": "Precise population equality (each variance justified), VRA plus a state ban on diluting minority influence, contiguity, preserving communities of interest and whole counties/cities as much as reasonably possible, compactness, and maximizing politically competitive districts; maps may not be drawn to protect incumbents, candidates, or parties.",
+    "mid_decade": "Appears prohibited: the constitution ties redistricting to the year after the census (Loyola). Initiative 256, on the Nov 3, 2026 ballot, would require any mid-decade plan to be approved by the commission and the state Supreme Court and bar maps drawn to favor a party.",
+    "paths": [
+      {
+        "path": "Commission adoption",
+        "how": "Apply to serve in 2030; nonpartisan staff release a preliminary plan 30-45 days after census data, followed by at least three hearings per congressional district; public may submit maps and testimony; final plan to the Supreme Court in fall 2031.",
+        "links": [
+          {
+            "label": "Colorado Independent Redistricting Commissions",
+            "url": "https://redistricting.colorado.gov/"
+          }
+        ]
+      },
+      {
+        "path": "Citizen-initiated constitutional amendment",
+        "how": "Draft reviewed by Legislative Council, then Title Board (single-subject); collect signatures equal to 5% of the last Secretary of State vote (124,238 for 2023-26) including 2% of registered voters in each of 35 senate districts; due three months before election (early Aug 2028); needs 55% approval.",
+        "links": [
+          {
+            "label": "Colorado SOS: Signature Requirements",
+            "url": "https://www.coloradosos.gov/pubs/elections/Initiatives/signatureRequirements.html"
+          }
+        ]
+      },
+      {
+        "path": "Legislatively referred amendment",
+        "how": "2/3 of each house refers an amendment to the next general election; 55% voter approval required.",
+        "links": [
+          {
+            "label": "Colorado General Assembly",
+            "url": "https://leg.colorado.gov/"
+          }
+        ]
+      },
+      {
+        "path": "Court remedy",
+        "how": "The Colorado Supreme Court reviews every commission plan and returns non-compliant plans; if the commission deadlocks, a nonpartisan staff plan becomes the default subject to court review.",
+        "links": [
+          {
+            "label": "Colo. Const. art. V",
+            "url": "https://leg.colorado.gov/colorado-constitution"
+          }
+        ]
+      }
+    ],
+    "best_window": "After the 2030 census via the commission (2031); or an initiated amendment on the Nov 2028 ballot (signatures due early Aug 2028; single-subject and 55% hurdles).",
+    "notes": "In June 2026 the Colorado Supreme Court blocked Democratic-backed 2026 initiatives to suspend the commission (single-subject). Initiative 256 qualified Aug 31, 2026 with 141,866 valid signatures and is on the Nov 3, 2026 ballot (needs 55%).",
+    "sources": [
+      {
+        "label": "Loyola All About Redistricting: Colorado",
+        "url": "https://redistricting.lls.edu/state/colorado/"
+      },
+      {
+        "label": "Ballotpedia: Redistricting in Colorado",
+        "url": "https://ballotpedia.org/Redistricting_in_Colorado"
+      },
+      {
+        "label": "Colorado SOS: Initiative #256 qualifies (Aug 31, 2026)",
+        "url": "https://coloradosos.gov/pubs/newsRoom/pressReleases/2026/PR20260828Initiative256.html"
+      },
+      {
+        "label": "Ballotpedia News: Colorado voters to decide mid-decade redistricting amendment",
+        "url": "https://news.ballotpedia.org/2026/09/03/colorado-voters-to-decide-on-constitutional-amendment-that-would-require-approval-from-an-independent-commission-and-the-state-supreme-court-for-mid-decade-redistricting-maps/"
+      },
+      {
+        "label": "NCSL: Initiative and Referendum Processes",
+        "url": "https://www.ncsl.org/elections-and-campaigns/initiative-and-referendum-processes"
+      }
+    ]
+  },
+  "CT": {
+    "authority": "General Assembly by a 2/3 vote of each chamber (plan prepared by an 8-member bipartisan Reapportionment Committee; no gubernatorial veto). If no plan by Sept 15 of the year after the census, a 9-member backup commission acts by Nov 30; failing that, the Connecticut Supreme Court adopts the map (by Feb 15).",
+    "legal_basis": [
+      {
+        "cite": "Conn. Const. art. III, § 6 (reapportionment process)",
+        "url": "https://www.cga.ct.gov/red2011/2001/section6article3.htm"
+      },
+      {
+        "cite": "Conn. Const. arts. XII-XIII (amendments; constitutional convention)",
+        "url": "https://www.cga.ct.gov/asp/Content/constitutions/Constitution_State_CT.pdf"
+      }
+    ],
+    "criteria": "No state criteria specific to congressional districts beyond federal equal-population and VRA rules (town-split and contiguity rules apply to legislative districts). In 2012 and 2022 the Supreme Court ordered least-change congressional maps.",
+    "mid_decade": "Prohibited: redistricting occurs only in the decennial cycle under art. III, § 6 (Loyola).",
+    "paths": [
+      {
+        "path": "Legislation",
+        "how": "In 2031 the Reapportionment Committee proposes a plan that needs 2/3 of each chamber by Sept 15, 2031. Citizen groups can submit maps and testimony to the committee.",
+        "links": [
+          {
+            "label": "CGA redistricting laws",
+            "url": "https://www.cga.ct.gov/rr/tfs/20210401_2021%20Redistricting%20Project/laws.asp"
+          }
+        ]
+      },
+      {
+        "path": "Commission adoption",
+        "how": "If the legislature fails, the backup commission (two appointees per legislative leader plus a ninth chosen by them) adopts a plan certified by at least five members by Nov 30, 2031.",
+        "links": [
+          {
+            "label": "Conn. Const. art. III, § 6",
+            "url": "https://www.cga.ct.gov/red2011/2001/section6article3.htm"
+          }
+        ]
+      },
+      {
+        "path": "Court remedy",
+        "how": "Any elector may petition the Supreme Court (original jurisdiction) if the commission fails; the court appoints a special master and adopts a plan by Feb 15, 2032, and may accept party/amicus proposals.",
+        "links": [
+          {
+            "label": "Conn. Const. art. III, § 6",
+            "url": "https://www.cga.ct.gov/red2011/2001/section6article3.htm"
+          }
+        ]
+      },
+      {
+        "path": "Legislatively referred amendment",
+        "how": "Amendment passed by 3/4 of each house goes to the next general election, or by a majority in two successive sessions (with an intervening election); then majority of voters.",
+        "links": [
+          {
+            "label": "CGA OLR: Amending the State Constitution",
+            "url": "https://www.cga.ct.gov/2015/rpt/2015-R-0240.htm"
+          }
+        ]
+      }
+    ],
+    "best_window": "After the 2030 census (2031 legislature, backup commission, or Supreme Court). Structural change could come via a referred amendment on the Nov 2028 or 2030 ballot, or the automatic constitutional-convention question on the Nov 2028 ballot.",
+    "notes": "No citizen initiative or referendum. The 20-year convention question (art. XIII, § 2) was last asked in 2008, so it is due in 2028.",
+    "sources": [
+      {
+        "label": "Loyola All About Redistricting: Connecticut",
+        "url": "https://redistricting.lls.edu/state/connecticut/"
+      },
+      {
+        "label": "Ballotpedia: Redistricting in Connecticut",
+        "url": "https://ballotpedia.org/Redistricting_in_Connecticut"
+      },
+      {
+        "label": "CGA OLR: Connecticut Constitutional Conventions",
+        "url": "https://www.cga.ct.gov/2008/rpt/2008-r-0296.htm"
+      },
+      {
+        "label": "NCSL: Redistricting Criteria",
+        "url": "https://www.ncsl.org/elections-and-campaigns/redistricting-criteria"
+      }
+    ]
+  },
+  "DE": {
+    "authority": "Single at-large seat; no congressional map is drawn. If Delaware gained a second seat, the General Assembly would draw it by ordinary statute (governor may veto; 3/5 override); no law currently addresses it.",
+    "legal_basis": [
+      {
+        "cite": "29 Del. C. ch. 8, subch. I (legislative redistricting; criteria and timing)",
+        "url": "https://delcode.delaware.gov/title29/c008/sc01/index.html"
+      },
+      {
+        "cite": "Del. Const. art. XVI (amendments)",
+        "url": "https://delcode.delaware.gov/constitution/constitution-17.html"
+      }
+    ],
+    "criteria": "None for Congress (one seat). Legislative districts must be nearly equal in population, contiguous where possible, bounded by roads/streams/natural boundaries, and not drawn to unduly favor a person or party; incarcerated people are counted at their last address (29 Del. C. §§ 804, 804A).",
+    "mid_decade": "Not applicable to Congress. Statute bars mid-decade legislative redistricting, and the legislature can change it.",
+    "paths": [
+      {
+        "path": "Legislation",
+        "how": "Bill passes both houses by majority; governor signs or vetoes (override 3/5 of each house). Session runs January to June 30. Would apply only if Delaware gains a seat.",
+        "links": [
+          {
+            "label": "Delaware General Assembly",
+            "url": "https://legis.delaware.gov/"
+          }
+        ]
+      },
+      {
+        "path": "Legislatively referred amendment",
+        "how": "Amendment must pass 2/3 of all members of each house in two successive General Assemblies; there is no popular vote.",
+        "links": [
+          {
+            "label": "Del. Const. art. XVI",
+            "url": "https://delcode.delaware.gov/constitution/constitution-17.html"
+          }
+        ]
+      }
+    ],
+    "best_window": "Not applicable unless Delaware gains a seat (earliest the 2031 apportionment). A criteria statute could be passed in any session beforehand.",
+    "notes": "No citizen initiative or referendum.",
+    "sources": [
+      {
+        "label": "Loyola All About Redistricting: Delaware",
+        "url": "https://redistricting.lls.edu/state/delaware/"
+      },
+      {
+        "label": "Ballotpedia: Redistricting in Delaware",
+        "url": "https://ballotpedia.org/Redistricting_in_Delaware"
+      },
+      {
+        "label": "NCSL: Redistricting Criteria",
+        "url": "https://www.ncsl.org/elections-and-campaigns/redistricting-criteria"
+      }
+    ]
+  },
+  "FL": {
+    "authority": "Legislature by ordinary statute; governor may veto (2/3 override). The current map (HB 1-D, based on the governor's proposal) passed in special session Apr 29, 2026 and was signed May 4, 2026; it is being challenged under the Fair Districts Amendment.",
+    "legal_basis": [
+      {
+        "cite": "Fla. Const. art. III, § 20 (congressional district standards)",
+        "url": "http://www.leg.state.fl.us/Statutes/index.cfm?Mode=Constitution&Submenu=3#A3S20"
+      },
+      {
+        "cite": "Fla. Const. art. XI, §§ 1, 3, 5 (amendment by legislature or initiative; 60% approval)",
+        "url": "https://www.flsenate.gov/Laws/Constitution"
+      },
+      {
+        "cite": "HB 1-D (2026 Special Session D) congressional plan",
+        "url": "https://www.flsenate.gov/Session/Bill/2026D/1"
+      }
+    ],
+    "criteria": "No district or plan may be drawn with intent to favor or disfavor a party or incumbent; no denial or abridgment of racial/language minorities' equal opportunity or diminishment of their ability to elect; contiguity; then, where not in conflict, districts as nearly equal in population as practicable, compact, and using existing political and geographical boundaries where feasible.",
+    "mid_decade": "Not explicitly barred for Congress (the census tie in art. III, § 16 covers legislative districts); the legislature redrew mid-decade in 2026.",
+    "paths": [
+      {
+        "path": "Legislation",
+        "how": "Bill passes both houses by majority and goes to the governor (2/3 override). The 60-day regular session starts in January in even years and March in odd years; special sessions by governor's proclamation or joint call of the presiding officers.",
+        "links": [
+          {
+            "label": "The Florida Senate",
+            "url": "https://www.flsenate.gov/"
+          }
+        ]
+      },
+      {
+        "path": "Court remedy",
+        "how": "Fair Districts suits (e.g., Equal Ground Education Fund v. Byrd, Leon County circuit court; First DCA) are pending. If a court invalidates the plan, it typically returns the map to the legislature and, if needed, adopts a remedial map, as the Florida Supreme Court did in 2015 using a plaintiff-proposed plan.",
+        "links": [
+          {
+            "label": "Loyola: Equal Ground Education Fund v. Byrd",
+            "url": "https://redistricting.lls.edu/case/equal-ground-education-fund-v-byrd/"
+          }
+        ]
+      },
+      {
+        "path": "Citizen-initiated constitutional amendment",
+        "how": "Register a sponsoring committee; collect signatures equal to 8% of the 2024 presidential vote (880,062) statewide and in at least half (14 of 28) of congressional districts; Supreme Court review is triggered at 25%; all signatures must be verified by Feb 1, 2028; needs 60% approval.",
+        "links": [
+          {
+            "label": "Florida Division of Elections: Constitutional Amendments/Initiatives",
+            "url": "https://dos.fl.gov/elections/laws-rules/constitutional-amendmentsinitiatives/"
+          }
+        ]
+      },
+      {
+        "path": "Legislatively referred amendment",
+        "how": "Joint resolution passed by 3/5 of each house goes to the next general election; needs 60% approval.",
+        "links": [
+          {
+            "label": "Florida Constitution (Senate)",
+            "url": "https://www.flsenate.gov/Laws/Constitution"
+          }
+        ]
+      }
+    ],
+    "best_window": "Near term: the pending Fair Districts litigation. Structural change: Nov 2028 ballot via initiated amendment, with signatures submitted in 2027 so counties can verify before Feb 1, 2028.",
+    "notes": "A Leon County judge denied preliminary injunctions May 26, 2026; the Florida Supreme Court (6-1, June 2026) left the map in place for 2026 and sent the case to the First DCA first; merits schedule as of Oct 2026 UNVERIFIED. 2025 law HB 1205 added circulator and petition restrictions; its litigation status is UNVERIFIED. The next Constitution Revision Commission is not until 2037.",
+    "sources": [
+      {
+        "label": "Loyola All About Redistricting: Florida",
+        "url": "https://redistricting.lls.edu/state/florida/"
+      },
+      {
+        "label": "Ballotpedia: Redistricting in Florida",
+        "url": "https://ballotpedia.org/Redistricting_in_Florida"
+      },
+      {
+        "label": "Florida Trend: Florida Supreme Court keeps new congressional districts in place (June 11, 2026)",
+        "url": "https://www.floridatrend.com/articles/2026/06/11/florida-supreme-court-keeps-new-congressional-districts-place/"
+      },
+      {
+        "label": "Ballotpedia: Laws governing the initiative process in Florida",
+        "url": "https://ballotpedia.org/Laws_governing_the_initiative_process_in_Florida"
+      },
+      {
+        "label": "NCSL: Initiative and Referendum Processes",
+        "url": "https://www.ncsl.org/elections-and-campaigns/initiative-and-referendum-processes"
+      }
+    ]
+  },
+  "GA": {
+    "authority": "General Assembly by ordinary statute; governor may veto (2/3 override).",
+    "legal_basis": [
+      {
+        "cite": "Ga. Const. art. III, § II, ¶ II (legislative apportionment; no congressional criteria)",
+        "url": "https://sos.ga.gov/sites/default/files/2022-02/state_constitution.pdf"
+      },
+      {
+        "cite": "Ga. Const. art. X, § I, ¶ II (amendments: 2/3 of each house, then voters)",
+        "url": "https://sos.ga.gov/sites/default/files/2022-02/state_constitution.pdf"
+      }
+    ],
+    "criteria": "No state constitutional or statutory criteria for congressional districts beyond federal equal-population and VRA rules; committees adopt non-binding guidelines each cycle.",
+    "mid_decade": "No explicit bar for Congress; the census tie in art. III applies to legislative districts and a federal court has doubted even that reading (Kidd v. Cox, 2006).",
+    "paths": [
+      {
+        "path": "Legislation",
+        "how": "Bill passes both houses by majority (via the House and Senate reapportionment committees); governor signs or vetoes (2/3 override). Regular session runs January to about early April (40 legislative days); the governor may call special sessions.",
+        "links": [
+          {
+            "label": "Georgia General Assembly",
+            "url": "https://www.legis.ga.gov/"
+          },
+          {
+            "label": "House Reapportionment & Redistricting Committee",
+            "url": "https://www.legis.ga.gov/committees/house/199"
+          }
+        ]
+      },
+      {
+        "path": "Legislatively referred amendment",
+        "how": "Resolution passed by 2/3 of each house goes to voters at the next general election; majority approval. Could create a commission or neutral criteria.",
+        "links": [
+          {
+            "label": "Georgia Constitution (SOS PDF)",
+            "url": "https://sos.ga.gov/sites/default/files/2022-02/state_constitution.pdf"
+          }
+        ]
+      },
+      {
+        "path": "Court remedy",
+        "how": "VRA cases over the 2021 plans were vacated by the 11th Circuit on Aug 25, 2026 and remanded in light of Callais; a court-ordered remedy is possible only if plaintiffs prevail on remand.",
+        "links": [
+          {
+            "label": "11th Cir. vacatur order (Aug 25, 2026)",
+            "url": "https://redistricting.lls.edu/wp-content/uploads/GA-apa-20260825-vacate.pdf"
+          }
+        ]
+      }
+    ],
+    "best_window": "Realistically after the 2030 census (2031 session or special session). A statute in the 2027 or 2028 session is legally possible but leadership declined to redistrict in June 2026.",
+    "notes": "Gov. Kemp called a special session for June 17, 2026 to redraw for 2028, but legislative leaders declined to take up redistricting. Loyola reports the 2023 remedial map is used for 2026 and, absent a new injunction, the 2021 plans thereafter. No citizen initiative or referendum.",
+    "sources": [
+      {
+        "label": "Loyola All About Redistricting: Georgia",
+        "url": "https://redistricting.lls.edu/state/georgia/"
+      },
+      {
+        "label": "Ballotpedia: Redistricting in Georgia",
+        "url": "https://ballotpedia.org/Redistricting_in_Georgia"
+      },
+      {
+        "label": "Leadership letter declining redistricting (June 17, 2026)",
+        "url": "https://redistricting.lls.edu/wp-content/uploads/GA-20260617-letter.pdf"
+      },
+      {
+        "label": "CBS Atlanta: Kemp calls special session (May 2026)",
+        "url": "https://www.cbsnews.com/atlanta/news/brian-kemp-georgia-special-session-redistricting-supreme-court-ruling-2028-maps/"
+      },
+      {
+        "label": "Loyola: Louisiana v. Callais case page",
+        "url": "https://redistricting.lls.edu/case/callais-v-landry/"
+      }
+    ]
+  },
+  "HI": {
+    "authority": "Nine-member Reapportionment Commission (two appointees from each of the four legislative leaders, who choose a ninth chair or the Supreme Court does) adopts congressional and legislative plans in reapportionment years; no legislative vote or gubernatorial veto.",
+    "legal_basis": [
+      {
+        "cite": "Haw. Const. art. IV, §§ 1-2, 6, 10 (reapportionment commission; criteria; court review)",
+        "url": "https://lrb.hawaii.gov/constitution#articleiv"
+      },
+      {
+        "cite": "Haw. Rev. Stat. § 25-2 (congressional criteria; hearings)",
+        "url": "https://www.capitol.hawaii.gov/hrscurrent/Vol01_Ch0001-0042F/HRS0025/HRS_0025-0002.htm"
+      },
+      {
+        "cite": "Haw. Const. art. XVII (amendments; convention question)",
+        "url": "https://lrb.hawaii.gov/constitution#articlexvii"
+      }
+    ],
+    "criteria": "Congressional districts (HRS § 25-2(b)) must be as nearly equal in population as practicable, contiguous, compact where practicable, follow permanent and easily recognized features and census tracts where practicable, avoid submerging areas with substantially different socioeconomic interests, and not unduly favor a person or political faction.",
+    "mid_decade": "Likely prohibited: the constitution designates specific reapportionment years (art. IV, § 1) (Loyola: 'might be construed to prohibit').",
+    "paths": [
+      {
+        "path": "Commission adoption",
+        "how": "Commission forms in 2031; it must publish drafts (within 100 days, by statute) and hold at least one hearing in each basic island unit, and adopt final plans within 150 days of forming. Citizen groups can submit plans and testify.",
+        "links": [
+          {
+            "label": "Hawaii Office of Elections: Reapportionment Commission",
+            "url": "https://elections.hawaii.gov/about-us/boards-and-commissions/reapportionment/"
+          }
+        ]
+      },
+      {
+        "path": "Legislatively referred amendment",
+        "how": "2/3 of each house in one session, or a majority in two successive sessions, places an amendment on the ballot; at a general election it must win a majority of all ballots cast on the question equal to at least 50% of all ballots cast.",
+        "links": [
+          {
+            "label": "Hawaii State Legislature",
+            "url": "https://www.capitol.hawaii.gov/"
+          }
+        ]
+      },
+      {
+        "path": "Court remedy",
+        "how": "Any registered voter may petition the Hawaii Supreme Court (original jurisdiction) within 45 days of the final plan; the court can order a corrected plan.",
+        "links": [
+          {
+            "label": "Haw. Const. art. IV",
+            "url": "https://lrb.hawaii.gov/constitution#articleiv"
+          }
+        ]
+      }
+    ],
+    "best_window": "2031 commission process. Constitutional change via a referred amendment or the automatic constitutional-convention question due on the Nov 2028 ballot (nine-year rule; last asked 2018).",
+    "notes": "No citizen initiative or referendum. Two congressional districts.",
+    "sources": [
+      {
+        "label": "Loyola All About Redistricting: Hawaii",
+        "url": "https://redistricting.lls.edu/state/hawaii/"
+      },
+      {
+        "label": "Ballotpedia: Redistricting in Hawaii",
+        "url": "https://ballotpedia.org/Redistricting_in_Hawaii"
+      },
+      {
+        "label": "NCSL: Redistricting Criteria",
+        "url": "https://www.ncsl.org/elections-and-campaigns/redistricting-criteria"
+      }
+    ]
+  },
+  "ID": {
+    "authority": "Six-member Commission for Reapportionment (one each from the four legislative leaders and the two largest parties' chairs) adopts congressional and legislative plans; no legislative vote or veto. The Idaho Supreme Court has original jurisdiction over challenges.",
+    "legal_basis": [
+      {
+        "cite": "Idaho Const. art. III, § 2 (commission)",
+        "url": "https://legislature.idaho.gov/statutesrules/idconst/ArtIII/Sect2/"
+      },
+      {
+        "cite": "Idaho Code § 72-1506 (criteria)",
+        "url": "https://legislature.idaho.gov/statutesrules/idstat/Title72/T72CH15/SECT72-1506/"
+      },
+      {
+        "cite": "Idaho Code § 34-1805 (initiative/referendum signatures)",
+        "url": "https://legislature.idaho.gov/statutesrules/idstat/Title34/T34CH18/SECT34-1805/"
+      }
+    ],
+    "criteria": "Statute requires contiguous districts, preserving counties (minimizing the number divided), traditional neighborhoods and communities of interest, avoiding oddly shaped districts, and highway connection between county pieces; only population data may be used, and counties may not be split to protect a party or incumbent.",
+    "mid_decade": "Likely prohibited: the constitution and Idaho Code § 72-1501 tie the commission to the census (Loyola: 'might be construed to prohibit').",
+    "paths": [
+      {
+        "path": "Commission adoption",
+        "how": "Commission is organized after 2030 census data arrive; it must produce draft plans within 90 days, holds meetings around the state, and accepts public plans; final plans filed with the Secretary of State.",
+        "links": [
+          {
+            "label": "Idaho Legislature: 2021 redistricting archive",
+            "url": "https://legislature.idaho.gov/redistricting/2021/"
+          }
+        ]
+      },
+      {
+        "path": "Citizen-initiated statute",
+        "how": "Can tighten statutory criteria in § 72-1506 (not the constitutional commission). File with the Secretary of State, AG review and ballot title, then signatures of 6% of registered voters statewide and in at least 18 of 35 legislative districts, due to county clerks by May 1, 2028; majority vote; legislature may later amend.",
+        "links": [
+          {
+            "label": "VoteIdaho: Initiative Filing Requirements",
+            "url": "https://voteidaho.gov/initiative-filing-requirements/"
+          },
+          {
+            "label": "VoteIdaho: Initiatives & Amendments",
+            "url": "https://voteidaho.gov/initiatives-amendments/"
+          }
+        ]
+      },
+      {
+        "path": "Referendum",
+        "how": "A statute (for example, amended criteria) can be referred with the same 6%/18-district signatures within 60 days after the session adjourns.",
+        "links": [
+          {
+            "label": "Idaho Code § 34-1805",
+            "url": "https://legislature.idaho.gov/statutesrules/idstat/Title34/T34CH18/SECT34-1805/"
+          }
+        ]
+      },
+      {
+        "path": "Legislatively referred amendment",
+        "how": "2/3 of each house places an amendment on the next general-election ballot; majority approval.",
+        "links": [
+          {
+            "label": "Idaho State Legislature",
+            "url": "https://legislature.idaho.gov/"
+          }
+        ]
+      }
+    ],
+    "best_window": "Nov 2028 ballot via initiated statute to strengthen neutral criteria before the 2031 commission (signatures due May 1, 2028).",
+    "notes": "A 2021 law requiring signatures from all 35 districts was struck by the Idaho Supreme Court (Reclaim Idaho v. Denney, 2021), and the Secretary of State lists the 18-district rule. No citizen-initiated constitutional amendments.",
+    "sources": [
+      {
+        "label": "Loyola All About Redistricting: Idaho",
+        "url": "https://redistricting.lls.edu/state/idaho/"
+      },
+      {
+        "label": "Ballotpedia: Redistricting in Idaho",
+        "url": "https://ballotpedia.org/Redistricting_in_Idaho"
+      },
+      {
+        "label": "Ballotpedia: Laws governing the initiative process in Idaho",
+        "url": "https://ballotpedia.org/Laws_governing_the_initiative_process_in_Idaho"
+      },
+      {
+        "label": "NCSL: Initiative and Referendum Processes",
+        "url": "https://www.ncsl.org/elections-and-campaigns/initiative-and-referendum-processes"
+      }
+    ]
+  },
+  "IL": {
+    "authority": "General Assembly by ordinary statute; governor may veto (3/5 override).",
+    "legal_basis": [
+      {
+        "cite": "Ill. Const. art. IV, § 3 (legislative redistricting only)",
+        "url": "https://www.ilga.gov/commission/lrb/con4.htm"
+      },
+      {
+        "cite": "Ill. Const. art. XIV, §§ 1-3 (convention; amendments; initiative limited to Article IV)",
+        "url": "https://www.ilga.gov/commission/lrb/con14.htm"
+      }
+    ],
+    "criteria": "No state constitutional or statutory criteria for congressional districts beyond federal rules (compactness/contiguity apply only to legislative districts).",
+    "mid_decade": "No constitutional bar for Congress; the art. IV, § 3 bar applies to legislative districts.",
+    "paths": [
+      {
+        "path": "Legislation",
+        "how": "Bill passes both houses and goes to the governor; override by 3/5 of each house. Bills passed after May 31 need 3/5 to take effect immediately. The General Assembly meets year-round (spring session ends May 31).",
+        "links": [
+          {
+            "label": "Illinois General Assembly",
+            "url": "https://www.ilga.gov/"
+          }
+        ]
+      },
+      {
+        "path": "Legislatively referred amendment",
+        "how": "Joint resolution passed by 3/5 of each house goes to the general election; adopted by 3/5 of those voting on it or a majority of those voting in the election.",
+        "links": [
+          {
+            "label": "Ill. Const. art. XIV",
+            "url": "https://www.ilga.gov/commission/lrb/con14.htm"
+          }
+        ]
+      }
+    ],
+    "best_window": "Any legislative session by statute (no mid-decade bar), though no 2025-26 action occurred; structurally, the automatic constitutional-convention question due on the Nov 2028 ballot.",
+    "notes": "Citizen initiatives may only change structural/procedural parts of Article IV; courts rejected redistricting initiatives in 2014 and 2016 (Hooker v. Ill. State Bd. of Elections), and congressional redistricting is outside Article IV, so no citizen initiative path exists. The 20-year convention question (art. XIV, § 1(b)) was last on the ballot in 2008.",
+    "sources": [
+      {
+        "label": "Loyola All About Redistricting: Illinois",
+        "url": "https://redistricting.lls.edu/state/illinois/"
+      },
+      {
+        "label": "Ballotpedia: Redistricting in Illinois",
+        "url": "https://ballotpedia.org/Redistricting_in_Illinois"
+      },
+      {
+        "label": "Ballotpedia: Laws governing the initiative process in Illinois",
+        "url": "https://ballotpedia.org/Laws_governing_the_initiative_process_in_Illinois"
+      },
+      {
+        "label": "5 ILCS 25/1 (convention question statute)",
+        "url": "https://www.ilga.gov/legislation/ilcs/documents/000500250K1.htm"
+      }
+    ]
+  },
+  "IN": {
+    "authority": "General Assembly by ordinary statute; governor may veto (simple-majority override). If the legislature fails to pass a plan, a five-member statutory backup commission (two majority leaders, two redistricting chairs, one legislator named by the governor) draws it.",
+    "legal_basis": [
+      {
+        "cite": "Ind. Code §§ 3-3-2-1, -2 (congressional districting; backup commission)",
+        "url": "https://iga.in.gov/laws/2025/ic/titles/3#3-3-2-2"
+      },
+      {
+        "cite": "Ind. Const. art. IV, § 5; art. XVI (legislative districts; amendments)",
+        "url": "https://iga.in.gov/publications/indiana_constitution/Archive%20Constitution%20(as%20amended%202018).pdf"
+      }
+    ],
+    "criteria": "No state constitutional or statutory criteria for congressional districts beyond federal rules (contiguity applies to legislative districts).",
+    "mid_decade": "Unclear: Ind. Code § 3-3-2-1 ties congressional districting to the session after the census but has not been interpreted; the legislature can amend it, and the 2025 special session considered a mid-decade map.",
+    "paths": [
+      {
+        "path": "Legislation",
+        "how": "Bill passes both houses by majority; governor signs or vetoes (majority override). Long session in odd years (Jan-Apr), short session in even years (Jan-Mar); the governor may call special sessions.",
+        "links": [
+          {
+            "label": "Indiana General Assembly",
+            "url": "https://iga.in.gov/"
+          }
+        ]
+      },
+      {
+        "path": "Commission adoption",
+        "how": "Only if the legislature fails to enact a plan by its deadline, the statutory backup commission has 30 days to draw one.",
+        "links": [
+          {
+            "label": "Ind. Code § 3-3-2-2",
+            "url": "https://iga.in.gov/laws/2025/ic/titles/3#3-3-2-2"
+          }
+        ]
+      },
+      {
+        "path": "Legislatively referred amendment",
+        "how": "Amendment must pass a majority of each house in two successive, separately elected General Assemblies, then a majority of voters.",
+        "links": [
+          {
+            "label": "Indiana Constitution (PDF)",
+            "url": "https://iga.in.gov/publications/indiana_constitution/Archive%20Constitution%20(as%20amended%202018).pdf"
+          }
+        ]
+      }
+    ],
+    "best_window": "Realistically the 2031 session after the 2030 census; a statute in the 2027 long session is legally possible.",
+    "notes": "Gov. Braun's Nov 2025 special session: House passed HB 1032 (Dec 5, 2025) but the Senate rejected it on Dec 11, 2025; Wikipedia reports five of seven GOP opponents lost 2026 primaries, so the issue could return in 2027. No citizen initiative or referendum.",
+    "sources": [
+      {
+        "label": "Loyola All About Redistricting: Indiana",
+        "url": "https://redistricting.lls.edu/state/indiana/"
+      },
+      {
+        "label": "Ballotpedia: Redistricting in Indiana",
+        "url": "https://ballotpedia.org/Redistricting_in_Indiana"
+      },
+      {
+        "label": "HB 1032 (2026) actions",
+        "url": "https://iga.in.gov/legislative/2026/bills/house/1032/actions"
+      },
+      {
+        "label": "Wikipedia: 2025-2026 United States redistricting",
+        "url": "https://en.wikipedia.org/wiki/2025%E2%80%932026_United_States_redistricting"
+      }
+    ]
+  },
+  "IA": {
+    "authority": "Legislature by ordinary statute (governor may veto; 2/3 override), but under Iowa Code ch. 42 the nonpartisan Legislative Services Agency draws plans with a five-member advisory commission; the legislature votes the first two plans up or down without amendment and may amend only a third.",
+    "legal_basis": [
+      {
+        "cite": "Iowa Code § 42.3 (LSA plan process)",
+        "url": "https://www.legis.iowa.gov/docs/code/42.3.pdf"
+      },
+      {
+        "cite": "Iowa Code § 42.4 (redistricting standards)",
+        "url": "https://www.legis.iowa.gov/docs/code/42.4.pdf"
+      },
+      {
+        "cite": "Iowa Const. art. III, §§ 34-37 (incl. § 37: no county divided in a congressional district)",
+        "url": "https://www.legis.iowa.gov/docs/publications/ICP/1023054.pdf"
+      }
+    ],
+    "criteria": "No congressional district may vary more than 1% from the ideal population; counties may not be split (Iowa Const. art. III, § 37); contiguous; reasonably compact by length-width and perimeter tests; no use of incumbent addresses, political data or (beyond federal requirements) demographics; not drawn to favor a party, incumbent, or group.",
+    "mid_decade": "No explicit bar for Congress; the ch. 42 timetable is tied to the census but is statutory and can be changed.",
+    "paths": [
+      {
+        "path": "Legislation",
+        "how": "LSA delivers the first plan by April 1, 2031; the legislature takes up-or-down votes, then a second plan within 35 days of rejection, then a third that may be amended; governor signs or vetoes. Regular session January to about April.",
+        "links": [
+          {
+            "label": "Iowa Legislature: Redistricting",
+            "url": "https://www.legis.iowa.gov/legislators/redistricting"
+          }
+        ]
+      },
+      {
+        "path": "Legislatively referred amendment",
+        "how": "To entrench the LSA process: pass by majority in two successive General Assemblies (e.g., 2027-28 and 2029-30), then a majority of voters (earliest Nov 2030).",
+        "links": [
+          {
+            "label": "Iowa Legislature",
+            "url": "https://www.legis.iowa.gov/"
+          }
+        ]
+      }
+    ],
+    "best_window": "2031 LSA process (already rule-drawn); a referred amendment to entrench it could reach the Nov 2030 ballot.",
+    "notes": "The legislature has accepted an LSA plan every cycle since 1981. No citizen initiative or referendum; Iowa's automatic constitutional-convention question recurs every 10 years (next 2030, UNVERIFIED).",
+    "sources": [
+      {
+        "label": "Loyola All About Redistricting: Iowa",
+        "url": "https://redistricting.lls.edu/state/iowa/"
+      },
+      {
+        "label": "Ballotpedia: Redistricting in Iowa",
+        "url": "https://ballotpedia.org/Redistricting_in_Iowa"
+      },
+      {
+        "label": "NCSL: Redistricting Criteria",
+        "url": "https://www.ncsl.org/elections-and-campaigns/redistricting-criteria"
+      }
+    ]
+  },
+  "KS": {
+    "authority": "Legislature by ordinary statute; governor may veto, and an override needs 2/3 of each house (84 House, 27 Senate votes).",
+    "legal_basis": [
+      {
+        "cite": "Kan. Const. art. 10, § 1 (legislative apportionment only)",
+        "url": "https://sos.ks.gov/publications/kansas-constitution/kansas-constitution-article-10.html"
+      },
+      {
+        "cite": "Kan. Const. art. 14, § 1 (amendments: 2/3 of each house, then voters)",
+        "url": "https://sos.ks.gov/publications/kansas-constitution/kansas-constitution-article-14.html"
+      }
+    ],
+    "criteria": "No constitutional or statutory criteria for congressional districts; committees adopt non-binding guidelines. The Kansas Supreme Court held partisan-gerrymandering claims nonjusticiable under the state constitution (Rivera v. Schwab, 2022).",
+    "mid_decade": "No explicit bar for Congress; the art. 10 bar applies to legislative districts.",
+    "paths": [
+      {
+        "path": "Legislation",
+        "how": "Bill passes both houses by majority; governor signs or vetoes (2/3 override). Regular session January to May; special sessions may be called by the governor or by petition of 2/3 of the members of each house.",
+        "links": [
+          {
+            "label": "Kansas Legislature",
+            "url": "https://www.kslegislature.gov/"
+          },
+          {
+            "label": "KLRD: Redistricting",
+            "url": "https://klrd.gov/policy-area/redistricting/"
+          }
+        ]
+      },
+      {
+        "path": "Legislatively referred amendment",
+        "how": "Concurrent resolution passed by 2/3 of each house goes to voters (no more than five amendments per election); majority approval.",
+        "links": [
+          {
+            "label": "Kan. Const. art. 14",
+            "url": "https://sos.ks.gov/publications/kansas-constitution/kansas-constitution-article-14.html"
+          }
+        ]
+      }
+    ],
+    "best_window": "2031-2032 sessions after the census (Kansas enacted its 2022 map in the regular session); a 2027 statute is legally possible.",
+    "notes": "A 2025-26 GOP push to redraw the 3rd District fell short: a special-session petition lacked House signatures and the speaker said Republicans were about 20 votes short of override in Jan 2026. The Nov 2026 governor race (Kelly is term-limited) may change the veto math. No citizen initiative or referendum.",
+    "sources": [
+      {
+        "label": "Loyola All About Redistricting: Kansas",
+        "url": "https://redistricting.lls.edu/state/kansas/"
+      },
+      {
+        "label": "Ballotpedia: Redistricting in Kansas",
+        "url": "https://ballotpedia.org/Redistricting_in_Kansas"
+      },
+      {
+        "label": "KCUR: Kansas redistricting push fails for now (Nov 5, 2025)",
+        "url": "https://www.kcur.org/politics-elections-and-government/2025-11-05/kansas-republicans-fail-to-get-support-for-redistricting-but-their-plan-isnt-dead-yet"
+      },
+      {
+        "label": "NCSL: Redistricting Criteria",
+        "url": "https://www.ncsl.org/elections-and-campaigns/redistricting-criteria"
+      }
+    ]
+  },
+  "KY": {
+    "authority": "General Assembly by ordinary statute; governor may veto, and a majority of the members of each house overrides (as in Jan 2022).",
+    "legal_basis": [
+      {
+        "cite": "Ky. Const. § 33 (legislative districts only)",
+        "url": "https://apps.legislature.ky.gov/Law/Constitution/Constitution/ViewConstitution?rsn=37"
+      },
+      {
+        "cite": "Ky. Const. § 256 (amendments: 3/5 of each house, then voters)",
+        "url": "https://apps.legislature.ky.gov/Law/Constitution/Constitution/ViewConstitution?rsn=294"
+      },
+      {
+        "cite": "KRS § 5.005 (redistricting challenges; venue)",
+        "url": "https://apps.legislature.ky.gov/law/statutes/statute.aspx?id=51897"
+      }
+    ],
+    "criteria": "No state constitutional or statutory criteria for congressional districts beyond federal rules. The Kentucky Supreme Court treats partisan-gerrymandering claims as justiciable but sets a very high bar (Graham v. Adams, 2023).",
+    "mid_decade": "Allowed: Kentucky may redraw congressional lines at any time (Loyola, citing Richardson v. McChesney, 1908); the mid-decade bar in § 33 covers legislative districts.",
+    "paths": [
+      {
+        "path": "Legislation",
+        "how": "Bill passes both houses by majority; governor signs or vetoes; override by a majority of members of each house. Sessions: 60 legislative days Jan-Apr in even years, 30 days in odd years; governor may call special sessions.",
+        "links": [
+          {
+            "label": "Kentucky General Assembly (LRC)",
+            "url": "https://legislature.ky.gov/"
+          }
+        ]
+      },
+      {
+        "path": "Legislatively referred amendment",
+        "how": "Proposed in a regular session and passed by 3/5 of all members of each house; submitted at the next general election for the House (no more than four amendments at once); majority approval; no governor role.",
+        "links": [
+          {
+            "label": "Ky. Const. § 256",
+            "url": "https://apps.legislature.ky.gov/Law/Constitution/Constitution/ViewConstitution?rsn=294"
+          }
+        ]
+      }
+    ],
+    "best_window": "2027 or 2028 session by statute (legally available any time); realistically the 2032 session after the 2030 census, as in 2022.",
+    "notes": "In 2025-26 Gov. Beshear and some Republicans discussed a mid-decade redraw, but Senate President Stivers opposed it and no session was called (as of May 2026 reporting). No citizen initiative or referendum.",
+    "sources": [
+      {
+        "label": "Loyola All About Redistricting: Kentucky",
+        "url": "https://redistricting.lls.edu/state/kentucky/"
+      },
+      {
+        "label": "Ballotpedia: Redistricting in Kentucky",
+        "url": "https://ballotpedia.org/Redistricting_in_Kentucky"
+      },
+      {
+        "label": "Spectrum News 1: Redistricting around the country (May 19, 2026)",
+        "url": "https://spectrumnews1.com/ky/louisville/news/2026/05/19/redistricting-in-kentucky"
+      },
+      {
+        "label": "NCSL: Redistricting Criteria",
+        "url": "https://www.ncsl.org/elections-and-campaigns/redistricting-criteria"
+      }
+    ]
+  },
+  "LA": {
+    "authority": "Legislature by ordinary statute; governor may veto (2/3 override). After Louisiana v. Callais struck the 2024 map, the legislature enacted SB 121 (signed May 29, 2026), which keeps one majority-Black district; it is challenged in state and federal court.",
+    "legal_basis": [
+      {
+        "cite": "La. Const. art. III, § 6 (legislative reapportionment only)",
+        "url": "https://senate.la.gov/Documents/Constitution/Article3.htm"
+      },
+      {
+        "cite": "La. Const. art. XIII, § 1 (amendments: 2/3 of each house, then voters)",
+        "url": "https://senate.la.gov/Documents/Constitution/Article13.htm"
+      },
+      {
+        "cite": "SB 121 (2026 Regular Session) congressional plan",
+        "url": "https://legis.la.gov/legis/BillInfo.aspx?s=26RS&b=SB121&sbi=y"
+      }
+    ],
+    "criteria": "No state constitutional or statutory criteria for congressional districts beyond federal equal-population, VRA and Equal Protection rules (now shaped by Callais).",
+    "mid_decade": "Allowed: Louisiana places no limits on redrawing congressional or legislative lines at any time (Loyola, citing La. Op. Atty. Gen. No. 99-54).",
+    "paths": [
+      {
+        "path": "Legislation",
+        "how": "Bill passes both houses by majority; governor signs or vetoes (2/3 override). Annual regular sessions: general sessions in even years, fiscal sessions in odd years with limits on non-fiscal bills; the governor or a majority of each house can call special sessions.",
+        "links": [
+          {
+            "label": "Louisiana State Legislature",
+            "url": "https://legis.la.gov/"
+          }
+        ]
+      },
+      {
+        "path": "Legislatively referred amendment",
+        "how": "Joint resolution passed by 2/3 of the elected members of each house goes to voters; majority approval. Could create a commission or neutral criteria.",
+        "links": [
+          {
+            "label": "La. Const. art. XIII",
+            "url": "https://senate.la.gov/Documents/Constitution/Article13.htm"
+          }
+        ]
+      },
+      {
+        "path": "Court remedy",
+        "how": "At least four suits followed Callais and new suits target SB 121; if a court invalidates SB 121 it may give the legislature a chance to redraw or adopt a remedial plan, and parties may propose maps.",
+        "links": [
+          {
+            "label": "Loyola: Louisiana v. Callais case page",
+            "url": "https://redistricting.lls.edu/case/callais-v-landry/"
+          }
+        ]
+      }
+    ],
+    "best_window": "Statute in a 2027 special session or the 2028 regular session (no mid-decade bar), or the 2031-32 cycle; court remedy only if the SB 121 challenges succeed.",
+    "notes": "Callais (Apr 29, 2026, 6-3) held the 2024 second majority-Black district an unconstitutional racial gerrymander; the governor suspended congressional primaries Apr 30, 2026. Wikipedia reports the U.S. House primary moved to Nov 3 with a Dec 12, 2026 general (UNVERIFIED in official sources). No citizen initiative or referendum.",
+    "sources": [
+      {
+        "label": "Loyola All About Redistricting: Louisiana",
+        "url": "https://redistricting.lls.edu/state/louisiana/"
+      },
+      {
+        "label": "Ballotpedia: Redistricting in Louisiana",
+        "url": "https://ballotpedia.org/Redistricting_in_Louisiana"
+      },
+      {
+        "label": "Loyola: Louisiana v. Callais case page",
+        "url": "https://redistricting.lls.edu/case/callais-v-landry/"
+      },
+      {
+        "label": "SCOTUSblog: Supreme Court strikes down Louisiana map (Apr 2026)",
+        "url": "https://www.scotusblog.com/2026/04/in-major-voting-rights-act-case-supreme-court-strikes-down-redistricting-map-challenged-as-racia/"
+      },
+      {
+        "label": "Louisiana Illuminator: Litigation looms as Legislature approves new map (May 29, 2026)",
+        "url": "https://lailluminator.com/2026/05/29/litigation-looms-as-louisiana-legislature-approves-new-congressional-map/"
+      },
+      {
+        "label": "Governor's order suspending primaries (Apr 30, 2026)",
+        "url": "https://redistricting.lls.edu/wp-content/uploads/LA-gov-20260430-order.pdf"
+      }
+    ]
+  },
+  "ME": {
+    "authority": "Legislature by a 2/3 vote of each house (statute), acting on a plan from the 15-member advisory Apportionment Commission; subject to governor's approval. If the legislature fails, the Supreme Judicial Court draws the map within 60 days.",
+    "legal_basis": [
+      {
+        "cite": "Me. Rev. Stat. tit. 21-A, § 1206 (congressional reapportionment; 2/3 vote; court fallback; criteria)",
+        "url": "http://www.mainelegislature.org/legis/statutes/21-A/title21-Asec1206.html"
+      },
+      {
+        "cite": "Me. Const. art. IV, pt. 3, §§ 1-A, 17-18 (apportionment commission; people's veto; initiative)",
+        "url": "https://legislature.maine.gov/ros/LawsOfMaine/#Const"
+      }
+    ],
+    "criteria": "Districts must be compact and contiguous, as equally populated as possible, and cross political subdivision lines the least number of times necessary (21-A § 1206); because this is statutory, it can be changed by law or citizen initiative.",
+    "mid_decade": "No constitutional bar for Congress; § 1206 schedules review in 2021 and every 10 years thereafter, which a statute or initiative could change.",
+    "paths": [
+      {
+        "path": "Legislation",
+        "how": "Commission submits a plan; the legislature enacts it or its own plan by 2/3 of each house; governor approval. Sessions run from December/January into spring; special sessions possible.",
+        "links": [
+          {
+            "label": "Maine State Legislature",
+            "url": "https://legislature.maine.gov/"
+          }
+        ]
+      },
+      {
+        "path": "Citizen-initiated statute",
+        "how": "Amend § 1206 (e.g., rule-based drawing). Apply to the SOS; signatures equal to 10% of the last governor vote (67,682 through 2026), valid one year; file by day 50 of the first regular session (Nov 2027 ballot) or 25th day of the second (Nov 2028); legislature enacts it or sends it to voters, perhaps with a competing measure.",
+        "links": [
+          {
+            "label": "Maine SOS: Citizen Initiatives and People's Vetoes",
+            "url": "https://www.maine.gov/sos/cec/elec/citizens/index.html"
+          }
+        ]
+      },
+      {
+        "path": "Referendum",
+        "how": "People's veto of any newly enacted map law: signatures equal to 10% of the last governor vote, filed within 90 days after the session adjourns; the law is suspended until the vote.",
+        "links": [
+          {
+            "label": "Maine SOS: Citizen Initiatives and People's Vetoes",
+            "url": "https://www.maine.gov/sos/cec/elec/citizens/index.html"
+          }
+        ]
+      },
+      {
+        "path": "Court remedy",
+        "how": "If the legislature misses its deadline, the Supreme Judicial Court apportions within 60 days and must consider plans and briefs filed by the public in the first 30 days.",
+        "links": [
+          {
+            "label": "21-A § 1206",
+            "url": "http://www.mainelegislature.org/legis/statutes/21-A/title21-Asec1206.html"
+          }
+        ]
+      },
+      {
+        "path": "Legislatively referred amendment",
+        "how": "2/3 of each house sends an amendment to voters; majority approval.",
+        "links": [
+          {
+            "label": "Maine Constitution (Legislature)",
+            "url": "https://legislature.maine.gov/ros/LawsOfMaine/#Const"
+          }
+        ]
+      }
+    ],
+    "best_window": "Nov 2027 or Nov 2028 ballot via initiated statute (petitions due early in the 2027 or 2028 session), setting rules for the 2031 commission/legislature process; Maine holds statewide referenda in odd years too.",
+    "notes": "Two congressional districts. No 2025-26 redistricting changes found.",
+    "sources": [
+      {
+        "label": "Loyola All About Redistricting: Maine",
+        "url": "https://redistricting.lls.edu/state/maine/"
+      },
+      {
+        "label": "Ballotpedia: Redistricting in Maine",
+        "url": "https://ballotpedia.org/Redistricting_in_Maine"
+      },
+      {
+        "label": "Ballotpedia: Laws governing the initiative process in Maine",
+        "url": "https://ballotpedia.org/Laws_governing_the_initiative_process_in_Maine"
+      },
+      {
+        "label": "NCSL: Initiative and Referendum Processes",
+        "url": "https://www.ncsl.org/elections-and-campaigns/initiative-and-referendum-processes"
+      }
+    ]
+  },
+  "MD": {
+    "authority": "General Assembly by ordinary statute; governor may veto (3/5 override). Governor Moore's advisory commission recommended a new map in Jan 2026; the House passed it Feb 2, 2026 but the Senate did not act.",
+    "legal_basis": [
+      {
+        "cite": "Md. Const. art. III, §§ 4-5 (districting; legislative standards)",
+        "url": "https://msa.maryland.gov/msa/mdmanual/43const/html/03art3.html"
+      },
+      {
+        "cite": "Md. Const. art. XVI (referendum)",
+        "url": "https://msa.maryland.gov/msa/mdmanual/43const/html/16art16.html"
+      },
+      {
+        "cite": "Md. Const. art. XIV (amendments)",
+        "url": "https://msa.maryland.gov/msa/mdmanual/43const/html/14art14.html"
+      },
+      {
+        "cite": "HB 2100 / Ch. 881 (2026 Special Session), Question 3",
+        "url": "https://mgaleg.maryland.gov/mgawebsite/Legislation/Details/HB2100?ys=2026RS"
+      }
+    ],
+    "criteria": "The constitution's contiguity, compactness and due-regard-for-boundaries rules are written for legislative districts; a state court nonetheless struck the 2021 congressional map as a partisan gerrymander (Szeliga, 2022). Question 3 would declare that no state constitutional boundary criteria apply to congressional plans and let the legislature give the Supreme Court of Maryland original jurisdiction.",
+    "mid_decade": "No explicit bar for Congress. Question 3 (Nov 3, 2026) is designed to clear the way for a new map before 2028; it would not change 2026 districts.",
+    "paths": [
+      {
+        "path": "Legislation",
+        "how": "Bill passes both houses by majority; governor signs or vetoes (3/5 override). 90-day session January to April; special sessions by governor or legislative call (as Aug 3-5, 2026).",
+        "links": [
+          {
+            "label": "Maryland General Assembly",
+            "url": "https://mgaleg.maryland.gov/mgawebsite/Legislation/Details/HB2100?ys=2026RS"
+          }
+        ]
+      },
+      {
+        "path": "Referendum",
+        "how": "Any newly enacted congressional map can be petitioned to referendum: signatures equal to 3% of the last governor vote, no more than half from Baltimore City or any one county; for regular-session laws one-third due by May 31 and the rest by June 30; the law is suspended until the next general election.",
+        "links": [
+          {
+            "label": "Md. Const. art. XVI",
+            "url": "https://msa.maryland.gov/msa/mdmanual/43const/html/16art16.html"
+          }
+        ]
+      },
+      {
+        "path": "Legislatively referred amendment",
+        "how": "Bill passed by 3/5 of each house goes to voters at the next general election (no governor veto); majority approval. Question 3 is this path.",
+        "links": [
+          {
+            "label": "SBE: Ballot questions for Nov 3, 2026",
+            "url": "https://elections.maryland.gov/elections/2026/ballot_questions.html"
+          }
+        ]
+      },
+      {
+        "path": "Court remedy",
+        "how": "State-constitutional challenges in circuit court (as in Szeliga) can lead to a court-supervised remedial map; Question 3 would route congressional challenges to the Supreme Court of Maryland.",
+        "links": [
+          {
+            "label": "Loyola: Howell v. Md. State Bd. of Elections",
+            "url": "https://redistricting.lls.edu/case/howell-v-md-state-bd-of-elections/"
+          }
+        ]
+      }
+    ],
+    "best_window": "If Question 3 passes, a redraw is likely in the 2027 session; a citizen group could press for a neutral map then or petition a partisan map to referendum (signatures due by June 30, 2027). Otherwise the 2031-32 cycle.",
+    "notes": "Question 3 came from an Aug 4-5, 2026 special session (HB 2100, Ch. 881). Circuit courts in Anne Arundel and Dorchester counties removed it; the Supreme Court of Maryland restored it on Sept 3, 2026 with a rewritten ballot summary. Maryland's next automatic constitutional-convention question is due in 2030 (UNVERIFIED). No citizen initiative.",
+    "sources": [
+      {
+        "label": "Loyola All About Redistricting: Maryland",
+        "url": "https://redistricting.lls.edu/state/maryland/"
+      },
+      {
+        "label": "Ballotpedia: Redistricting in Maryland",
+        "url": "https://ballotpedia.org/Redistricting_in_Maryland"
+      },
+      {
+        "label": "Maryland SBE: 2026 ballot questions",
+        "url": "https://elections.maryland.gov/elections/2026/ballot_questions.html"
+      },
+      {
+        "label": "Maryland SBE: Proposed constitutional amendment text (PDF)",
+        "url": "https://elections.maryland.gov/elections/2026/SBE_Proposed_Constitutional_Amendment_Text.pdf"
+      },
+      {
+        "label": "WYPR: What's next for Maryland's redistricting fight (Sept 8, 2026)",
+        "url": "https://wypr.org/wypr-news/2026-09-08/whats-next-for-marylands-bitter-congressional-redistricting-fight"
+      }
+    ]
+  },
+  "MA": {
+    "authority": "General Court (legislature) by ordinary statute; governor may veto (2/3 override).",
+    "legal_basis": [
+      {
+        "cite": "Mass. Const. amend. arts. XLVIII (initiative/referendum) and CI (legislative districts)",
+        "url": "https://malegislature.gov/laws/constitution"
+      },
+      {
+        "cite": "2021 congressional plan, H.4256 (Acts 2021)",
+        "url": "https://malegislature.gov/Bills/192/H4256/Congressional"
+      }
+    ],
+    "criteria": "No state constitutional or statutory criteria for congressional districts beyond federal rules (county/town preservation and contiguity apply to legislative districts).",
+    "mid_decade": "No constitutional bar for Congress; the census tie applies to legislative districts.",
+    "paths": [
+      {
+        "path": "Legislation",
+        "how": "Bill passes both houses by majority; governor signs or vetoes (2/3 override). Two-year session; formal sessions end July 31 of the even year.",
+        "links": [
+          {
+            "label": "The General Court of Massachusetts",
+            "url": "https://malegislature.gov/"
+          }
+        ]
+      },
+      {
+        "path": "Citizen-initiated statute",
+        "how": "Ten voters file with the Attorney General by early Aug 2027; certified petitions need 3% of the last governor vote (74,574 in 2025-26; max 25% from one county) by early Dec 2027; if the legislature does not enact by early May 2028, 0.5% more (12,429 in 2026) by early July puts it on the Nov 2028 ballot.",
+        "links": [
+          {
+            "label": "Mass. SOC: Guide to Statewide Ballot Question Petitions 2025-26 (PDF)",
+            "url": "https://www.sec.state.ma.us/divisions/elections/download/getting-on-the-ballot/Guide-to-Statewide-Ballot-Questions-2025-26.pdf"
+          }
+        ]
+      },
+      {
+        "path": "Citizen-initiated constitutional amendment",
+        "how": "Same AG certification and 3% signatures, then at least 25% of legislators in joint session must approve in two successive sessions before it goes to voters; earliest Nov 2030 if filed in 2027.",
+        "links": [
+          {
+            "label": "Mass. SOC: Guide to Statewide Ballot Question Petitions 2025-26 (PDF)",
+            "url": "https://www.sec.state.ma.us/divisions/elections/download/getting-on-the-ballot/Guide-to-Statewide-Ballot-Questions-2025-26.pdf"
+          }
+        ]
+      },
+      {
+        "path": "Legislatively referred amendment",
+        "how": "Majority of the legislature in joint session in two successive sessions, then voters.",
+        "links": [
+          {
+            "label": "Massachusetts Constitution",
+            "url": "https://malegislature.gov/laws/constitution"
+          }
+        ]
+      }
+    ],
+    "best_window": "Nov 2028 ballot via initiated statute setting neutral criteria or a commission for the 2031 map (AG filing early Aug 2027; signatures early Dec 2027).",
+    "notes": "Signature numbers for 2027-28 will be recalculated from the Nov 2026 governor vote. Massachusetts also has a statutory referendum on enacted laws (art. XLVIII), but initiative is the practical tool. No redistricting changes found in 2025-26.",
+    "sources": [
+      {
+        "label": "Loyola All About Redistricting: Massachusetts",
+        "url": "https://redistricting.lls.edu/state/massachusetts/"
+      },
+      {
+        "label": "Ballotpedia: Redistricting in Massachusetts",
+        "url": "https://ballotpedia.org/Redistricting_in_Massachusetts"
+      },
+      {
+        "label": "Ballotpedia: Laws governing the initiative process in Massachusetts",
+        "url": "https://ballotpedia.org/Laws_governing_the_initiative_process_in_Massachusetts"
+      },
+      {
+        "label": "NCSL: Initiative and Referendum Processes",
+        "url": "https://www.ncsl.org/elections-and-campaigns/initiative-and-referendum-processes"
+      }
+    ]
+  },
+  "MI": {
+    "authority": "Thirteen-member Independent Citizens Redistricting Commission (4 D, 4 R, 5 neither, chosen by random selection) adopts maps by a majority including at least 2 D, 2 R and 2 non-affiliated members; the legislature and governor have no role.",
+    "legal_basis": [
+      {
+        "cite": "Mich. Const. art. IV, § 6 (commission; criteria)",
+        "url": "https://www.legislature.mi.gov/Laws/MCL?objectName=MCL-ARTICLE-IV-6"
+      },
+      {
+        "cite": "Mich. Const. art. XII, § 2 (amendment by petition)",
+        "url": "https://www.legislature.mi.gov/Laws/MCL?objectName=MCL-ARTICLE-XII-2"
+      },
+      {
+        "cite": "Mich. Const. art. XII, § 3 (constitutional convention question)",
+        "url": "https://www.legislature.mi.gov/Laws/MCL?objectName=MCL-ARTICLE-XII-3"
+      }
+    ],
+    "criteria": "Ranked: equal population and VRA; contiguity; reflect communities of interest; no disproportionate partisan advantage under accepted measures of partisan fairness; no favoring or disfavoring incumbents or candidates; consider county, city and township boundaries; reasonably compact.",
+    "mid_decade": "Appears prohibited: commission maps remain in effect until the next census (art. IV, § 6; Loyola).",
+    "paths": [
+      {
+        "path": "Commission adoption",
+        "how": "Secretary of State mails applications and randomly selects commissioners in 2030; the commission holds at least 10 hearings before drafting and 5 on proposed plans, allows 45 days of comment, and adopts plans by Nov 1, 2031. Public may submit maps.",
+        "links": [
+          {
+            "label": "Michigan Independent Citizens Redistricting Commission",
+            "url": "https://www.michigan.gov/micrc"
+          }
+        ]
+      },
+      {
+        "path": "Citizen-initiated constitutional amendment",
+        "how": "Submit petition form to the Secretary of State; collect signatures equal to 10% of the last governor vote (446,198 for 2026; 2028 figure set by Nov 2026) within a 180-day window; file at least 120 days before the election (early July 2028); Board of State Canvassers certifies; majority vote.",
+        "links": [
+          {
+            "label": "Michigan SOS: Ballot Proposal Petition Manual (PDF)",
+            "url": "https://www.michigan.gov/sos/-/media/Project/Websites/sos/Elections/Ballot-Access/FDC-FC-MAN-1-Ballot-Proposal-Petition-Manual.pdf?rev=053df0a73d0847139d7bd260575de7e6&hash=8958E9FF4412B68EE024AB302696E668"
+          }
+        ]
+      },
+      {
+        "path": "Legislatively referred amendment",
+        "how": "2/3 of each house places an amendment on the ballot; majority approval.",
+        "links": [
+          {
+            "label": "Michigan Legislature",
+            "url": "https://www.legislature.mi.gov/"
+          }
+        ]
+      },
+      {
+        "path": "Court remedy",
+        "how": "The Michigan Supreme Court has original jurisdiction over map challenges and can direct the commission to remedy violations.",
+        "links": [
+          {
+            "label": "Mich. Const. art. IV, § 6",
+            "url": "https://www.legislature.mi.gov/Laws/MCL?objectName=MCL-ARTICLE-IV-6"
+          }
+        ]
+      }
+    ],
+    "best_window": "2031 commission process; any structural change via initiated amendment on the Nov 2028 ballot (signatures due early July 2028).",
+    "notes": "Proposal 1 on the Nov 3, 2026 ballot asks whether to call a constitutional convention in 2027 (automatic every 16 years); a convention could propose redistricting changes for voter approval. Courts upheld the 2021 congressional map; legislative maps were redrawn in 2024 after a VRA/racial-predominance ruling.",
+    "sources": [
+      {
+        "label": "Loyola All About Redistricting: Michigan",
+        "url": "https://redistricting.lls.edu/state/michigan/"
+      },
+      {
+        "label": "Ballotpedia: Redistricting in Michigan",
+        "url": "https://ballotpedia.org/Redistricting_in_Michigan"
+      },
+      {
+        "label": "Ballotpedia: Michigan Proposal 1, Constitutional Convention Question (2026)",
+        "url": "https://ballotpedia.org/Michigan_Proposal_1,_Constitutional_Convention_Question_(2026)"
+      },
+      {
+        "label": "Michigan Public: November 2026 ballot is official (Sept 4, 2026)",
+        "url": "https://www.michiganpublic.org/politics-government/2026-09-04/michigans-november-2026-ballot-is-official-includes-two-questions-for-all-voters"
+      },
+      {
+        "label": "NCSL: Initiative and Referendum Processes",
+        "url": "https://www.ncsl.org/elections-and-campaigns/initiative-and-referendum-processes"
+      }
+    ]
+  },
+  "MN": {
+    "authority": "Legislature by ordinary statute; governor may veto (2/3 override). In practice the legislature has deadlocked for decades and a Supreme Court-appointed special redistricting panel adopts the congressional map (2002, 2012, 2022).",
+    "legal_basis": [
+      {
+        "cite": "Minn. Const. art. IV, § 3 (redistricting at first session after census)",
+        "url": "https://www.revisor.mn.gov/constitution/#article_4"
+      },
+      {
+        "cite": "Minn. Stat. § 2.91 (districting principles)",
+        "url": "https://www.revisor.mn.gov/statutes/cite/2.91"
+      },
+      {
+        "cite": "Minn. Const. art. IX (amendments)",
+        "url": "https://www.revisor.mn.gov/constitution/#article_9"
+      }
+    ],
+    "criteria": "Statute requires contiguous districts and that political subdivisions not be divided more than necessary; court panels have added communities of interest (including tribal lands), reasonable compactness, and no drawing to advantage or disadvantage a party or candidate. Incarcerated people will be counted at last residence from 2030 (HF 4772).",
+    "mid_decade": "Possibly prohibited: the constitution ties redistricting to the first session after the census (Loyola: 'might be construed to prohibit').",
+    "paths": [
+      {
+        "path": "Legislation",
+        "how": "Bill passes both houses by majority; governor signs or vetoes (2/3 override). Session January to May; statutory final deadline 25 weeks before the 2032 state primary.",
+        "links": [
+          {
+            "label": "Minnesota Legislature",
+            "url": "https://www.leg.mn.gov/"
+          }
+        ]
+      },
+      {
+        "path": "Court remedy",
+        "how": "Chief Justice appoints a special panel early in the cycle; it issues criteria, holds public hearings, accepts plans from intervenors and the public, and adopts maps if the legislature misses the deadline (as on Feb 15, 2022).",
+        "links": [
+          {
+            "label": "Loyola: Wattson v. Simon",
+            "url": "https://redistricting.lls.edu/case/wattson-v-simon/"
+          }
+        ]
+      },
+      {
+        "path": "Legislatively referred amendment",
+        "how": "Majority of each house places an amendment on the ballot (no governor role); it must be approved by a majority of all voters voting in the election.",
+        "links": [
+          {
+            "label": "Minn. Const. art. IX",
+            "url": "https://www.revisor.mn.gov/constitution/#article_9"
+          }
+        ]
+      }
+    ],
+    "best_window": "2031-32 cycle: intervene before the special redistricting panel with a rule-drawn plan (final maps due Feb 2032).",
+    "notes": "No citizen initiative or referendum. Divided government makes court-drawn maps likely again.",
+    "sources": [
+      {
+        "label": "Loyola All About Redistricting: Minnesota",
+        "url": "https://redistricting.lls.edu/state/minnesota/"
+      },
+      {
+        "label": "Ballotpedia: Redistricting in Minnesota",
+        "url": "https://ballotpedia.org/Redistricting_in_Minnesota"
+      },
+      {
+        "label": "NCSL: Redistricting Criteria",
+        "url": "https://www.ncsl.org/elections-and-campaigns/redistricting-criteria"
+      }
+    ]
+  },
+  "MS": {
+    "authority": "Legislature by ordinary statute (assisted by the Standing Joint Congressional Redistricting Committee); governor may veto (2/3 override). A federal court drew the map in 2011 when the legislature failed to act.",
+    "legal_basis": [
+      {
+        "cite": "Miss. Const. art. XIII, § 254 and § 273 (legislative apportionment; amendments/initiative) - Loyola-hosted copy",
+        "url": "https://redistricting.lls.edu/wp-content/uploads/MS-2000-constitution.pdf#page=114"
+      },
+      {
+        "cite": "SC 518 (2026) initiative-restoration resolution, bill history",
+        "url": "https://billstatus.ls.state.ms.us/2026/pdf/history/SC/SC0518.xml"
+      }
+    ],
+    "criteria": "No state constitutional or statutory criteria for congressional districts beyond federal rules (statutory compactness and boundary rules apply to legislative districts).",
+    "mid_decade": "No bar for Congress; the constitution expressly allows mid-decade legislative redistricting and is silent on congressional lines.",
+    "paths": [
+      {
+        "path": "Legislation",
+        "how": "Bill passes both houses by majority; governor signs or vetoes (2/3 override). Session starts in January (90 days; 125 in the first year of a term); the governor may call special sessions.",
+        "links": [
+          {
+            "label": "Mississippi Legislature",
+            "url": "https://www.legislature.ms.gov/"
+          }
+        ]
+      },
+      {
+        "path": "Legislatively referred amendment",
+        "how": "Resolution passed by 2/3 of each house goes to voters; majority approval.",
+        "links": [
+          {
+            "label": "Mississippi Legislature",
+            "url": "https://www.legislature.ms.gov/"
+          }
+        ]
+      },
+      {
+        "path": "Court remedy",
+        "how": "If the legislature fails to enact a valid plan, a federal three-judge court can draw one (as in 2001 and 2011); parties may propose plans.",
+        "links": [
+          {
+            "label": "Loyola All About Redistricting: Mississippi",
+            "url": "https://redistricting.lls.edu/state/mississippi/"
+          }
+        ]
+      }
+    ],
+    "best_window": "2027 regular session (Gov. Reeves has said a congressional redraw is a matter of 'when'); realistically the 2032 session after the census.",
+    "notes": "Citizen initiative is inoperative: the Mississippi Supreme Court voided it in 2021 because it required signatures from five congressional districts, and 2026 restoration efforts (SCR 518) died in the Senate; the SOS initiatives page still describes the old process. Joint committee hearings were held in Aug 2026 ahead of a possible special session; none confirmed as of Oct 2026 (UNVERIFIED).",
+    "sources": [
+      {
+        "label": "Loyola All About Redistricting: Mississippi",
+        "url": "https://redistricting.lls.edu/state/mississippi/"
+      },
+      {
+        "label": "Ballotpedia: Redistricting in Mississippi",
+        "url": "https://ballotpedia.org/Redistricting_in_Mississippi"
+      },
+      {
+        "label": "Mississippi Today: Redistricting hearing in Tupelo (Aug 18, 2026)",
+        "url": "https://mississippitoday.org/2026/08/18/redistricting-hearing-mississippi-tupelo/"
+      },
+      {
+        "label": "Mississippi Free Press: Ballot initiative revival dies again",
+        "url": "https://www.mississippifreepress.org/ballot-initiative-revival-effort-dies-for-third-year-in-mississippi-senate/"
+      },
+      {
+        "label": "Ballotpedia: Laws governing the initiative process in Mississippi",
+        "url": "https://ballotpedia.org/Laws_governing_the_initiative_process_in_Mississippi"
+      }
+    ]
+  },
+  "MO": {
+    "authority": "General Assembly by ordinary statute; governor may veto (2/3 override); enacted maps are subject to referendum. The 2025 map (HB 1, signed Sept 2025) is suspended pending Proposition A, so the 2022 map governs the 2026 election.",
+    "legal_basis": [
+      {
+        "cite": "Mo. Const. art. III, § 45 (congressional districts)",
+        "url": "https://revisor.mo.gov/main/OneSection.aspx?section=III++++45&bid=31801&constit=y"
+      },
+      {
+        "cite": "Mo. Const. art. III, § 49 (initiative and referendum reserved)",
+        "url": "https://revisor.mo.gov/main/OneSection.aspx?section=III++++49&constit=y"
+      },
+      {
+        "cite": "Mo. Const. art. III, § 50 (initiative petitions)",
+        "url": "https://revisor.mo.gov/main/OneSection.aspx?section=III++++50&constit=y"
+      },
+      {
+        "cite": "Mo. Const. art. III, § 52(a) (referendum)",
+        "url": "https://revisor.mo.gov/main/OneSection.aspx?section=III++++52(a)&constit=y"
+      },
+      {
+        "cite": "Mo. Const. art. XII, § 2(b) (submission of amendments)",
+        "url": "https://revisor.mo.gov/main/OneSection.aspx?section=XII++++2(b)&constit=y"
+      }
+    ],
+    "criteria": "Congressional districts must be contiguous, as compact as may be, and as nearly equal in population as may be (art. III, § 45); the detailed fairness and county-split rules in §§ 3 and 7 apply only to legislative districts.",
+    "mid_decade": "Permitted for Congress (Luther v. Hoskins, Mo. 2026, 4-3), but a mid-decade map can be suspended by referendum.",
+    "paths": [
+      {
+        "path": "Legislation",
+        "how": "Bill passes both houses by majority; governor signs or vetoes (2/3 override). Session January to mid-May; governor may call special sessions (as in Sept 2025).",
+        "links": [
+          {
+            "label": "Missouri House of Representatives",
+            "url": "https://house.mo.gov/"
+          },
+          {
+            "label": "HB 1 (2025, 2nd Extraordinary Session)",
+            "url": "https://house.mo.gov/Bill.aspx?bill=HB1&year=2025&code=S2"
+          }
+        ]
+      },
+      {
+        "path": "Referendum",
+        "how": "Within 90 days after the session adjourns, file signatures equal to 5% of the last governor vote in 6 of 8 congressional districts (about 106,000 minimum for 2026); the law is suspended until voters decide. Prop A (Nov 3, 2026) is this path: Yes keeps the 2025 map for 2028; No rejects it.",
+        "links": [
+          {
+            "label": "SOS: Referendum 2026-R004 (PDF)",
+            "url": "https://www.sos.mo.gov/CMSImages/Elections/Petitions/2026Referendums/2026-R004.pdf"
+          }
+        ]
+      },
+      {
+        "path": "Citizen-initiated constitutional amendment",
+        "how": "Submit sample petition to the Secretary of State for ballot title (from after the 2026 election); collect signatures equal to 8% of the last governor vote in 6 of 8 congressional districts (about 170,000 minimum in the 2026 cycle); file six months before the election (early May 2028); simple statewide majority.",
+        "links": [
+          {
+            "label": "Missouri SOS: Ballot Measures & Initiative Petitions",
+            "url": "https://www.sos.mo.gov/elections/petitions"
+          }
+        ]
+      },
+      {
+        "path": "Citizen-initiated statute",
+        "how": "Same process with 5% in 6 of 8 congressional districts; could set map criteria by statute, but the legislature can later amend it.",
+        "links": [
+          {
+            "label": "Missouri SOS: Ballot Measures & Initiative Petitions",
+            "url": "https://www.sos.mo.gov/elections/petitions"
+          }
+        ]
+      },
+      {
+        "path": "Legislatively referred amendment",
+        "how": "Joint resolution passed by a majority of each house goes to voters (no governor veto); simple majority.",
+        "links": [
+          {
+            "label": "Mo. Const. art. XII, § 2(b)",
+            "url": "https://revisor.mo.gov/main/OneSection.aspx?section=XII++++2(b)&constit=y"
+          }
+        ]
+      }
+    ],
+    "best_window": "Nov 2028 ballot via initiated constitutional amendment adopting neutral criteria and/or a rule-drawn map (signatures due early May 2028), effective for 2030; Prop A on Nov 3, 2026 first decides the 2025 map.",
+    "notes": "The Missouri Supreme Court upheld the 2025 map against mid-decade challenges (Mar 24, 2026, 4-3) but on Sept 3, 2026 overruled the Secretary of State and held the map suspended pending referendum; U.S. Supreme Court orders in Sept 2026 left the 2022 map in place for the Nov 2026 election. Voters rejected Amendment 4 (concurrent-majority rule for initiatives) on Aug 4, 2026, so initiated amendments still need only a statewide majority.",
+    "sources": [
+      {
+        "label": "Loyola All About Redistricting: Missouri",
+        "url": "https://redistricting.lls.edu/state/missouri/"
+      },
+      {
+        "label": "Ballotpedia: Redistricting in Missouri",
+        "url": "https://ballotpedia.org/Redistricting_in_Missouri"
+      },
+      {
+        "label": "Loyola: von Glahn v. Hoskins",
+        "url": "https://redistricting.lls.edu/case/von-glahn-v-hoskins/"
+      },
+      {
+        "label": "Loyola: Luther v. Hoskins",
+        "url": "https://redistricting.lls.edu/case/luther-v-hoskins/"
+      },
+      {
+        "label": "Missouri Independent: Supreme Court blocks map, orders referendum vote (Sept 3, 2026)",
+        "url": "https://missouriindependent.com/2026/09/03/missouri-supreme-court-blocks-gerrymandered-congressional-map-orders-referendum-vote/"
+      },
+      {
+        "label": "St. Louis Public Radio: Voters reject Amendment 4 (Aug 4, 2026)",
+        "url": "https://www.stlpr.org/government-politics-issues/2026-08-04/missouri-amendment-4-amend-state-constitution"
+      },
+      {
+        "label": "Ballotpedia: Laws governing the initiative process in Missouri",
+        "url": "https://ballotpedia.org/Laws_governing_the_initiative_process_in_Missouri"
+      }
+    ]
+  }
+}

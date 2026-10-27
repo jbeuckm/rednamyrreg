@@ -32,6 +32,9 @@ MAXDEV = 0.003      # hard population tolerance at block-group resolution
 # States whose law bars partisan data in drawing (IA, MT, NE, NM, CA) or makes
 # choosing on it risky (FL's intent standard): selection there uses no election data.
 NO_PARTISAN = {"IA", "MT", "NE", "NM", "CA", "FL"}
+# States whose law asks for competitive districts (Colo. Const. art. V §44.3;
+# Ariz. Const. art. IV pt. 2 §1(14)(F)): selection maximises competitive seats.
+COMPETITIVE = {"CO", "AZ"}
 YEARS = ["16", "18", "20"]
 ABBR_LOWER = {s[0]: s[1].lower() for s in STATES}
 
@@ -173,7 +176,7 @@ def candidate(args):
                 secs=time.time() - t0, **st)
 
 
-def select(cands, partisan_ok=True):
+def select(cands, partisan_ok=True, competitive=False):
     """The published selection rule (see the site's Method section).
 
     1. Hard constraints: contiguous and every district within MAXDEV of equal.
@@ -201,6 +204,11 @@ def select(cands, partisan_ok=True):
     gate = [i for i in tier if cands[i]["moi"] <= (1 + ALPHA) * best]
 
     def score(i):
+        if competitive:
+            el = cands[i]["elections"]
+            ncomp = np.mean([np.sum(np.abs(np.asarray(el[y]["shares"]) - 0.5) < 0.05) for y in YEARS if y in el])
+            bias = np.mean([el[y]["bias"] for y in YEARS if y in el])
+            return (-round(float(ncomp), 3), round(abs(bias), 6), cands[i]["moi"])
         if not partisan_ok:
             return (cands[i]["moi"], cands[i]["county_splits"], cands[i]["seed"])
         el = cands[i]["elections"]
@@ -224,7 +232,7 @@ def run_state(abbr, cands=None):
                       secs=0.0, **district_stats(a, 1, inp))]
         chosen, gate, uniq = 0, [0], [0]
     else:
-        chosen, gate, uniq = select(cands, abbr not in NO_PARTISAN)
+        chosen, gate, uniq = select(cands, abbr not in NO_PARTISAN, abbr in COMPETITIVE)
     res = dict(fips=fips, abbr=abbr, name=name, k=k, proj=inp["proj"], cands=cands,
                chosen=chosen, gate=gate, uniq=uniq, partisan_step=abbr not in NO_PARTISAN)
     with open(OUT / f"{abbr}.pkl", "wb") as f:
@@ -243,7 +251,7 @@ def reselect(abbrs):
         path = OUT / f"{ab}.pkl"
         res = pickle.load(open(path, "rb"))
         if res["k"] > 1:
-            res["chosen"], res["gate"], res["uniq"] = select(res["cands"], ab not in NO_PARTISAN)
+            res["chosen"], res["gate"], res["uniq"] = select(res["cands"], ab not in NO_PARTISAN, ab in COMPETITIVE)
         res["partisan_step"] = ab not in NO_PARTISAN
         pickle.dump(res, open(path, "wb"))
         print(ab, "chosen", res["cands"][res["chosen"]]["seed"], "partisan" if res["partisan_step"] else "no-partisan")

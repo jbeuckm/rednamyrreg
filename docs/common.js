@@ -22,3 +22,23 @@ window.ORIGIN = {
 };
 window.ORIGIN_DEFAULT = ["Adopted after the 2020 census and unchanged for 2026 (see the NCSL tracker for each state's process).", ["ncsl-criteria", "ncsl-tracker"]];
 
+
+// State-law notes that the automated checks don't capture on their own.
+window.NO_PARTISAN = ["IA", "MT", "NE", "NM", "CA", "FL"];
+window.STATE_LAW = {
+  IA: ["Iowa Const. art. III §37 forbids dividing a county in a congressional district, and Code §42.4 allows up to 1% deviation and bars political data. The Neutral Lines plan for Iowa uses whole counties only, as equal as whole counties allow, and the partisan step is off.", ["ia-const", "iowa-424"]],
+  WV: ["W. Va. Const. art. I §4 requires congressional districts made of contiguous counties. The Neutral Lines plan for West Virginia uses whole counties only.", ["wv-const"]],
+  OH: ["Ohio Const. art. XIX §2(B) applies in full: at least 65 counties whole, at most 18 split once and 5 twice, Cleveland and Cincinnati whole, and two districts sharing at most one county under 400,000. The Ohio module enforces each rule (see the checks).", ["oh-xix"]],
+  CA: ["The partisan step is off (California law bars considering party).", ["ca-xxi"]],
+  FL: ["The partisan step is off (Fair Districts tier 1 forbids intent to favor a party).", ["fl-iii20"]],
+  MT: ["The partisan step is off (Montana bars previous election results).", ["levitt"]],
+  NE: ["The partisan step is off (Nebraska bars political data).", ["ncsl-criteria"]],
+  NM: ["The partisan step is off. The New Mexico committee may not split precincts; the formula still splits some, so a module is needed.", ["nm-13a7"]],
+  MI: ["Michigan requires accepted measures of partisan fairness; the symmetry step fits, but the state's named measures should be reported.", ["mi-iv6"]],
+  CO: ["Colorado requires competitiveness analysis, and precincts may not span districts (they would be re-precincted).", ["co-precinct", "ncsl-criteria"]],
+  UT: ["Utah's Prop 4 requires partisan-symmetry testing; the selection step uses symmetry.", ["ut-2025"]],
+  AZ: ["Arizona allows partisan data only to test maps after drawing, which is exactly the formula's two-phase design.", ["airc", "ncsl-criteria"]],
+  WA: ["Washington keeps precincts whole where practicable and allows contiguity by ferry or bridge.", ["wa-rcw"]],
+  PA: ["The Pennsylvania Supreme Court's standard: do not divide counties, cities, boroughs, townships or wards except as needed for equality.", ["pa-2018"]],
+};
+

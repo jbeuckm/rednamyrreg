@@ -56,6 +56,8 @@ window.REFS = [
   ["ncsl-criteria", "National Conference of State Legislatures, “Redistricting Criteria.”", "https://www.ncsl.org/elections-and-campaigns/redistricting-criteria"],
   ["levitt", "Justin Levitt, “Where Are the Lines Drawn?” <i>All About Redistricting</i>, Loyola Law School.", "https://redistricting.lls.edu/redistricting-101/where-are-the-lines-drawn/"],
   ["iowa-424", "Iowa Code §42.4 (redistricting standards).", "https://www.legis.iowa.gov/docs/code/42.4.pdf"],
+  ["ia-const", "Iowa Constitution, art. III, §37 (“no county shall be divided in forming a congressional district”).", "https://www.legis.iowa.gov/docs/publications/ICP/1023054.pdf"],
+  ["wv-const", "West Virginia Constitution, art. I, §4 (congressional districts formed of contiguous counties).", "https://www.wvlegislature.gov/WVCODE/WV_CON.cfm"],
   ["ca-xxi", "California Constitution, art. XXI, §2.", "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CONS&sectionNum=SEC.%202.&article=XXI"],
   ["oh-xix", "Ohio Constitution, art. XIX (congressional redistricting).", "https://codes.ohio.gov/ohio-constitution/article-19"],
   ["mi-iv6", "Michigan Constitution, art. IV, §6.", "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-Article-IV-6"],
