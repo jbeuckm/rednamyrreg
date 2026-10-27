@@ -1,0 +1,5 @@
+numpy
+pandas
+shapely>=2.1
+pyproj
+pyogrio

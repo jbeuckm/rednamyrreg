@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neutral Lines: Districts by Rule</title>
+<meta name="description" content="The history of U.S. congressional districts and gerrymandering, a set of provable principles for fair redistricting, and all 435 districts computed by a public formula, compared with the enacted maps.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M2 2h13v13H2zM17 2h13v13H17zM2 17h13v13H2zM17 17h13v13H17z' fill='%236250d6'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="top">
+  <div class="wrap">
+    <a class="brand" href="#">Rednamyrreg <span>· Neutral Lines</span></a>
+    <div class="links">
+      <a href="#map-section">Map</a>
+      <a href="#history">History</a>
+      <a href="#now">2025–26</a>
+      <a href="#principles">Principles</a>
+      <a href="#method">Method</a>
+      <a href="#usable">Usability</a>
+      <a href="#results">Results</a>
+      <a href="#adoption">Adoption</a>
+      <a href="fairness.html">Fair from every side</a>
+      <a href="#limits">Limits &amp; data</a>
+      <a href="#sources">Sources</a>
+    </div>
+    <button id="themeBtn" type="button" aria-label="Toggle color theme">Theme</button>
+  </div>
+</nav>
+
+<header class="hero wrap">
+  <div class="eyebrow">Rednamyrreg (gerrymander, spelled backwards) · the Neutral Lines proposal</div>
+  <h1>What if districts were drawn by a formula anyone can check?</h1>
+  <p class="lede">For two centuries the people who benefit from district lines have drawn them. This site sets out the history, proposes a short list of principles that can actually be proved, and applies them to all 50 states: 435 congressional districts computed from 2020 Census data by a published rule, then measured against the maps in use today.</p>
+  <div class="tiles" id="heroTiles" aria-live="polite"></div>
+</header>
+
+<!-- ============================ MAP ============================ -->
+<section id="map-section">
+  <div class="wrap">
+    <div class="eyebrow">Interactive map</div>
+    <h2>435 districts, drawn by the formula</h2>
+    <p class="prose">Switch between the formula's plan, the districts in use for the November 2026 elections, and an annotated history of congressional maps since 1789. Hover over a district for its numbers, and click a state for a side-by-side scorecard. Partisan colors use each area's average two-party vote across every statewide race from 2016 to 2020; the formula never saw those numbers while drawing.</p>
+    <div class="mapcard">
+      <div class="controls">
+        <label class="small" id="planLbl">Plan</label>
+        <div class="seg" role="group" aria-labelledby="planLbl">
+          <button type="button" data-plan="ours" aria-pressed="true">Formula</button>
+          <button type="button" data-plan="enacted" aria-pressed="false">Enacted (2026)</button>
+          <button type="button" data-plan="history" aria-pressed="false">History</button>
+        </div>
+        <label class="small" id="colorLbl">Color</label>
+        <div class="seg" role="group" aria-labelledby="colorLbl">
+          <button type="button" data-color="id" aria-pressed="true">Boundaries</button>
+          <button type="button" data-color="lean" aria-pressed="false">Partisan lean</button>
+          <button type="button" data-color="minority" aria-pressed="false">Minority share</button>
+        </div>
+        <label class="small" for="stateSel">State</label>
+        <select id="stateSel"><option value="">All states</option></select>
+      </div>
+      <div class="histbar" id="histbar" hidden>
+        <button type="button" class="btn" id="histPrev" aria-label="Earlier map">‹</button>
+        <input type="range" id="histRange" min="0" max="0" value="0" aria-label="Congress">
+        <button type="button" class="btn" id="histNext" aria-label="Later map">›</button>
+        <span id="histLabel" class="num"></span>
+        <button type="button" class="btn" id="histPlay">Play</button>
+        <button type="button" class="btn" id="tourBtn">Guided tour</button>
+      </div>
+      <div class="mapgrid">
+        <div id="map">
+          <button id="resetBtn" class="btn" type="button">← All states</button>
+          <div class="map-hint">Click a state to zoom</div>
+        </div>
+        <aside id="panel" aria-live="polite"></aside>
+      </div>
+      <div class="legend" id="legend"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ HISTORY ============================ -->
+<section id="history">
+  <div class="wrap">
+    <div class="prose">
+      <div class="eyebrow">History</div>
+      <h2>Two centuries of line-drawing</h2>
+      <p>The Constitution apportions House seats among the states by population but says nothing about how a state should divide its seats. For most of the nineteenth century some states elected their whole delegation at large. Congress first required single-member districts in 1842, added equal population (1872) and compactness (1901, repeated in 1911), then quietly dropped all three standards in the Reapportionment Act of 1929.<a class="cite" data-ref="crs-apportion-acts"></a><a class="cite" data-ref="act-1929"></a><a class="cite" data-ref="wood"></a> For the next three decades, districts could go unredrawn for decades and differ in population many times over.</p>
+      <p>The word itself comes from an 1812 Massachusetts state-senate map signed by Governor Elbridge Gerry, which included a district so contorted that the <i>Boston Gazette</i> drew it as a salamander.<a class="cite" data-ref="smithsonian-gerry"></a> The technique is simple:</p>
+    </div>
+
+    <div class="pack" id="packDemo"></div>
+
+    <ol class="timeline" id="timeline"></ol>
+
+    <div class="prose">
+      <h3>Why courts stepped back</h3>
+      <p>Two very different doctrines govern district lines today. On <b>population equality</b>, the courts are strict: since <i>Wesberry v. Sanders</i> (1964) congressional districts must be "as nearly equal as practicable," and <i>Karcher v. Daggett</i> (1983) struck down a New Jersey plan whose largest and smallest districts differed by only 0.7%.<a class="cite" data-ref="wesberry"></a><a class="cite" data-ref="karcher"></a> On <b>partisan fairness</b>, the federal courts have withdrawn entirely. <i>Rucho v. Common Cause</i> (2019) held 5–4 that partisan-gerrymandering claims raise "political questions" that federal courts cannot resolve, partly because no one had offered a manageable standard for how much partisanship is too much.<a class="cite" data-ref="rucho"></a></p>
+      <p>The third doctrine, <b>race</b>, has narrowed sharply. <i>Thornburg v. Gingles</i> (1986) and <i>Allen v. Milligan</i> (2023) read Section 2 of the Voting Rights Act as sometimes <em>requiring</em> majority-minority districts.<a class="cite" data-ref="gingles"></a><a class="cite" data-ref="milligan"></a> On April 29, 2026, <i>Louisiana v. Callais</i> (6–3) struck down Louisiana's second majority-Black district, saying Section 2 liability now needs a "strong inference" of intentional discrimination and that racially polarized voting must be shown in a way that partisanship cannot explain.<a class="cite" data-ref="callais"></a><a class="cite" data-ref="crs-callais"></a></p>
+      <p>That leaves the field to the states: independent commissions (Arizona, California, Colorado, Michigan and others, upheld in <i>Arizona State Legislature v. AIRC</i>, 2015), state constitutional "fair districts" clauses, and state courts (<i>Moore v. Harper</i>, 2023).<a class="cite" data-ref="airc"></a><a class="cite" data-ref="moore"></a> It also leaves an opening for the argument this site makes: a rule precise enough that a court, or a voter, can check whether it was followed.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 2025–26 ============================ -->
+<section id="now">
+  <div class="wrap">
+    <div class="prose">
+      <div class="eyebrow">The 2025–26 redistricting war</div>
+      <h2>Mid-decade redraws are back</h2>
+      <p>Redistricting used to happen once a decade, after the census. In July 2025 President Trump urged Texas to redraw its map before the 2026 midterms, and other states followed, some to add Republican seats and some, in retaliation, to add Democratic ones. <i>Callais</i> then set off a second round across the South. According to AP and NCSL, <b>nine states will use new House maps in November 2026</b>: Alabama, California, Florida, Louisiana, North Carolina, Ohio, Tennessee, Texas and Utah. Sabato's Crystal Ball (Sept. 15, 2026) put the net effect at R+2 to R+6 seats. AP estimated that about one in ten potential voters is now in a different district than in 2024.<a class="cite" data-ref="ap-9states"></a><a class="cite" data-ref="ncsl-tracker"></a><a class="cite" data-ref="sabato"></a></p>
+    </div>
+    <div class="tablewrap" style="margin-top:18px">
+      <table class="wartable">
+        <thead><tr><th>State</th><th>What happened</th><th>New map in use Nov. 2026?</th></tr></thead>
+        <tbody>
+          <tr><td>Texas</td><td>New map signed Aug. 29, 2025 (designed for R+5). A lower court found it a racial gerrymander, but the Supreme Court stayed that ruling (Dec. 4, 2025) and summarily reversed it on Apr. 27, 2026.</td><a class="cite" data-ref="tx-lulac"></a><td>Yes</td></tr>
+          <tr><td>California</td><td>Prop 50 (Nov. 4, 2025, about 64% yes) set aside the citizen commission's map until 2030, in retaliation (D+5).</td><a class="cite" data-ref="ncsl-tracker"></a><td>Yes</td></tr>
+          <tr><td>North Carolina</td><td>Enacted Oct. 22, 2025, targeting NC-1. NC governors cannot veto maps.</td><td>Yes</td></tr>
+          <tr><td>Ohio</td><td>Commission adopted a bipartisan map 7–0 on Oct. 31, 2025, nominally 12–3 R.</td><a class="cite" data-ref="oh-2025"></a><td>Yes</td></tr>
+          <tr><td>Utah</td><td>A court ruled the Legislature's repeal of the voter-passed Prop 4 unconstitutional and imposed a map with a Democratic-leaning Salt Lake seat (Nov. 10, 2025).</td><a class="cite" data-ref="ut-2025"></a><td>Yes</td></tr>
+          <tr><td>Florida</td><td>Map signed May 4, 2026 (R+2 to R+4). The state Supreme Court let it stand for 2026; litigation continues.</td><a class="cite" data-ref="fl-2026"></a><td>Yes</td></tr>
+          <tr><td>Louisiana · Alabama · Tennessee</td><td>Redrawn after <i>Callais</i>: Louisiana eliminated its second majority-Black district, Alabama restored its 2023 map, and Tennessee split Memphis.</td><a class="cite" data-ref="callais"></a><a class="cite" data-ref="al-2026"></a><a class="cite" data-ref="la-2026"></a><a class="cite" data-ref="tn-2026"></a><td>Yes</td></tr>
+          <tr><td>Missouri</td><td>Map signed Sept. 28, 2025, then suspended pending a referendum (Prop A, Nov. 3, 2026). The Supreme Court declined three times to let it be used.</td><a class="cite" data-ref="mo-scotus"></a><td>No</td></tr>
+          <tr><td>Virginia</td><td>Voters approved a redistricting amendment on Apr. 21, 2026. The state Supreme Court voided it 4–3 on May 8.</td><a class="cite" data-ref="va-2026"></a><td>No</td></tr>
+          <tr><td>Indiana</td><td>The state Senate rejected a 9–0 Republican map, 31–19, on Dec. 11, 2025.</td><a class="cite" data-ref="in-2025"></a><td>No</td></tr>
+          <tr><td>Maryland · New York</td><td>Constitutional amendments are moving that could allow new maps in 2028.</td><a class="cite" data-ref="md-2026"></a><a class="cite" data-ref="ny-2026"></a><td>No</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note" style="margin-top:8px">Sources: NCSL mid-decade tracker (Sept. 11, 2026), AP (Sept. 28, 2026), Sabato's Crystal Ball (Sept. 15, 2026), CRS LSB11431, and court records. The "Enacted (2026)" layer on the map is the Census Bureau's official block equivalency file for the 120th Congress, which includes every redraw above that is in use this November.</p>
+    <div class="callout prose">The lesson of 2025–26 is that any map whose lines are chosen by a person can be redrawn whenever someone with power wants a different result. A formula fixed in law before the data arrive removes that discretion: there is nothing left to redraw, because the same inputs always produce the same map.</div>
+  </div>
+</section>
+
+<!-- ============================ PRINCIPLES ============================ -->
+<section id="principles">
+  <div class="wrap">
+    <div class="prose">
+      <div class="eyebrow">Principles</div>
+      <h2>Nine principles, and what each one lets you prove</h2>
+      <p>"Fair" has no single definition, and there is a theorem to prove it. Alexeev and Mixon (2018) showed that no districting rule can always guarantee equal population, a minimum compactness and a bounded efficiency gap at the same time.<a class="cite" data-ref="alexeev-mixon"></a> So these principles do not promise fair <em>outcomes</em>. They promise a fair <em>procedure</em> whose every property can be checked, plus a bounded, symmetric correction for outcomes.</p>
+    </div>
+    <div class="cards" id="principleCards"></div>
+  </div>
+</section>
+
+<!-- ============================ METHOD ============================ -->
+<section id="method">
+  <div class="wrap prose">
+    <div class="eyebrow">Method</div>
+    <h2>The formula, step by step</h2>
+    <p>Each state's plan is defined by <b>k centers</b> <code>c₁…cₖ</code> (one per seat) and <b>k weights</b> <code>w₁…wₖ</code>. A place <code>x</code> belongs to the district that minimizes</p>
+    <div class="formula"><div class="eq">district(x) = argminⱼ  ‖x − cⱼ‖² − wⱼ</div></div>
+    <p>Each district is therefore a convex polygon (a "power cell"), and each center is the population center of its district. The weights grow or shrink the districts until every one holds the same number of people. This is the population-weighted "moment of inertia" objective first used for nonpartisan districting by Weaver and Hess (1963–65), in the balanced power-diagram form of Cohen-Addad, Klein and Young (2018).<a class="cite" data-ref="weaver-hess"></a><a class="cite" data-ref="hess1965"></a><a class="cite" data-ref="cohen-addad"></a> In plain terms, it puts people as close as possible to the center of their own district.</p>
+    <ol class="steps">
+      <li><b>Inputs.</b> The 2020 Census population of every census block (about 8 million), the Census Bureau's official assignment of each block to its county, municipality and voting precinct, and the boundary files. Nothing else: no votes, no race, no incumbents' homes. The fast county-level search uses the 239,209 block groups; the final plan is built from blocks.</li>
+      <li><b>Seeds.</b> For candidate <code>s = 0…23</code>, split the state's population with a straight line at angle <code>7.5° × s</code> in the seat ratio ⌊k/2⌋ : ⌈k/2⌉, then recurse on each half with the perpendicular line. The population centers of the pieces are the starting centers. This is fully deterministic: 24 pre-registered starting points, with no randomness.</li>
+      <li><b>Balanced centroidal iteration.</b> Alternate between (a) solving for the weights that equalize population, which is a transportation problem whose dual variables are the weights, and (b) moving each center to its district's population center. Stop when the centers move less than 50 m.</li>
+      <li><b>County rule.</b> Give each county, whole, to the district holding most of its people, unless the county is bigger than a district. While any district misses equal population by more than 0.3%, release one county back to the straight-line rule: the most evenly split county touching the worst district, or, if none touches it, the whole county lying nearest that district's border. If keeping a county whole would cut another district in two, release the whole counties around the break. Finally, in county-code order, try restoring each released county that is still split, and keep it whole if the plan stays balanced and contiguous.</li>
+      <li><b>Municipalities, then precincts, then blocks.</b> Inside the counties that had to be split, the same keep-whole rule runs one level down. Every city, town or township (the incorporated place, or in the twelve states where towns are the local government, the town) starts whole, as one point at its population center. While any district is more than 0.3% off, the municipality nearest the worst district is opened into whole precincts. The last imbalance is settled along a spanning tree of district borders (the longest shared borders first). Across each border, whole precincts move first, preferring ones that split no municipality, then blocks are peeled off a single precinct from the shared edge. A final pass moves single boundary blocks, or two-step chains of them, until the largest and smallest districts differ by one person, choosing moves that create no new split whenever possible. Every line therefore follows a county, municipal, precinct or census-block boundary, which means a road, river, rail line or legal border on the ground. California has no Census precincts, so block groups play that role there.</li>
+      <li><b>Contiguity.</b> Water inside a state's boundary counts as connecting, as with the Chesapeake or the Straits of Mackinac. Any piece cut off by the state's shape goes to the neighboring district it shares the most border with, and the weights are rebalanced. Every published district is checked on the true union of its census blocks: one piece on each landmass, with corner-only touches counting as broken.</li>
+      <li><b>Eligibility, in legal priority order.</b> First the hard constraints: contiguous, and every district within 0.3% of equal population at block-group resolution. Then counties: keep plans splitting no more than the fewest-splitting plan plus max(2, 20%). Then compactness: keep plans within <b>5%</b> of the most compact survivor's moment of inertia. Every survivor is a legitimate, equally defensible map. The order mirrors common state-law rankings (population, contiguity, political subdivisions, compactness).</li>
+      <li><b>Symmetric fairness selection.</b> Only now do election results enter. Among the eligible plans, choose the one whose <b>partisan bias</b> is closest to zero. Partisan bias is the seat share a party would win if the statewide vote were tied 50–50 (uniform swing), minus 50%, averaged over the 2016, 2018 and 2020 statewide races. Ties go to the smaller mean–median gap, then to the more compact plan. The score is symmetric: swapping the party labels changes nothing.</li>
+      <li><b>Publish the plan the way states do.</b> Each state's download includes a census-block assignment file, the same format legislatures publish and election offices load, plus a certificate: the centers and weights, the whole-county list, and the ordered log of every municipality and precinct the rule opened. At the county stage the weights are optimal dual variables, so they certify that, at those centers, no population-preserving reshuffle of the freely assigned areas could reduce total squared distance (Σ people × w is fixed when populations are fixed, so the power rule wins term by term).</li>
+    </ol>
+
+    <h3 id="over-time">Adjusting for fairness over time, by formula</h3>
+    <p>The plan is tied to the census, not to whoever holds power. Three rules keep it fair without reopening the lines to discretion:</p>
+    <ol class="steps">
+      <li><b>Decennial rerun.</b> After each census the same code runs on the new data, and nobody chooses anything. Apportionment changes are absorbed automatically: seats come from the Huntington–Hill formula (2 U.S.C. §2a), and each state's centers are re-seeded.<a class="cite" data-ref="usc-2a"></a><a class="cite" data-ref="census-hh"></a></li>
+      <li><b>Fairness ledger.</b> After every general election, each state's partisan bias is recomputed from that year's statewide races and published. The selection score is always the <em>rolling average of the last three</em> statewide election years, so no single wave election dominates.</li>
+      <li><b>Bounded switch.</b> If a state's plan shows |partisan bias| above <b>one seat's worth</b> (1/k) in the rolling ledger for two consecutive elections, <em>and</em> another plan in the same frozen, pre-certified ensemble would cut it by at least half, the state switches to that plan at the next election, with at least a year's notice. The switch happens at most once per decade and is never a new drawing. Because every option was certified in advance and passed the compactness gate, no one can use the switch to gerrymander.</li>
+    </ol>
+    <p class="note">Why bias and not proportionality? Proportional representation cannot be guaranteed with single-member districts, and enforcing it would require drawing by party. Symmetry asks a narrower question that is fair to both sides: if the parties traded vote shares, would they trade seat shares? See King, Grofman, Gelman and Katz's brief in <i>LULAC v. Perry</i> (2006).<a class="cite" data-ref="king-amicus"></a></p>
+  </div>
+</section>
+
+
+<!-- ============================ USABILITY ============================ -->
+<section id="usable">
+  <div class="wrap">
+    <div class="prose">
+      <div class="eyebrow">Is it usable?</div>
+      <h2>Every objection, and the test that answers it</h2>
+      <p>A districting plan can fail in court, or fail in practice at the county election office. We collected the arguments that have actually been used against plans, in federal and state law, election administration and the critiques of computer-drawn maps. Each one became an automated test that runs on every state, for the formula's plan and for the enacted 2026 map alike. Each state's results are in its map panel and in the table's <b>Checks</b> column.</p>
+    </div>
+    <div class="tablewrap" style="margin-top:18px">
+      <table class="wartable">
+        <thead><tr><th>Requirement</th><th>Where it comes from</th><th>How the formula meets it</th><th>Automated test</th></tr></thead>
+        <tbody>
+          <tr><td><b>Equal population</b></td><td>Art. I §2; <i>Wesberry</i> (1964); <i>Karcher</i> (1983) rejected a 0.7% gap; <i>Tennant</i> (2012) upheld 0.79% justified by whole counties. 19 of 44 enacted maps are within one person.<a class="cite" data-ref="const-art1"></a><a class="cite" data-ref="wesberry"></a><a class="cite" data-ref="karcher"></a><a class="cite" data-ref="tennant"></a></td><td>Built from 8 million census blocks, then exact boundary transfers.</td><td>Range ≤ 1 person passes. A larger gap passes as "justified" only if it comes from the published keep-whole rule and stays far below 0.79%.</td></tr>
+          <tr><td><b>Whole census blocks</b></td><td>2 U.S.C. §2c; states publish plans as block equivalency files.<a class="cite" data-ref="usc-2c"></a><a class="cite" data-ref="census-cd120"></a></td><td>The unit is the 2020 block; no block is ever divided.</td><td>Every block assigned exactly once; a block file is published for each state.</td></tr>
+          <tr><td><b>Contiguity</b></td><td>33 states. Corner-only contact fails in Iowa, Florida and Minnesota. Water inside a state is generally allowed (Florida, Michigan, Washington's ferry rule). <i>Clarke v. WEC</i> (Wis. 2023) struck maps with detached pieces.<a class="cite" data-ref="iowa-424"></a><a class="cite" data-ref="levitt"></a><a class="cite" data-ref="wa-rcw"></a><a class="cite" data-ref="mi-iv6"></a><a class="cite" data-ref="clarke"></a></td><td>Districts are unions of whole blocks; water blocks inside the state connect shores.</td><td>Each district must be one piece per landmass on the true block union. Corner-only touches count as breaks.</td></tr>
+          <tr><td><b>No enclaves</b></td><td>Ohio Art. XIX (single boundary); best practice elsewhere.<a class="cite" data-ref="oh-xix"></a></td><td>Power-rule districts are convex before county lines, so enclaves are rare.</td><td>Flags any district surrounded by a single other district.</td></tr>
+          <tr><td><b>Counties and municipalities</b></td><td>30 states protect subdivisions. Pennsylvania (2018): don't divide "any county, city, incorporated town, borough, township, or ward" unless necessary. Ohio caps county splits at 18 split once and 5 split more than once.<a class="cite" data-ref="ncsl-criteria"></a><a class="cite" data-ref="pa-2018"></a><a class="cite" data-ref="oh-xix"></a></td><td>Counties whole first, then cities and towns (or townships in the 12 states where they govern), each split only to reach equal population.</td><td>Counts split counties and municipalities against the enacted map; Ohio's caps checked exactly.</td></tr>
+          <tr><td><b>Precincts</b></td><td>Colorado bars precincts spanning districts, New Mexico's committee may not split them, Washington keeps them whole where practicable. North Carolina's 2011 maps split 563 precincts into 1,400+ ballot pieces; Oklahoma estimates $230k per election year for split-precinct staffing.<a class="cite" data-ref="co-precinct"></a><a class="cite" data-ref="nm-13a7"></a><a class="cite" data-ref="wa-rcw"></a><a class="cite" data-ref="nc-precincts"></a><a class="cite" data-ref="ok-fiscal"></a><a class="cite" data-ref="ma-galvin"></a></td><td>Precincts kept whole after municipalities. Equalizing population splits at most about one precinct per district border.</td><td>Counts split precincts against the enacted map, and flags any split piece with 1–99 residents, too few for a secret ballot.</td></tr>
+          <tr><td><b>Compactness</b></td><td>29 states, with no legal bright line. Districts attacked in court have scored Polsby–Popper 0.08–0.11 and Reock 0.20–0.26.<a class="cite" data-ref="ncsl-criteria"></a><a class="cite" data-ref="levitt"></a></td><td>Compactness is the objective the formula optimizes.</td><td>Flags a district below PP 0.10 or Reock 0.20 only if it is also less compact than the enacted map's least compact district.</td></tr>
+          <tr><td><b>Lines on the ground</b></td><td>Census blocks are bounded by streets, roads, streams and rail lines; Arizona asks for "visible geographic features".<a class="cite" data-ref="census-glossary"></a></td><td>Every boundary is a county, municipal, precinct or block edge, so no line runs through a backyard.</td><td>Holds by construction (block-level plan).</td></tr>
+          <tr><td><b>No partisan or incumbent data</b></td><td>Iowa, Montana, Nebraska, New Mexico and California bar partisan data. Arizona allows it only to test maps. Florida forbids intent to favor a party. Michigan, Colorado and Utah <em>require</em> partisan-fairness analysis. California, Iowa, Arizona and Idaho bar considering incumbents' homes.<a class="cite" data-ref="iowa-424"></a><a class="cite" data-ref="ca-xxi"></a><a class="cite" data-ref="fl-iii20"></a><a class="cite" data-ref="mi-iv6"></a><a class="cite" data-ref="ncsl-criteria"></a></td><td>Drawing reads only population and boundaries; incumbents' addresses are never used. The final selection step is <b>switched off</b> in IA, MT, NE, NM, CA and FL (most compact eligible plan wins) and is symmetric between parties elsewhere.</td><td>Input firewall (the code reads no political or racial fields when drawing); per-state switch shown in each panel.</td></tr>
+          <tr><td><b>Race and the VRA</b></td><td>After <i>Louisiana v. Callais</i> (2026), §2 needs a "strong inference" of intentional discrimination. Racial-gerrymandering claims (<i>Shaw</i>, <i>Alexander</i>) require race to predominate.<a class="cite" data-ref="callais"></a><a class="cite" data-ref="crs-callais"></a><a class="cite" data-ref="shaw"></a><a class="cite" data-ref="alexander"></a></td><td>Race is never an input, so it cannot predominate. The rule is fixed in law before any data arrive, which leaves no room for intent at adoption.</td><td>Majority-minority districts reported for both plans. A court-ordered district can be locked and the rest re-run.</td></tr>
+          <tr><td><b>Reproducibility</b></td><td>Opaque algorithms (e.g., the original splitline code) have been criticized. North Carolina's 2019 lottery among simulated maps was contested.<a class="cite" data-ref="splitline"></a></td><td>Deterministic: fixed seed angles, no randomness, open code.</td><td>Same inputs give the same block file; the certificate and the refinement log are published.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="prose">
+      <h3>What the checks can't settle</h3>
+      <ul>
+        <li><b>Communities of interest</b> without legal boundaries (neighborhoods, reservations that cross counties, media markets). Twenty states ask for them. A state adopting the formula would add any such community as one more mechanical keep-whole tier.</li>
+        <li><b>Political geography.</b> Neutral compact maps lean Republican where Democrats cluster in cities (Chen &amp; Rodden 2013). The selection step offsets this only within the compactness gate, and not at all where state law forbids it. The full candidate set is published, so any remaining lean can be seen to come from geography rather than from a choice.</li>
+        <li><b>Where a court-drawn map is simply better on one criterion.</b> Connecticut's 2022 special-master map splits fewer towns than the formula. When the formula is worse than the enacted map on a criterion, the checklist marks it <b>Review</b> rather than hiding it.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ RESULTS ============================ -->
+<section id="results">
+  <div class="wrap">
+    <div class="prose">
+      <div class="eyebrow">Results</div>
+      <h2>How the formula compares</h2>
+      <div id="findings"></div>
+    </div>
+    <h3>All 50 states</h3>
+    <p class="note">Click a column to sort, or a row to open the state on the map. "D seats" count districts whose 2016–20 statewide composite is above 50% Democratic, which estimates lean, not who actually won. County splits are counted at block-group resolution for both plans.</p>
+    <div class="tablewrap"><table class="states" id="statesTable"></table></div>
+  </div>
+</section>
+
+
+<!-- ============================ ADOPTION ============================ -->
+<section id="adoption">
+  <div class="wrap">
+    <div class="prose">
+      <div class="eyebrow">From map to law</div>
+      <h2>How Neutral Lines could actually be adopted</h2>
+      <p>A better map changes nothing unless someone with the power to adopt it does. That power sits in four places: voters (where states allow citizen initiatives), redistricting commissions, courts drawing remedial maps, and Congress, which can regulate congressional elections under Art. I §4.<a class="cite" data-ref="const-art1"></a> Each path has a different audience, and the plan below uses all four.</p>
+
+      <h3>What to call it</h3>
+      <p><b>Recommended name: Neutral Lines.</b> The proposal would be the <i>Neutral Lines Standard</i> (the rule), the <i>Neutral Lines Act</i> (a state or federal statute adopting it) and the <i>Neutral Lines Compact</i> (an interstate agreement, below).</p>
+      <ul>
+        <li><b>"Neutral," not "fair."</b> Each party already claims "fair" for its own preferred outcome, so the word signals a side. "Neutral" describes the process, and the process is the part that can be proved.</li>
+        <li><b>"Lines," not "maps."</b> People picture their own street and town line. "Map" invites a debate about seat counts.</li>
+        <li><b>Rednamyrreg stays the name of the research project.</b> It's memorable for a website but hard to say on a ballot.</li>
+      </ul>
+
+      <h3>How to present it</h3>
+      <ol class="steps">
+        <li><b>Lead with process, never seat counts.</b> Open with "the same rule for every state, written before anyone sees the data, that nobody can tweak." Seat projections invite immediate partisan sorting; save them for the appendix.</li>
+        <li><b>Make it local.</b> "Your county stays whole. Your town stays whole. Your precinct stays whole." Show each voter their own district and their own county line before any statewide map.</li>
+        <li><b>Answer "unilateral disarmament" up front.</b> The strongest objection in 2025–26 is "why should we stop while they keep gerrymandering?" The compact below takes effect only when states with offsetting partisan effects join together, so neither side disarms alone.</li>
+        <li><b>Let others verify it.</b> Publish the code, data and block files, and invite anyone to rerun them. Recruit validators from both parties: former election officials, county clerks (who gain from fewer split precincts), retired judges and academic replicators. Third-party verification persuades voters more than the authors' own claims.</li>
+        <li><b>Freeze the rule before the 2030 census.</b> A public-comment period through 2028, then version 1.0 locked into law before the 2031 data arrive. The promise "rule before data" is the whole credibility of the proposal.</li>
+        <li><b>Be candid about the trade-offs.</b> Publish where the formula does worse than an enacted map (the checklist's Review items) and why. Opponents will find them anyway; disclosing them first protects credibility.</li>
+      </ol>
+      <p class="note">Public opinion is a tailwind, not a guarantee. In August 2025, California voters preferred keeping their independent commission by nearly two to one; three months later they approved Prop 50, setting it aside to counter Texas. Voters favor neutral processes in principle, and they will also back a partisan counter-gerrymander when it is framed as self-defense.<a class="cite" data-ref="poll-ca-2025"></a><a class="cite" data-ref="ncsl-tracker"></a></p>
+    </div>
+
+    <h3>Outlook by state</h3>
+    <p class="note prose">Transparent heuristic, not a forecast. <b>Path:</b> citizen-initiated constitutional amendment available (3), initiated statute only (2), an existing redistricting commission (2, counted only when no initiative exists), legislature only (0). <b>Seat shock:</b> how many seats the formula would move relative to the 2026 map, on the 2016–20 composite (0 seats: 3, 1: 2, 2: 1, 3 or more: 0). <b>Checklist:</b> +1 if the formula has no Review or Fail item. Outlook: High ≥ 6, Medium 4–5, Low ≤ 3. Single-district states are omitted.</p>
+    <div class="tablewrap"><table class="states" id="adoptTable"></table></div>
+
+    <h3>The Neutral Lines Compact</h3>
+    <div class="prose">
+      <p>An interstate compact in which each member adopts the Neutral Lines Standard, effective only once the members' combined seat shift relative to their current maps nets out within one seat. A Republican-leaning state's change is matched by a Democratic-leaning state's, so the partisan balance of the House is unchanged by joining, and the gerrymanders are retired in matched pairs. Compacts that affect federal elections likely need congressional consent (Art. I §10). That consent is itself a vehicle for the federal path below.</p>
+      <div id="compact"></div>
+    </div>
+
+    <h3>Roadmap</h3>
+    <div class="tablewrap">
+      <table class="wartable">
+        <thead><tr><th>When</th><th>Path</th><th>What happens</th></tr></thead>
+        <tbody>
+          <tr><td>Now – 2027</td><td>Open review</td><td>Publish everything. Invite independent replication, election-administrator review and public comment on the rule (tiers, tolerances, which communities to protect). Record every change in a public log.</td></tr>
+          <tr><td>2027 – 2028</td><td>Courts</td><td>Offer the Neutral Lines plan as a neutral benchmark or remedial map in pending redistricting litigation (Florida, Tennessee, Louisiana, Texas). Courts already rely on special masters and computer-drawn alternatives.</td></tr>
+          <tr><td>2028</td><td>Citizen initiatives</td><td>Constitutional initiatives in the High-outlook initiative states, written to adopt the frozen rule for the 2031 cycle. <i>Arizona State Legislature v. AIRC</i> (2015) confirms voters may take congressional districting away from legislatures.</td><a class="cite" data-ref="airc"></a><a class="cite" data-ref="ballotpedia-ir"></a></tr>
+          <tr><td>2028 – 2030</td><td>Commissions</td><td>Ask existing commissions (Arizona, Colorado, Michigan, Washington and others, plus California's when it resumes after 2030) to adopt the formula's plan as their required starting map or benchmark, so any departure from it must be justified on the record.</td></tr>
+          <tr><td>2029 – 2030</td><td>Congress</td><td>A Neutral Lines Default Act under Art. I §4: any state that redraws mid-decade, or misses its post-census deadline, gets the Neutral Lines plan by default. It can be attached to the anti-mid-decade bills already filed. The same act can consent to the compact.</td></tr>
+          <tr><td>2031</td><td>First use</td><td>The frozen rule runs on 2030 Census data in every adopting state; the fairness ledger starts recording.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Sources: initiative availability, Ballotpedia (18 states allow initiated constitutional amendments, with Mississippi's process de facto suspended; 21 allow initiated statutes). Illinois's amendment initiative is limited to the legislative article, and courts blocked a 2016 redistricting initiative there. Polling: POLITICO–Citrin Center–Possibility Lab (Aug. 2025), via Election Law Blog.</p>
+  </div>
+</section>
+
+<!-- ============================ LIMITS ============================ -->
+<section id="limits">
+  <div class="wrap prose">
+    <div class="eyebrow">Limits &amp; data</div>
+    <h2>What this is, and what it isn't</h2>
+    <ul>
+      <li><b>Population equality.</b> Plans are built from census blocks and equalized to the person where the rule allows. Where a gap of a few people remains, it is because closing it would mean splitting another county or municipality. That is the kind of consistently applied, neutral policy the Supreme Court accepted in <i>Tennant v. Jefferson County Commission</i> (2012) for a far larger 0.79% gap. Each state's exact range is shown in its checklist.</li><a class="cite" data-ref="tennant"></a>
+      <li><b>Communities of interest.</b> The formula protects the communities that have legal boundaries: counties, then municipalities, then precincts. Neighborhoods, tribal lands and other communities without a fixed boundary are not protected unless they fall inside one district. A legislature could add tiers (for example, reservations), but each tier must be just as mechanical.</li>
+      <li><b>Voting Rights Act.</b> The formula is race-blind, and the table reports how many majority-minority districts each plan produces. Compact, race-blind maps often produce fewer of them than enacted maps. After <i>Callais</i>, Section 2 rarely <em>requires</em> such districts, but where a court finds liability, the remedy can stay formulaic: lock the court-ordered district and rerun the formula on the rest of the state.</li>
+      <li><b>Political geography.</b> Democrats are concentrated in cities, so even neutral maps often lean Republican (Chen &amp; Rodden 2013).<a class="cite" data-ref="chen-rodden"></a> The selection step corrects this only within the compactness gate. It cannot, and does not try to, produce proportional results.</li>
+      <li><b>Election data.</b> Partisan numbers are VEST precinct results (2016–2020 statewide races), assigned to 2020 voting districts by the ALARM Project. They are a measure of lean, not a forecast. 2022–24 precinct data were not available nationally in a consistent, open form.</li>
+      <li><b>Enacted map.</b> The comparison map is the set of districts in use for the November 2026 elections, from the Census Bureau's 120th-Congress block equivalency file, scored with exactly the same code and data as the formula. Several states (including California, Colorado, Maryland, New Jersey, Nevada, New York, Virginia and Washington) count prisoners at their home addresses before redistricting, so their enacted maps look slightly unequal on raw Census counts. That is not a defect. The formula uses raw counts, and in those states it would have to run on the adjusted counts.</li>
+    </ul>
+    <h3>Sources &amp; code</h3>
+    <ul>
+      <li>U.S. Census Bureau: 2020 census blocks with population (TIGER/Line TABBLOCK20), 2020 block assignment files (precincts, places, county subdivisions), block-group centers of population, state and county boundaries, and the 120th-Congress block equivalency file.</li>
+      <li>Voting and Election Science Team (VEST), via the <a href="https://github.com/alarm-redist/census-2020">ALARM Project census-2020 files</a> (CC BY-SA 4.0).</li>
+      <li>Every number on this page is produced by the Python pipeline in this repository (<code>pipeline/</code>): <code>build.py</code> computes the plans, and <code>export.py</code> writes the files this page reads. The per-state certificates and block-group assignment files are in <code>docs/data/plans/</code>.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="sources">
+  <div class="wrap prose">
+    <div class="eyebrow">Sources</div>
+    <h2>Citations</h2>
+    <p class="note">Numbers in brackets throughout the page link here. Historical district stories in the map's History mode carry their own source links.</p>
+    <ol class="refs" id="refList"></ol>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Rednamyrreg is an independent demonstration project, not affiliated with any party, government or advocacy group. Data: U.S. Census Bureau; VEST / ALARM Project. Historical boundaries: Lewis, DeVine, Pritcher &amp; Martis, <a href="https://github.com/JeffreyBLewis/congressional-district-boundaries">congressional-district-boundaries</a> (<a href="https://github.com/JeffreyBLewis/congressional-district-boundaries/blob/master/LICENSE">MIT License</a>). Built <span id="builtDate"></span>.</div>
+</footer>
+
+<div id="tooltip" role="tooltip"></div>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="refs.js"></script>
+<script src="common.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

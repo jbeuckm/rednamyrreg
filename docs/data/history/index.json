@@ -1,0 +1,125 @@
+{
+ "source": "District boundaries: Jeffrey B. Lewis, Brandon DeVine, Lincoln Pritcher, and Kenneth C. Martis, Digital Boundary Definitions of United States Congressional Districts, 1789-2012 (Version 2.0, with updates through the 119th Congress), https://cdmaps.polisci.ucla.edu and https://github.com/JeffreyBLewis/congressional-district-boundaries. Copyright (c) 2013-2018 Jeffrey B. Lewis; used under the MIT License. Simplified for web display (1.5-3 km tolerance); at-large seat counts from the Voteview member roster (https://voteview.com).",
+ "snapshots": [
+  {
+   "congress": 13,
+   "years": "1813–1815",
+   "file": "c013.geojson",
+   "title": "The early republic",
+   "summary": "Each state chose how to elect its members. Massachusetts drew 20 single-member districts; New Jersey, New York, Pennsylvania and Maryland drew districts some of which elected two or more members; and Connecticut, Delaware, Georgia, New Hampshire, Rhode Island and Vermont elected their whole delegations statewide on a 'general ticket'. Massachusetts' 1812 state senate map had just given the language the word 'gerrymander'.",
+   "seats": 182
+  },
+  {
+   "congress": 28,
+   "years": "1843–1845",
+   "file": "c028.geojson",
+   "title": "The first districting mandate",
+   "summary": "The Apportionment Act of 1842 required members to be elected from contiguous single-member districts. Four states (Georgia, Mississippi, Missouri and New Hampshire) ignored it and elected at large anyway, and the House seated their members.",
+   "seats": 223
+  },
+  {
+   "congress": 45,
+   "years": "1877–1879",
+   "file": "c045.geojson",
+   "title": "The end of Reconstruction",
+   "summary": "Elected in 1876, the year of the disputed Hayes–Tilden presidential election. As Democrats regained control of Southern legislatures, they redrew districts to concentrate Black Republican voters into as few seats as possible, as in Mississippi's 'shoestring' 6th district along the Mississippi River.",
+   "seats": 293
+  },
+  {
+   "congress": 48,
+   "years": "1883–1885",
+   "file": "c048.geojson",
+   "title": "Packing after Reconstruction",
+   "summary": "Southern legislatures redrew again after the 1880 Census. South Carolina's new 7th district snaked across nine counties to take in as many Black voters as possible, and Mississippi placed the Delta in a single district. Several states that gained seats in 1880 elected the new members at large instead of redrawing.",
+   "seats": 325
+  },
+  {
+   "congress": 63,
+   "years": "1913–1915",
+   "file": "c063.geojson",
+   "title": "The House reaches 435",
+   "summary": "The 1911 apportionment set the House at 433 seats (435 once Arizona and New Mexico were admitted in 1912) and required contiguous, compact districts 'containing as nearly as practicable an equal number of inhabitants'. States that gained seats often elected the extra members at large rather than redraw.",
+   "seats": 435
+  },
+  {
+   "congress": 73,
+   "years": "1933–1935",
+   "file": "c073.geojson",
+   "title": "No standards, many at-large seats",
+   "summary": "The 1929 Act re-apportioned seats automatically but dropped the compactness and equal-population language, and in Wood v. Broom (1932) the Supreme Court held those requirements had lapsed. Kentucky, Minnesota, Missouri and Virginia, whose new maps were vetoed or struck down in court, elected their entire delegations at large in 1932.",
+   "seats": 435
+  },
+  {
+   "congress": 88,
+   "years": "1963–1965",
+   "file": "c088.geojson",
+   "title": "Malapportionment before Wesberry",
+   "summary": "Many states had not redrawn in decades, so urban districts held two to more than four times as many people as rural ones in the same state. In Wesberry v. Sanders (February 1964) the Supreme Court held that congressional districts must be as nearly equal in population as practicable.",
+   "seats": 435
+  },
+  {
+   "congress": 93,
+   "years": "1973–1975",
+   "file": "c093.geojson",
+   "title": "One person, one vote",
+   "summary": "The first maps drawn after the 1970 Census under Wesberry and Kirkpatrick v. Preisler (1969), which demanded near-exact population equality. A 1967 statute required single-member districts, and no state with more than one seat still elected members at large.",
+   "seats": 435
+  },
+  {
+   "congress": 103,
+   "years": "1993–1995",
+   "file": "c103.geojson",
+   "title": "Majority-minority districts",
+   "summary": "After the 1982 amendments to the Voting Rights Act and Thornburg v. Gingles (1986), states drew many new majority-Black and majority-Hispanic districts, some of them very irregular. Shaw v. Reno (1993) opened these to racial-gerrymandering challenges.",
+   "seats": 435
+  },
+  {
+   "congress": 109,
+   "years": "2005–2007",
+   "file": "c109.geojson",
+   "title": "Texas redraws mid-decade",
+   "summary": "Texas replaced its court-drawn 2002 map with a new legislative map in 2003, the first major mid-decade congressional redraw of the modern era. In LULAC v. Perry (2006) the Supreme Court upheld most of it but found District 23 violated the Voting Rights Act.",
+   "seats": 435
+  },
+  {
+   "congress": 113,
+   "years": "2013–2015",
+   "file": "c113.geojson",
+   "title": "After the 2010 redistricting cycle",
+   "summary": "Maps drawn after the 2010 Census, with sophisticated software and precinct-level data, produced some of the least compact districts on the country, among them Pennsylvania's 7th, Maryland's 3rd and Ohio's 9th.",
+   "seats": 435
+  },
+  {
+   "congress": 115,
+   "years": "2017–2019",
+   "file": "c115.geojson",
+   "title": "Pennsylvania before the court map",
+   "summary": "The last Congress elected under Pennsylvania's 2011 map, which the Pennsylvania Supreme Court struck down in January 2018 as a partisan gerrymander under the state constitution.",
+   "seats": 435
+  },
+  {
+   "congress": 116,
+   "years": "2019–2021",
+   "file": "c116.geojson",
+   "title": "Pennsylvania's remedial map",
+   "summary": "Pennsylvania elected its delegation from a map drawn by the state Supreme Court in February 2018, which split far fewer counties than the 2011 plan. Elsewhere, the 2010-cycle maps (with court-ordered changes in states such as Florida, North Carolina and Virginia) remained in use.",
+   "seats": 435
+  },
+  {
+   "congress": 118,
+   "years": "2023–2025",
+   "file": "c118.geojson",
+   "title": "After the 2020 Census",
+   "summary": "The first Congress elected from maps drawn after the 2020 Census. Several of these maps were still in litigation when the 2022 elections were held.",
+   "seats": 435
+  },
+  {
+   "congress": 119,
+   "years": "2025–2027",
+   "file": "c119.geojson",
+   "title": "Court-ordered changes",
+   "summary": "Elected in 2024. After Allen v. Milligan (2023), Alabama used a court-drawn map with a second district giving Black voters an opportunity to elect a candidate of their choice; Louisiana, Georgia, New York and North Carolina also used revised maps.",
+   "seats": 435
+  }
+ ]
+}

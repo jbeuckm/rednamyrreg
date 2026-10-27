@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fair From Every Side</title>
+<meta name="description" content="How the Neutral Lines districts look from every perspective (both parties, independents, minority communities, rural and urban voters, local and election officials, incumbents and courts), the legality of each state's plan, and an assessment of the 2025–26 redraws and reform proposals.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M2 2h13v13H2zM17 2h13v13H17zM2 17h13v13H2zM17 17h13v13H17z' fill='%236250d6'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html">Rednamyrreg <span>· Neutral Lines</span></a>
+    <div class="links">
+      <a href="index.html#map-section">Map</a>
+      <a href="#perspectives">Perspectives</a>
+      <a href="#legality">Legality by state</a>
+      <a href="#proposals">2025–26 maps &amp; proposals</a>
+      <a href="#sources">Sources</a>
+    </div>
+    <button id="themeBtn" type="button" aria-label="Toggle color theme">Theme</button>
+  </div>
+</nav>
+
+<header class="hero wrap">
+  <div class="eyebrow">Fair from every side</div>
+  <h1>Who gains, who gives something up, and is it legal?</h1>
+  <p class="lede">A plan only lasts if people who dislike parts of it can still accept how it was made. This page looks at Neutral Lines from each group with a stake in congressional districts. For each one it sets out their legitimate concerns, what the formula offers them, and what it costs them, using numbers computed from the same data as the map. Below that are the legal status of every state's plan and an assessment of the 2025–26 redraws and the reform proposals.</p>
+  <div class="tiles" id="fairTiles"></div>
+</header>
+
+<section id="perspectives">
+  <div class="wrap">
+    <div class="prose">
+      <div class="eyebrow">Perspectives</div>
+      <h2>The same plan, seen from each side</h2>
+      <p>Fairness has no single definition. Each perspective below is held in good faith. What the formula can promise everyone is a neutral, verifiable process; it cannot promise every group the outcome it would prefer<a class="cite" data-ref="alexeev-mixon"></a>.</p>
+    </div>
+    <div class="cards" id="perspectiveCards"></div>
+  </div>
+</section>
+
+<section id="legality">
+  <div class="wrap">
+    <div class="prose">
+      <div class="eyebrow">Legality</div>
+      <h2>Legal status, state by state</h2>
+      <p>Federal law requires equal population<a class="cite" data-ref="wesberry"></a><a class="cite" data-ref="karcher"></a>, single-member districts<a class="cite" data-ref="usc-2c"></a> and compliance with the Voting Rights Act as narrowed by <i>Louisiana v. Callais</i><a class="cite" data-ref="callais"></a>. Federal courts no longer hear partisan-gerrymandering claims<a class="cite" data-ref="rucho"></a>, so state constitutions and statutes carry most of the remaining rules<a class="cite" data-ref="ncsl-criteria"></a>. The table applies the same automated checks to both plans and adds each state's own requirements where they bind.</p>
+      <p class="note"><b>Status key:</b> ✓ Pass · ≈ Justified (allowed with a stated, neutral reason) · ! Review (worse than the enacted map or near a common flag) · ✕ Fail. Click a state to open it on the map.</p>
+    </div>
+    <div class="tablewrap"><table class="states" id="legalTable"></table></div>
+  </div>
+</section>
+
+<section id="proposals">
+  <div class="wrap">
+    <div class="prose">
+      <div class="eyebrow">Assessment</div>
+      <h2>The 2025–26 maps and the reform proposals</h2>
+      <p>Each approach is judged on three questions. <b>Legal:</b> would it survive in federal and state court? <b>Consensus:</b> could voters of both parties accept the <em>process</em>, even when they dislike the result? <b>Practical:</b> can election offices run it, and will it last?</p>
+      <h3>Maps in use for November 2026, measured</h3>
+    </div>
+    <div class="tablewrap"><table class="states" id="redrawTable"></table></div>
+    <div class="prose" id="redrawNotes"></div>
+    <div class="prose"><h3>Reform proposals</h3></div>
+    <div class="tablewrap">
+      <table class="wartable">
+        <thead><tr><th>Approach</th><th>Legal</th><th>Consensus</th><th>Practical</th></tr></thead>
+        <tbody>
+          <tr><td><b>Independent citizen commissions</b> (AZ, CA, CO, MI)</td><td>Strong: upheld for congressional maps<a class="cite" data-ref="airc"></a></td><td>Strong: even California voters preferred theirs by nearly two to one in 2025<a class="cite" data-ref="poll-ca-2025"></a></td><td>Mixed: commissioners still exercise judgment; California's was set aside by Prop 50 in 2025<a class="cite" data-ref="ncsl-tracker"></a></td></tr>
+          <tr><td><b>Iowa model</b> (nonpartisan staff draw with no political data; up-or-down legislative vote)</td><td>Strong<a class="cite" data-ref="iowa-424"></a></td><td>Strong in Iowa</td><td>Strong: whole counties, small deviations; depends on a culture of restraint</td></tr>
+          <tr><td><b>Court or special-master maps</b> (PA, VA, UT)</td><td>Strong</td><td>Mixed: the losing side calls them overreach</td><td>Strong, but remedial and late in the cycle</td></tr>
+          <tr><td><b>Ensemble / outlier testing</b><a class="cite" data-ref="recom"></a><a class="cite" data-ref="mattingly"></a></td><td>Strong as evidence</td><td>Mixed: technical; trust depends on experts</td><td>A test, not a drawing method</td></tr>
+          <tr><td><b>Shortest-splitline and pure geometric algorithms</b><a class="cite" data-ref="splitline"></a></td><td>Weak: straight lines cut cities and precincts against most state rules</td><td>Mixed: neutral but locally alienating</td><td>Weak: many split precincts</td></tr>
+          <tr><td><b>Federal ban on mid-decade redistricting</b></td><td>Strong under Art. I §4<a class="cite" data-ref="const-art1"></a></td><td>Strong: binds both parties equally</td><td>Strong; stops the escalation but doesn't make maps fairer</td></tr>
+          <tr><td><b>Proportional representation</b> (multi-member districts with ranked-choice voting)</td><td>Requires repealing 2 U.S.C. §2c<a class="cite" data-ref="usc-2c"></a></td><td>Mixed: a large, unfamiliar change</td><td>Mixed; would remove gerrymandering's leverage entirely</td></tr>
+          <tr><td><b>Removing state constraints</b> (MD Question 3, the voided VA amendment, NY)</td><td>Strong if adopted</td><td>Weak: framed as retaliation</td><td>Mixed; moves away from neutral process<a class="cite" data-ref="md-2026"></a><a class="cite" data-ref="va-2026"></a></td></tr>
+          <tr><td><b>Neutral Lines</b> (this project)</td><td>Strong on federal law; state modules still needed for Ohio's county caps and Iowa's whole-county rule</td><td>Strong by design: rule fixed before data, blind drawing, symmetric and bounded selection, paired adoption</td><td>Strong as a required starting map, mid-decade default or court benchmark</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="prose">
+      <div class="callout">The approaches most likely to build agreement share three traits: the rules are fixed before anyone sees the results, both sides can verify them, and one side cannot change them alone. The full written assessment, with every source, is in the repository's <a href="https://github.com/jbeuckm/rednamyrreg/blob/main/ASSESSMENT.md">ASSESSMENT.md</a>.</div>
+    </div>
+  </div>
+</section>
+
+<section id="sources">
+  <div class="wrap prose">
+    <div class="eyebrow">Sources</div>
+    <h2>Citations</h2>
+    <ol class="refs" id="refList"></ol>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Rednamyrreg / Neutral Lines is an independent demonstration project, not affiliated with any party, government or advocacy group. Numbers on this page are computed in your browser from the same data files as the map.</div>
+</footer>
+<div id="tooltip" role="tooltip"></div>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="refs.js"></script>
+<script src="common.js"></script>
+<script src="fairness.js"></script>
+</body>
+</html>
