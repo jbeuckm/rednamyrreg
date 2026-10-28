@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fair From Every Side</title>
-<meta name="description" content="How the Neutral Lines districts look from every perspective (both parties, independents, minority communities, rural and urban voters, local and election officials, incumbents and courts), the legality of each state's plan, and an assessment of the 2025–26 redraws and reform proposals.">
+<meta name="description" content="Every idea of fair districting, from polls, both parties, civil-rights groups, courts, research and other democracies, checked against Neutral Lines; how the districts look from every perspective; whether the rule can be tuned to favor a party, federal legality in every state, and an assessment of the 2025–26 redraws and reform proposals.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M2 2h13v13H2zM17 2h13v13H17zM2 17h13v13H2zM17 17h13v13H17z' fill='%236250d6'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -14,7 +14,9 @@
     <a class="brand" href="index.html">Rednamyrreg <span>· Neutral Lines</span></a>
     <div class="links">
       <a href="index.html#map-section">Map</a>
+      <a href="#ideas">Every idea of fair</a>
       <a href="#perspectives">Perspectives</a>
+      <a href="#tuning">Can it be tuned?</a>
       <a href="#legality">Legality by state</a>
       <a href="#proposals">2025–26 maps &amp; proposals</a>
       <a href="#sources">Sources</a>
@@ -26,9 +28,23 @@
 <header class="hero wrap">
   <div class="eyebrow">Fair from every side</div>
   <h1>Who gains, who gives something up, and is it legal?</h1>
-  <p class="lede">A plan only lasts if people who dislike parts of it can still accept how it was made. This page looks at Neutral Lines from each group with a stake in congressional districts. For each one it sets out their legitimate concerns, what the formula offers them, and what it costs them, using numbers computed from the same data as the map. Below that are the legal status of every state's plan and an assessment of the 2025–26 redraws and the reform proposals.</p>
+  <p class="lede">A plan only lasts if people who dislike parts of it can still accept how it was made. This page starts with every idea of a fair map we could find, from polls, both parties, civil-rights groups, courts, researchers and other democracies, and checks the plan against each one. Then it looks at Neutral Lines from each group with a stake in congressional districts. For each one it sets out their legitimate concerns, what the formula offers them, and what it costs them, using numbers computed from the same data as the map. Below that: a test of whether the rule can be tuned to favor a party, the federal legal status of every state's plan, and an assessment of the 2025–26 redraws and the reform proposals.</p>
   <div class="tiles" id="fairTiles"></div>
 </header>
+
+<section id="ideas">
+  <div class="wrap">
+    <div class="prose">
+      <div class="eyebrow">Every idea of fair</div>
+      <h2>What people mean by a fair map, and how this plan measures up</h2>
+      <p>We collected the ideas of fairness that Americans, both parties, civil-rights and reform groups, courts, researchers and other democracies actually hold, and checked the plan against each one. Most can be met at once, and the plan meets them by construction. A few cannot all be met by <em>any</em> plan: some contradict each other outright (a party-blind map cannot also be guaranteed proportional; a race-blind map cannot also guarantee minority opportunity districts), and mathematicians have proved that some combinations are impossible<a class="cite" data-ref="alexeev-mixon"></a><a class="cite" data-ref="duchin-ma"></a>. For those, the table says which way the plan goes and why, and publishes the measurement so nobody has to take our word for it.</p>
+      <p>Where an idea could be met without adding a setting someone could tune, we changed the rule to meet it: who counts in the population, a public check of the input data, a fixed national definition of every boundary the rule follows, a ban on mid-decade redraws, and a formula for Voting Rights Act remedies. Ideas that need judgment or election data are measured after the fact, never used to draw.</p>
+    </div>
+    <div class="fitkey" id="fitKey"></div>
+    <div class="tablewrap"><table class="states ideas" id="ideasTable"></table></div>
+    <div class="prose" id="ideasNotes"></div>
+  </div>
+</section>
 
 <section id="perspectives">
   <div class="wrap">
@@ -41,13 +57,26 @@
   </div>
 </section>
 
+<section id="tuning">
+  <div class="wrap">
+    <div class="prose">
+      <div class="eyebrow">Can it be tuned?</div>
+      <h2>Could someone make "improvements" that favor one party?</h2>
+      <p>Any rule with a choice in it can be steered. We tested our own earlier version, which chose among compact plans by a partisan-symmetry score, and found it could. Hand-picking among plans that all passed its checks moved the national result from 215 to 227 Democratic-leaning seats. Swapping in other fairness measures that sound just as reasonable (efficiency gap, mean–median, proportionality, competitiveness, single election years), or nudging its tolerances, moved it from 220 to 226. Even which starting angles were searched moved it from 220 to 223.5. Each version was "fair" by some measure, and each gave a different map.</p>
+      <p>So the rule now has no choice in it. It uses one objective that reads no election data: <b>fewest split counties, then smallest moment of inertia</b>. It searches until doubling the search finds nothing better. The only way to change a state's map is to find a valid plan with a better score, and the score has no party in it. The table compares what the rule produces with what a free choice among the very same valid plans could have produced.</p>
+    </div>
+    <div class="tablewrap"><table class="cmp" id="tuneTable" style="max-width:760px"></table></div>
+    <div class="prose" id="tuneNotes"></div>
+  </div>
+</section>
+
 <section id="legality">
   <div class="wrap">
     <div class="prose">
       <div class="eyebrow">Legality</div>
-      <h2>Legal status, state by state</h2>
-      <p>Federal law requires equal population<a class="cite" data-ref="wesberry"></a><a class="cite" data-ref="karcher"></a>, single-member districts<a class="cite" data-ref="usc-2c"></a> and compliance with the Voting Rights Act as narrowed by <i>Louisiana v. Callais</i><a class="cite" data-ref="callais"></a>. Federal courts no longer hear partisan-gerrymandering claims<a class="cite" data-ref="rucho"></a>, so state constitutions and statutes carry most of the remaining rules<a class="cite" data-ref="ncsl-criteria"></a>. The table applies the same automated checks to both plans and adds each state's own requirements where they bind.</p>
-      <p class="note"><b>Status key:</b> ✓ Pass · ≈ Justified (allowed with a stated, neutral reason) · ! Review (worse than the enacted map or near a common flag) · ✕ Fail. Click a state to open it on the map.</p>
+      <h2>Federal law in every state, and the state rules a national standard would replace</h2>
+      <p>Federal law requires equal population<a class="cite" data-ref="wesberry"></a><a class="cite" data-ref="karcher"></a>, single-member districts<a class="cite" data-ref="usc-2c"></a> and compliance with the Voting Rights Act as narrowed by <i>Louisiana v. Callais</i><a class="cite" data-ref="callais"></a>. Today each state adds its own criteria<a class="cite" data-ref="ncsl-criteria"></a>, which is why fifty maps are drawn fifty ways. Neutral Lines is proposed as one national standard under Art. I §4<a class="cite" data-ref="const-art1"></a>, replacing those state criteria for congressional districts only. The table applies the same automated checks to both plans and lists each state rule the national standard would replace.</p>
+      <p class="note"><b>Status key:</b> ✓ Pass · ≈ Justified (allowed with a stated, neutral reason) · ! Review (worse than the enacted map or near a common flag) · ✕ Fail. Click a state for its full page.</p>
     </div>
     <div class="tablewrap"><table class="states" id="legalTable"></table></div>
   </div>
@@ -76,7 +105,7 @@
           <tr><td><b>Federal ban on mid-decade redistricting</b></td><td>Strong under Art. I §4<a class="cite" data-ref="const-art1"></a></td><td>Strong: binds both parties equally</td><td>Strong; stops the escalation but doesn't make maps fairer</td></tr>
           <tr><td><b>Proportional representation</b> (multi-member districts with ranked-choice voting)</td><td>Requires repealing 2 U.S.C. §2c<a class="cite" data-ref="usc-2c"></a></td><td>Mixed: a large, unfamiliar change</td><td>Mixed; would remove gerrymandering's leverage entirely</td></tr>
           <tr><td><b>Removing state constraints</b> (MD Question 3, the voided VA amendment, NY)</td><td>Strong if adopted</td><td>Weak: framed as retaliation</td><td>Mixed; moves away from neutral process<a class="cite" data-ref="md-2026"></a><a class="cite" data-ref="va-2026"></a></td></tr>
-          <tr><td><b>Neutral Lines</b> (this project)</td><td>Strong: passes federal law and each state's own rules in all 50 states (state modules for Iowa, West Virginia and Ohio)</td><td>Strong by design: rule fixed before data, blind drawing, symmetric and bounded selection, paired adoption</td><td>Strong as a required starting map, mid-decade default or court benchmark</td></tr>
+          <tr><td><b>Neutral Lines</b> (this project)</td><td>Strong: passes federal law in all 50 states; as a national standard it needs an act of Congress under Art. I §4, which would replace state congressional criteria</td><td>Strong by design: one rule for every state, fixed before the data, no election or race data anywhere, one answer with nothing left to choose</td><td>Strong: block files ready for 2031; also usable now as a court benchmark or mid-decade default</td></tr>
         </tbody>
       </table>
     </div>
@@ -100,6 +129,7 @@
 <div id="tooltip" role="tooltip"></div>
 <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
 <script src="refs.js"></script>
+<script src="terms.js"></script>
 <script src="common.js"></script>
 <script src="fairness.js"></script>
 </body>

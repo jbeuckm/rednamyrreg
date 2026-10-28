@@ -1,7 +1,8 @@
 """Fill the measured tables in ASSESSMENT.md from docs/data/summary.json.
 
-Replaces the content after each <!-- MEASURED:name --> marker (up to the next
-heading) so every number in the assessment comes straight from the pipeline.
+Replaces the content after each <!-- MEASURED:name --> marker (up to a closing
+<!-- /MEASURED:name --> marker if there is one, otherwise the next heading or
+bold bullet) so every number in the assessment comes straight from the pipeline.
 """
 
 import json
@@ -67,25 +68,55 @@ def ours(S):
     return "\n".join(rows)
 
 
-def law(S):
-    rows = ["| State | What blocks it | Formula without the restriction | Formula obeying current law | Legal change that would allow it |",
-            "|---|---|---|---|---|"]
-    tilt = lambda b, k: "0" if abs(b * k) < 0.05 else f"{'R' if b > 0 else 'D'}+{abs(b * k):.1f}"
+def tuning(S):
+    t = lambda k: sum((s.get("tuning") or {}).get(k, s["ours"]["elections"]["comp"]["seatsD"]) for s in S.values())
+    tried = sum(s.get("tried", 1) for s in S.values() if s["seats"] > 1)
+    rows = ["| How the plan is chosen, among the same valid candidates | Democratic-leaning seats |", "|---|---|",
+            f"| **The rule: fewest split counties, then most compact** | **{t('rule'):.1f}** |",
+            f"| Most compact, ignoring county splits | {t('compact_only'):.1f} |",
+            f"| Free hand-pick of the most Republican valid plan per state | {t('most_r'):.1f} |",
+            f"| Free hand-pick of the most Democratic valid plan per state | {t('most_d'):.1f} |",
+            "", f"County-stage plans, averaging the 2016, 2018 and 2020 statewide races; {tried:,} candidate plans searched."]
+    return "\n".join(rows)
+
+
+def superseded(S):
+    rows = ["| State | Current state rule | National plan |", "|---|---|---|"]
     for ab, s in sorted(S.items()):
-        alt = s.get("alternatives") or {}
-        O = s["ours"]
-        if "unconstrained" in alt:
-            u = alt["unconstrained"]
-            rows.append(f"| {s['name']} | {u['law']} | tilt {tilt(u['bias'], s['seats'])} seats, gap {u['range_people']} people, "
-                        f"{u['county_splits']} counties split | tilt {tilt(O['elections']['comp']['bias'], s['seats'])} seats, "
-                        f"gap {O['range_people']} people, {O['county_splits']} counties split | {u['change']} |")
-        if "symmetric" in alt:
-            y = alt["symmetric"]
-            rows.append(f"| {s['name']} | {y['law']} | symmetric choice: efficiency gap {abs(y['alternative']['eg'])*100:.1f}% | "
-                        f"most-compact choice: efficiency gap {abs(y['chosen']['eg'])*100:.1f}% | {y['change']} |")
-    rows.append("")
-    rows.append("In California, Montana, Nebraska and New Mexico the symmetric choice and the most compact choice are the same plan, "
-                "so their bans on partisan data cost nothing in fairness here.")
+        for c in s["ours"].get("state_law", []):
+            rows.append(f"| {s['name']} | {c['label']} | {'consistent' if c['status'] == 'pass' else 'not met: ' + c['detail']} |")
+    return "\n".join(rows)
+
+
+def ideas(S):
+    """Audit-only measures for the ideas of fairness the rule cannot target."""
+    V = list(S.values())
+    multi = [s for s in V if s["seats"] > 1]
+    tot = lambda f, arr=V: sum(f(s) for s in arr)
+    maj = lambda plan, key: tot(lambda s: s[plan].get("majority", {}).get(key, 0))
+    ret = [s for s in multi if s["ours"].get("retention") is not None]
+    ty = [s for s in multi if s.get("typicality")]
+    mid = sum(0.1 <= s["typicality"]["seats"]["pct"] <= 0.9 for s in ty)
+    rows = ["| Measured, never used to draw | Neutral Lines | 2026 maps |", "|---|---|---|",
+            f"| Competitive districts (45–55%, 2016–20 composite) | {tot(lambda s: s['ours']['competitive'])} "
+            f"| {tot(lambda s: s['enacted']['competitive'])} |",
+            f"| Seats moved by a 1-point uniform swing | {tot(lambda s: s['ours']['responsiveness']):.1f} "
+            f"| {tot(lambda s: s['enacted']['responsiveness']):.1f} |",
+            f"| Majority-Black districts | {maj('ours', 'black')} | {maj('enacted', 'black')} |",
+            f"| Majority-Hispanic districts | {maj('ours', 'hisp')} | {maj('enacted', 'hisp')} |",
+            f"| Majority-Asian districts | {maj('ours', 'asian')} | {maj('enacted', 'asian')} |",
+            f"| Majority-minority districts | {tot(lambda s: s['ours']['mm_districts'])} | {tot(lambda s: s['enacted']['mm_districts'])} |"]
+    if ret:
+        share = tot(lambda s: s["ours"]["retention"] * s["pop"], ret) / tot(lambda s: s["pop"], ret)
+        rows.append(f"| People who stay with the core of their current district | {share * 100:.0f}% | 100% |")
+    if ty:
+        rows += ["", f"Typicality: among the valid plans the search found in each state (county-stage plans, "
+                 f"2016–20 composite), summed over the {len(ty)} states where the search found more than one distinct "
+                 f"valid plan, the rule's plan has {tot(lambda s: s['typicality']['seats']['rule'], ty):.1f} "
+                 f"Democratic-leaning seats against a median of "
+                 f"{tot(lambda s: s['typicality']['seats']['median'], ty):.1f}. Its seat count "
+                 f"is within the middle 80% of those plans in {mid} of those {len(ty)} states "
+                 "(in the other multi-district states every seed angle gave the same plan)."]
     return "\n".join(rows)
 
 
@@ -107,10 +138,12 @@ def main():
     S = {s["abbr"]: s for s in json.loads((ROOT / "docs" / "data" / "summary.json").read_text())["states"]}
     path = ROOT / "ASSESSMENT.md"
     text = path.read_text()
-    for name, fn in [("redraws", redraws), ("ours", ours), ("law", law)]:
-        marker = f"<!-- MEASURED:{name} -->"
-        text = re.sub(re.escape(marker) + r"\n.*?(?=\n- \*\*|\n### |\n## )",
-                      lambda m: marker + "\n\n" + fn(S) + "\n", text, count=1, flags=re.S)
+    for name, fn in [("redraws", redraws), ("ours", ours), ("tuning", tuning), ("superseded", superseded),
+                     ("ideas", ideas)]:
+        marker, end = f"<!-- MEASURED:{name} -->", f"<!-- /MEASURED:{name} -->"
+        stop = re.escape(end) if end in text else r"\n- \*\*|\n### |\n## "
+        text = re.sub(re.escape(marker) + r"\n.*?(?=" + stop + ")",
+                      lambda m: marker + "\n\n" + fn(S) + "\n" + ("\n" if end in text else ""), text, count=1, flags=re.S)
     if "\n## References" in text:
         text = text[:text.index("\n## References")]
     text = text.rstrip() + "\n\n---\n\n" + references()

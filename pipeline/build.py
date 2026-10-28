@@ -1,8 +1,11 @@
-"""Compute candidate plans for every state, select one by the published rule, save results.
+"""Search candidate plans for every state and select one by the published rule.
 
 Usage: python build.py [STATE ...]     (default: all 50 states)
 
-Writes one pickle per state to data/build/. Run export.py afterwards.
+The search starts every candidate from a seed angle on a grid over 0-180 degrees.
+The grid starts at 24 angles and doubles (24, 48, 96, ...) until a doubling finds
+no better plan. Candidates already saved in data/build/XX.pkl are reused, so a
+rerun only computes new angles. Run refine.py afterwards.
 """
 
 import os
@@ -26,16 +29,10 @@ from load import RAW, block_groups, state_projection
 from states import BY_ABBR, BY_FIPS, STATES
 
 OUT = RAW.parent / "build"
-K = 24              # candidate plans per state: seed angles 0, 7.5, ..., 172.5 degrees
-ALPHA = 0.05        # compactness gate: within 5% of the most compact candidate
+K = 24              # first search grid: seed angles 0, 7.5, ..., 172.5 degrees
+MAX_GRID = 3072     # safety cap on the doubling search; no state has reached it
 MAXDEV = 0.003      # hard population tolerance at block-group resolution
-# States whose law bars partisan data in drawing (IA, MT, NE, NM, CA) or makes
-# choosing on it risky (FL's intent standard): selection there uses no election data.
-NO_PARTISAN = {"IA", "MT", "NE", "NM", "CA", "FL"}
-# States whose law asks for competitive districts (Colo. Const. art. V §44.3;
-# Ariz. Const. art. IV pt. 2 §1(14)(F)): selection maximises competitive seats.
-COMPETITIVE = {"CO", "AZ"}
-YEARS = ["16", "18", "20"]
+YEARS = ["16", "18", "20"]  # statewide races reported in the audit; never read by select()
 ABBR_LOWER = {s[0]: s[1].lower() for s in STATES}
 
 
@@ -111,12 +108,12 @@ def plan_assign(Xq, cq, C, w, whole, fragments):
 
 
 def candidate(args):
-    fips, s = args
+    fips, j, n = args
     k = BY_FIPS[fips][3]
     inp = state_inputs(fips)
     X, p, water, county = inp["X"], inp["p"], inp["water"], inp["county"]
     cpolys = counties(fips, inp["fwd"], water=True)
-    theta = s * np.pi / K
+    theta = j * np.pi / n
     t0 = time.time()
     C, w, a0 = solve(X, p, k, theta)
     pure = dict(moi=moment_of_inertia(X, p, a0, k), splits=count_splits(a0, county, p))
@@ -171,22 +168,29 @@ def candidate(args):
     a = plan_assign(X, county, C, w, whole, frags)
     inp["ea"] = plan_assign(inp["Xe"], inp["ecounty"], C, w, whole, frags)
     st = district_stats(a, k, inp)
-    return dict(seed=s, theta=theta, C=C, w=w, a=a, whole=whole, released=sorted(rel),
+    return dict(seed=angle(theta), theta=theta, C=C, w=w, a=a, whole=whole, released=sorted(rel),
                 fragments=[(f.wkb, d) for f, d in frags], contiguous=contiguous, pure=pure,
                 secs=time.time() - t0, **st)
 
 
-def select(cands, partisan_ok=True, competitive=False):
+def angle(theta):
+    """Seed angle in degrees, the candidate's identifier."""
+    return round(float(np.degrees(theta)), 6)
+
+
+def objective(c):
+    """The rule's single objective, compared in order: fewest split counties,
+    then smallest moment of inertia. Ties go to the smallest seed angle."""
+    return (c["county_splits"], c["moi"], c["seed"])
+
+
+def select(cands):
     """The published selection rule (see the site's Method section).
 
-    1. Hard constraints: contiguous and every district within MAXDEV of equal.
-    2. Counties before compactness: keep plans splitting at most
-       min + max(2, 20%) counties.
-    3. Compactness gate: within ALPHA of the most compact remaining plan.
-    4. Fairness: smallest |partisan bias| (2016/18/20 average), then
-       smallest |mean-median|, then most compact. Where state law bars
-       partisan data (partisan_ok=False): most compact, then fewest splits.
-    Returns (chosen index, gate set, distinct set).
+    Among candidates that are contiguous with every district within MAXDEV of
+    equal population, choose the one with the best objective(). No election,
+    race or incumbent data is read.
+    Returns (chosen index, valid set, distinct set).
     """
     uniq, seen = [], set()
     for i, c in enumerate(cands):
@@ -198,28 +202,10 @@ def select(cands, partisan_ok=True, competitive=False):
     if not valid:
         lo = min(cands[i]["maxdev"] for i in uniq)
         valid = [i for i in uniq if cands[i]["maxdev"] <= lo + 1e-9]
-    fewest = min(cands[i]["county_splits"] for i in valid)
-    tier = [i for i in valid if cands[i]["county_splits"] <= fewest + max(2, int(np.ceil(0.2 * fewest)))]
-    best = min(cands[i]["moi"] for i in tier)
-    gate = [i for i in tier if cands[i]["moi"] <= (1 + ALPHA) * best]
-
-    def score(i):
-        if competitive:
-            el = cands[i]["elections"]
-            ncomp = np.mean([np.sum(np.abs(np.asarray(el[y]["shares"]) - 0.5) < 0.05) for y in YEARS if y in el])
-            bias = np.mean([el[y]["bias"] for y in YEARS if y in el])
-            return (-round(float(ncomp), 3), round(abs(bias), 6), cands[i]["moi"])
-        if not partisan_ok:
-            return (cands[i]["moi"], cands[i]["county_splits"], cands[i]["seed"])
-        el = cands[i]["elections"]
-        bias = np.mean([el[y]["bias"] for y in YEARS if y in el])
-        mm = np.mean([el[y]["mm"] for y in YEARS if y in el])
-        return (round(abs(bias), 6), round(abs(mm), 4), cands[i]["moi"])
-
-    return min(gate, key=score), gate, uniq
+    return min(valid, key=lambda i: objective(cands[i])), valid, uniq
 
 
-def run_state(abbr, cands=None):
+def run_state(abbr, cands=None, search=None):
     fips, _, name, k = BY_ABBR[abbr]
     t = time.time()
     inp = state_inputs(fips)
@@ -227,46 +213,67 @@ def run_state(abbr, cands=None):
         a = np.zeros(len(inp["X"]), int)
         inp["ea"] = np.zeros(len(inp["elec"]), int)
         C = np.average(inp["X"], axis=0, weights=inp["p"])[None]
-        cands = [dict(seed=0, theta=0.0, C=C, w=np.zeros(1), a=a, fragments=[], contiguous=True,
+        cands = [dict(seed=0.0, theta=0.0, C=C, w=np.zeros(1), a=a, fragments=[], contiguous=True,
                       whole={}, released=[], pure=dict(moi=0.0, splits=0),
                       secs=0.0, **district_stats(a, 1, inp))]
         chosen, gate, uniq = 0, [0], [0]
     else:
-        chosen, gate, uniq = select(cands, abbr not in NO_PARTISAN, abbr in COMPETITIVE)
+        chosen, gate, uniq = select(cands)
     res = dict(fips=fips, abbr=abbr, name=name, k=k, proj=inp["proj"], cands=cands,
-               chosen=chosen, gate=gate, uniq=uniq, partisan_step=abbr not in NO_PARTISAN)
+               chosen=chosen, gate=gate, uniq=uniq, search=search or [])
     with open(OUT / f"{abbr}.pkl", "wb") as f:
         pickle.dump(res, f)
     c = cands[chosen]
     print(f"{abbr} k={k} cands={len(uniq)} gate={len(gate)} chosen=#{c['seed']} "
           f"dev={c['maxdev']*100:.2f}% contig={c['contiguous']} splits={c['county_splits']} "
           f"(pure {c['pure']['splits']}) "
-          f"D seats(comp)={c['elections']['comp']['seatsD']} "
           f"{time.time()-t:.0f}s", flush=True)
 
 
-def reselect(abbrs):
-    """Re-apply the selection rule to saved candidates (no recomputation)."""
-    for ab in abbrs:
-        path = OUT / f"{ab}.pkl"
-        res = pickle.load(open(path, "rb"))
-        if res["k"] > 1:
-            res["chosen"], res["gate"], res["uniq"] = select(res["cands"], ab not in NO_PARTISAN, ab in COMPETITIVE)
-        res["partisan_step"] = ab not in NO_PARTISAN
-        pickle.dump(res, open(path, "wb"))
-        print(ab, "chosen", res["cands"][res["chosen"]]["seed"], "partisan" if res["partisan_step"] else "no-partisan")
+def load_saved(abbr):
+    """Candidates from an earlier run, keyed by seed angle."""
+    path = OUT / f"{abbr}.pkl"
+    if not path.exists():
+        return {}
+    res = pickle.load(open(path, "rb"))
+    for c in res["cands"]:
+        c["seed"] = angle(c["theta"])
+    return {c["seed"]: c for c in res["cands"]}
+
+
+def search(todo):
+    """Doubling search: grid n = 24, 48, 96, ... A state stops when a doubling
+    finds no plan better than the best on the previous grid (or at MAX_GRID)."""
+    multi = [ab for ab in todo if BY_ABBR[ab][3] > 1]
+    saved = {ab: load_saved(ab) for ab in multi}
+    trace = {ab: [] for ab in multi}
+    active, n = list(multi), K
+    with ProcessPoolExecutor(max_workers=int(os.environ.get("WORKERS", 4))) as pool:
+        while active and n <= MAX_GRID:
+            # Queue every new (state, angle) up front, biggest states first.
+            futs = {ab: [pool.submit(candidate, (BY_ABBR[ab][0], j, n)) for j in range(n)
+                         if angle(j * np.pi / n) not in saved[ab]] for ab in active}
+            nxt = []
+            for ab in active:
+                for f in futs[ab]:
+                    c = f.result()
+                    saved[ab][c["seed"]] = c
+                grid = [saved[ab][angle(j * np.pi / n)] for j in range(n)]
+                chosen, _, _ = select(grid)
+                best = objective(grid[chosen])
+                improved = not trace[ab] or best[:2] < tuple(trace[ab][-1]["best"][:2])
+                trace[ab].append(dict(grid=n, best=list(best), distinct=len(select(grid)[2])))
+                print(f"{ab} grid={n} splits={best[0]} moi={best[1]:.6g} seed={best[2]} "
+                      f"{'improved' if improved else 'stable'}", flush=True)
+                run_state(ab, grid, trace[ab])
+                if improved and n < MAX_GRID:
+                    nxt.append(ab)
+            active, n = nxt, n * 2
+    for ab in todo:
+        if ab not in multi:
+            run_state(ab)
 
 
 if __name__ == "__main__":
-    if sys.argv[1:2] == ["--reselect"]:
-        reselect(sys.argv[2:] or [s[1] for s in STATES])
-        sys.exit()
     OUT.mkdir(parents=True, exist_ok=True)
-    todo = sys.argv[1:] or [s[1] for s in sorted(STATES, key=lambda s: -s[3])]
-    with ProcessPoolExecutor(max_workers=int(os.environ.get("WORKERS", 4))) as pool:
-        # Queue every (state, seed) task up front, biggest states first, so
-        # no worker idles while one state's slowest candidate finishes.
-        futs = {ab: [pool.submit(candidate, (BY_ABBR[ab][0], s)) for s in range(K)]
-                for ab in todo if BY_ABBR[ab][3] > 1}
-        for ab in todo:
-            run_state(ab, [f.result() for f in futs[ab]] if ab in futs else None)
+    search(sys.argv[1:] or [s[1] for s in sorted(STATES, key=lambda s: -s[3])])

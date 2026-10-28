@@ -34,7 +34,6 @@ import shapely
 from pyproj import Transformer
 
 from blocks import load_blocks
-import statelaw
 from district import assign, balance, polish
 from geometry import counties as county_polys, parts, project, states_with_water
 from load import RAW, block_groups
@@ -627,7 +626,25 @@ def free_region(F, wkb, fwd, cpolys, whole, n):
     return polysF, idxF, i, j, nbrs
 
 
-def refine_state(abbr):
+def border_counties(jw, a, whole, nbrs, n):
+    """Whole counties on the border of district jw, with their contact counts:
+    a county of jw that touches another district (block or county), or a
+    county of another district that touches jw."""
+    items = list(whole.items())
+    label = lambda x: a[x] if x < n else items[x - n][1]
+    contact = {}
+    for u, vs in nbrs.items():
+        for v in vs:
+            if v < n:
+                continue
+            cty, dc = items[v - n]
+            lu = label(u)
+            if (dc == jw and lu != jw) or (dc != jw and lu == jw):
+                contact[cty] = contact.get(cty, 0) + 1
+    return contact
+
+
+def refine_state(abbr, drop=()):
     t0 = time.time()
     fips, _, name, k = BY_ABBR[abbr]
     res = pickle.load(open(BUILD / f"{abbr}.pkl", "rb"))
@@ -643,18 +660,13 @@ def refine_state(abbr):
 
     if k == 1:
         a = np.zeros(n, int)
-    elif abbr in statelaw.WHOLE_COUNTY:
-        # State constitution forbids dividing counties: whole-county plan.
-        bgs = block_groups()
-        bgc = bgs[bgs.STATEFP == fips].COUNTYFP.values.astype(int)
-        cp = county_polys(fips, fwd, water=True)
-        starts = [res["cands"][i]["a"] for i in res["uniq"]]
-        a = statelaw.whole_county_plan(county, p, k, starts, bgc, statelaw.polygon_graph(cp), X)
-        released = [("law", "whole counties: " + ("Iowa Const. art. III §37" if abbr == "IA" else "W. Va. Const. art. I §4"))]
     else:
         C, w0 = c["C"], c["w"].copy()
         target = p.sum() / k
         whole = dict(c["whole"])
+        for cty in drop:            # released by an earlier pass that could not balance
+            del whole[cty]
+            released.append(("C", int(cty)))
         frag_lock = np.full(n, -1)
         for f, d in c["fragments"]:
             frag_lock[shapely.contains_xy(shapely.from_wkb(f), X[:, 0], X[:, 1])] = d
@@ -704,20 +716,7 @@ def refine_state(abbr):
             if np.abs(dev).max() <= 100 or not whole:
                 break
             jw = int(np.argmax(np.abs(dev)))
-            items = list(whole.items())
-            # Whole counties on the border of district jw: a county of jw that
-            # touches another district (block or county), or a county of
-            # another district that touches jw. Longest contact first.
-            label = lambda x: a[x] if x < n else items[x - n][1]
-            contact = {}
-            for u, vs in nbrs.items():
-                for v in vs:
-                    if v < n:
-                        continue
-                    cty, dc = items[v - n]
-                    lu = label(u)
-                    if (dc == jw and lu != jw) or (dc != jw and lu == jw):
-                        contact[cty] = contact.get(cty, 0) + 1
+            contact = border_counties(jw, a, whole, nbrs, n)
             if not contact:
                 break
             pick = max(contact, key=lambda q: (contact[q], -q))
@@ -784,30 +783,19 @@ def refine_state(abbr):
                 a_ext = finish(a_ext, p_ext, k, F & ~frozen, eu, ev, nbrs, [Bf, Mf, cty64])
             a = a_ext[:n]
 
-    if abbr == "OH":
-        # Ohio Const. art. XIX §2(B): county-split caps, Cleveland and
-        # Cincinnati whole, one shared county per pair of districts.
-        polys_all = project(shapely.from_wkb(wkb), fwd)
-        ai, aj = adjacency(polys_all)
-        nb_all = {}
-        for u, v in zip(ai, aj):
-            nb_all.setdefault(u, []).append(v)
-            nb_all.setdefault(v, []).append(u)
-        a, free_oh, split_c = statelaw.ohio_plan(b, p, k, a.copy(), ai, aj, nb_all, finish, locally_connected, X)
-        A, _ = pd.factorize(b.A)
-        Bf, _ = pd.factorize(b.B)
-        Mf = np.where(np.array([("|P" in s) or ("|T" in s) for s in pd.factorize(b.A)[1]])[A], A, -1)
-        cty64 = county.astype(np.int64)
-        nodes_all = list(range(n))
-        for _r in range(8):
-            a = finish(a, p, k, free_oh, ai, aj, nb_all, [Bf, Mf, cty64], hard=(2,))
-            fr = graph_fragments(a, nodes_all, nb_all, p + 1e-6)
-            if not fr:
+    if k > 1 and len(drop) < 12:
+        # A district still more than 100 people off is walled in by whole
+        # counties: release the whole county with the longest border on the
+        # district furthest off that has one, and refine the state again.
+        dev = np.bincount(a, p, k) - p.sum() / k
+        for jw in np.argsort(-np.abs(dev), kind="stable"):
+            if abs(dev[jw]) <= 100:
                 break
-            for m, to in fr:
-                a[np.array(m)] = to
-                frag_moves += len(m)
-        released = released + [("law", "Ohio art. XIX: split counties " + ",".join(f"{c:03d}" for c in split_c))]
+            contact = border_counties(jw, a_ext, whole, nbrs, n)
+            if contact:
+                pick = max(contact, key=lambda q: (contact[q], -q))
+                print(f"  {abbr}: district {jw + 1} is {dev[jw]:+.0f} people off; releasing county {pick}", flush=True)
+                return refine_state(abbr, drop + (pick,))
 
     out = dict(abbr=abbr, fips=fips, k=k, GEOID=b.GEOID.values, assign=a.astype(np.int16),
                released=released, frag_moves=frag_moves, has_vtd=has_vtd, secs=time.time() - t0)

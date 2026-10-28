@@ -23,6 +23,7 @@ from pyproj import Transformer
 
 from blocks import YEARS, block_votes, load_blocks
 from build import partisan
+from district import moment_of_inertia
 from geometry import parts, polsby_popper, project, reock, states_shoreline, states_with_water
 from load import RAW
 from states import BY_ABBR, STATES
@@ -144,8 +145,17 @@ def plan_metrics(a, k, b, p, votes, geoms_water, shore, water, extra):
         pieces=pieces, pp=pp, reock=rk, hull=hull, elections=el,
         enclaves=enclaves(geoms_water, water), slivers=precinct_slivers(a, b, p) if extra["has_vtd"] else 0,
         ohio=ohio_caps(a, b, p), ohio_extra=ohio_extra(a, b, p, k) if extra.get("abbr") == "OH" else None,
-        minority=1 - sv("vap_white"), black=sv("vap_black"), hisp=sv("vap_hisp"),
+        minority=1 - sv("vap_white"), black=sv("vap_black"), hisp=sv("vap_hisp"), asian=sv("vap_asian"),
         shore_geoms=shore_geoms)
+
+
+def retention(a, other, p, k):
+    """Core retention: for each district, the people it shares with the district
+    of the other plan it overlaps most, as a share of everyone."""
+    a, other = np.where(a < 0, 0, a), np.where(other < 0, 0, other)
+    n = other.max() + 1
+    M = np.bincount(a * n + other, p, k * n).reshape(k, n)
+    return float(M.max(axis=1).sum() / p.sum())
 
 
 def checks(m, k, abbr, enacted=None):
@@ -158,9 +168,6 @@ def checks(m, k, abbr, enacted=None):
     rng, md = m["range_people"], m["maxdev"]
     if rng <= 1:
         st, why = "pass", "within one person"
-    elif md <= TENNANT and abbr in ("IA", "WV"):
-        st, why = "justified", ("the state constitution requires whole counties, and this is the smallest gap whole "
-                                "counties allow from the rule's starting plans; Tennant v. Jefferson County (2012) upheld 0.79% for this reason")
     elif md <= TENNANT:
         st, why = "justified", ("closing the gap would split another county or municipality; "
                                 "far below the 0.79% upheld in Tennant v. Jefferson County (2012)")
@@ -192,6 +199,13 @@ def checks(m, k, abbr, enacted=None):
         out.append(("slivers", "No tiny split-precinct pieces (ballot secrecy)",
                     "pass" if m["slivers"] == 0 else ("justified" if m["slivers"] <= enacted["slivers"] else "review"),
                     f"{m['slivers']} split-precinct pieces with 1–99 residents ({enacted['slivers']} in the enacted 2026 map)"))
+    return out
+
+
+def state_law(m, abbr):
+    """Current state rules for congressional maps that a national standard
+    would supersede (U.S. Const. art. I §4). Reported, not enforced."""
+    out, md = [], m["maxdev"]
     if abbr == "OH":
         whole, once, more = m["ohio"]
         ok = whole >= 65 and once <= 18 and more <= 5
@@ -239,6 +253,12 @@ def score_state(abbr):
     en = plan_metrics(ea, len(codes), b, p, votes, en_geo, shore, water, extra)
     ours["checks"] = checks(ours, k, abbr, en)
     en["checks"] = checks(en, len(codes), abbr)
+    ours["state_law"], en["state_law"] = state_law(ours, abbr), state_law(en, abbr)
+    # The rule's objective on the final block plan, for the certificate.
+    Xb = np.column_stack(fwd.transform(b.lon.values, b.lat.values))
+    ours["moi"] = moment_of_inertia(Xb, p, np.where(a < 0, 0, a), k)
+    en["moi"] = moment_of_inertia(Xb, p, np.where(ea < 0, 0, ea), len(codes))
+    ours["retention"] = retention(a, ea, p, k)
     en["prison_adjusted"] = abbr in PRISON_ADJUSTED
     en["labels"] = codes
     inv = Transformer.from_crs(res["proj"], "EPSG:4326", always_xy=True)

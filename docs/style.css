@@ -254,3 +254,30 @@ ul.why li { margin-bottom: 4px; }
 #map .map-hint { z-index: 2; background: color-mix(in srgb, var(--surface) 85%, transparent); padding: 2px 6px; border-radius: 6px; }
 #resetBtn { z-index: 3; }
 .maplibregl-ctrl-attrib { font-size: 10px; }
+
+/* Fairness scorecard: how the plan meets each idea of fairness */
+.fit { display: inline-block; padding: 1px 8px; border-radius: 10px; font-size: .72rem; font-weight: 600; white-space: nowrap; }
+.fit.met { background: #0ca30c; color: #fff; }
+.fit.partial { background: var(--ink-2); color: var(--surface); }
+.fit.audit { border: 1px solid var(--axis); color: var(--ink-2); }
+.fit.conflict { background: #fab219; color: #0b0b0b; }
+.ideas td:first-child { min-width: 150px; }
+.ideas td:nth-child(3) { white-space: nowrap; }
+.ideas tr.group td { padding-top: 18px; color: var(--muted); font-size: .74rem; text-transform: uppercase; letter-spacing: .05em; font-weight: 600; }
+.fitkey { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: .84rem; color: var(--ink-2); margin: 6px 0 12px; }
+
+/* Named measures and theorems: hover or tap for a definition and its source */
+a.term { color: inherit; text-decoration: underline dotted var(--muted); text-underline-offset: 3px; cursor: help; }
+a.term:hover, a.term:focus-visible { text-decoration-color: var(--accent); }
+.termtip { position: fixed; z-index: 1000; background: var(--surface); color: var(--ink); border: 1px solid var(--grid);
+  border-radius: 8px; box-shadow: 0 6px 24px rgba(0, 0, 0, .18); padding: 10px 12px; font-size: .84rem; line-height: 1.45; }
+.termtip .src { margin-top: 6px; color: var(--ink-2); font-size: .76rem; }
+.termtip .src a { color: var(--accent); white-space: nowrap; }
+
+/* The rules in plain words, at the top of the home page */
+.rules { margin: 26px 0 6px; background: var(--surface); border: 1px solid var(--ring); border-radius: 12px; padding: 16px 20px 12px; box-shadow: var(--shadow); }
+.rules h2 { font-size: 1.15rem; margin: 0; }
+.rules ol { list-style: none; counter-reset: rule; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px 28px; padding: 0; margin: 12px 0 8px; }
+.rules li { counter-increment: rule; position: relative; padding-left: 38px; font-size: 1rem; line-height: 1.45; }
+.rules li::before { content: counter(rule); position: absolute; left: 0; top: 0; width: 26px; height: 26px; border-radius: 50%;
+  background: var(--accent); color: var(--surface); display: grid; place-items: center; font-weight: 700; font-size: .85rem; }

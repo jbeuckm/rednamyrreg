@@ -59,15 +59,15 @@ const TIMELINE = [
 ];
 
 const PRINCIPLES = [
-  ["Equality", "Equal population", "Every district holds the same number of people, to within one census unit.", "Checkable: sum the published assignment file by district."],
+  ["Uniformity", "One rule for every state", "The same rule, with the same settings, draws all 435 districts. No state-specific exceptions and no adjustable parameters.", "Checkable: one program, one configuration, 50 runs."],
+  ["Equality", "Equal population, everyone counted", "Every district holds the same number of people, to within one census unit. Everyone counts, with people in prison counted at their last home address.", "Checkable: sum the published assignment file by district."],
   ["Contiguity", "One piece", "Every district is connected. Water inside the state counts as connecting; islands are exempt.", "Checkable: a connectivity test on the published geometry."],
-  ["Compactness", "Close to the center", "Minimize the average squared distance from each person to their district's population center (Hess et al., 1965).", "Provable: between split counties, each district is a convex polygon."],
-  ["Counties", "Keep counties whole", "Split a county only when equal population or contiguity requires it, and then along the same straight-line rule.", "Checkable: every split county is listed and justified by the rule."],
-  ["Blindness", "No politics at the drawing board", "The generator sees population and geography only: no votes, no party registration, no race, no incumbents' addresses.", "Provable by inspection: the inputs are public, and none of them encode party."],
-  ["Determinism", "Same data, same map", "No randomness and no human choices. Seeds are fixed angles, and every parameter is fixed in advance.", "Provable: anyone rerunning the code gets an identical map."],
-  ["Certificate", "Verify in seconds", "Publish centers and weights. Each address's district is a one-line calculation, and the weights are optimal dual variables.", "Provable by LP duality: at these centers, no population-preserving reassignment lowers total distance."],
-  ["Symmetry", "Bounded, two-sided correction", "Election data may only choose among pre-certified plans that already pass every constraint, the county tier and the 5% compactness gate, and it picks the one with the least partisan bias.", "Provable: swapping party labels yields the same choice, and every option is compact."],
-  ["Schedule", "Change by rule, never by request", "Rerun after each census. Between censuses, a published fairness ledger can trigger at most one switch to another certified plan.", "Checkable: the trigger is arithmetic on public election returns."],
+  ["Counties", "Keep places whole", "Split a county only when equal population or contiguity requires it, then cities and towns, then precincts, in that order.", "Checkable: every split is listed in the certificate with the step that required it."],
+  ["Compactness", "Close to the center", "Put people as close as possible to the population center of their own district (Hess et al., 1965).", "Provable: between split counties, each district is a convex polygon."],
+  ["Blindness", "No politics, anywhere", "No votes, party registration, race or incumbents' addresses are read while drawing or while choosing between maps.", "Provable by inspection: the inputs are public, and none of them encode party or race."],
+  ["One answer", "Nothing left to choose", "The plan is the one with the fewest split counties, then the smallest moment of inertia. There is no menu of acceptable maps for anyone to pick from.", "Checkable: the score is arithmetic on the block file, and a valid plan with a better score would replace ours."],
+  ["Determinism", "Same data, same map", "No randomness and no human choices. Seed angles are a fixed grid, and the search stops by a fixed rule.", "Provable: anyone rerunning the code gets an identical map."],
+  ["Schedule", "Change by census, never by request", "Publish the data for public correction, rerun after each census, take better plans during a fixed challenge window, then freeze until the next census. No mid-decade redraws.", "Checkable: the dates, the data and the objective are public."],
 ];
 
 // ---------------------------------------------------------------- citations
@@ -197,9 +197,9 @@ function renderHero() {
   const S = state.data.summary.states;
   const legal = S.filter((s) => !s.ours.checks.some((c) => c.status === "fail")).length;
   const tiles = [
-    [`${legal}/50`, `states whose plan passes every federal and state legal check we run, including each state's own constitution and statutes`],
-    [`0`, `partisan, racial or incumbent inputs while drawing. The rule is public, deterministic and checkable by anyone`],
-    [`${n.contiguous}/50 · ≤ ${n.maxRange}`, `states with every district contiguous on true block geometry · largest population gap anywhere, in people`],
+    [`1 rule`, `for all 50 states, and one answer in each: fewest split counties, then most compact. No dial for anyone to turn`],
+    [`0`, `partisan, racial or incumbent inputs, in drawing or in choosing. Anyone can rerun it and get the same map`],
+    [`${legal}/50`, `states whose plan passes every federal legal and practical check we run`],
     [`${seatsFavor(n.oursBias).replace(" seats", "")} vs ${seatsFavor(n.enBias).replace(" seats", "")}`, `summed partisan bias, in seats, at a 50–50 vote: Neutral Lines vs today's maps (closer to 0 is fairer)`],
     [`${fmt(n.oursSplits)} vs ${fmt(n.enSplits)}`, `counties split, Neutral Lines vs today's maps. Towns: ${fmt(n.oursMuni)} vs ${fmt(n.enMuni)}; precincts: ${fmt(n.oursPrec)} vs ${fmt(n.enPrec)}`],
   ];
@@ -627,7 +627,8 @@ function renderPanel() {
       <tr><td>Majority-minority districts</td><td>${n.oursMM}</td><td>${n.enMM}</td></tr>
       </tbody></table>
       <p class="note">* Seats whose 2016–20 statewide composite vote leans each way. The state-weighted composite vote would give Democrats about ${n.propD.toFixed(0)} seats under strict proportionality. These figures describe lean, not election results.</p>
-      <p class="note">Pick a state on the map or from the menu for its scorecard, candidate plans and downloads.</p>`;
+      <p class="note">Pick a state on the map or from the menu for its scorecard, candidate plans and downloads.</p>
+      <p class="note">Seats and bias are an audit. The rule never reads election data.</p>`;
     return;
   }
   const s = state.data.byAbbr.get(state.sel);
@@ -642,7 +643,7 @@ function renderPanel() {
     ${di != null && (formula ? O : E).pop[di] != null ? districtWhy(s, formula ? O : E, di, formula) :
       `<p class="note">Click a district on the map to see why its lines are where they are.</p>`}
     <p class="note"><b>Today's map:</b> ${origin[0]}${cites(origin[1])}</p>
-    <p><a class="btn" href="state.html?st=${s.abbr}">The case for Neutral Lines in ${esc(s.name)}: legality and how to adopt it →</a></p>
+    <p><a class="btn" href="state.html?st=${s.abbr}">Neutral Lines in ${esc(s.name)}: every district, the law and how to adopt it →</a></p>
     <table class="cmp"><thead><tr><th></th><th>Formula</th><th>Enacted</th></tr></thead><tbody>
       <tr><td>D-leaning seats (2016–20)</td><td>${O.elections.comp.seatsD}</td><td>${E.elections.comp.seatsD}</td></tr>
       <tr><td>D-leaning seats (Pres. 2020)</td><td>${O.elections.pres20.seatsD}</td><td>${E.elections.pres20.seatsD}</td></tr>
@@ -658,10 +659,10 @@ function renderPanel() {
       <tr><td>Population range (people)</td><td>${fmt(O.range_people)}</td><td>${fmt(E.range_people)}</td></tr>
     </tbody></table>
     ${s.seats > 1 ? `<div class="panel-h">District lean, sorted</div><div class="chart" id="stripChart"></div>` : ""}
-    ${s.ensemble.length > 1 ? `<div class="panel-h">Candidate plans (${s.candidates} distinct, ${s.gate} eligible)</div>
+    ${s.ensemble.length > 1 ? `<div class="panel-h">Candidate plans (${s.tried} tried, ${s.candidates} distinct, ${s.valid} valid)</div>
       <div class="chart" id="ensChart"></div>
-      <p class="note">Each dot is one of the formula's deterministic candidate plans. Filled dots are eligible: they meet the population and contiguity constraints, the county tier and the 5% compactness gate. Of those, the one with partisan bias closest to zero is selected (ringed). Hover a dot for its details.</p>` : ""}
-    ${s.seats > 1 ? `<div class="panel-h">Fairness ledger · partisan bias by election year</div>
+      <p class="note">Each dot is one candidate from the search. Filled dots are valid (contiguous, within 0.3%). The rule takes the valid plan with the fewest split counties, then the smallest spread (ringed). The vertical position, partisan bias, is shown only as an audit: the rule never reads it. Hover a dot for its details.</p>` : ""}
+    ${s.seats > 1 ? `<div class="panel-h">Partisan audit by election year (not used by the rule)</div>
     <table class="cmp"><thead><tr><th>Year</th><th>Formula</th><th>Enacted</th></tr></thead><tbody>
       ${years.map((y) => `<tr><td>20${y}</td><td>${favor(O.elections[y].bias, 0, "% seats")}</td><td>${favor(E.elections[y].bias, 0, "% seats")}</td></tr>`).join("")}
     </tbody></table>` : ""}
@@ -669,15 +670,21 @@ function renderPanel() {
     <ul class="checks">${O.checks.map(checkItem).join("")}</ul>
     <div class="panel-h">Verify it yourself</div>
     <p class="note"><a href="data/plans/${s.abbr}.json" download>Certificate (centers, weights, county rule, refinement log)</a> · <a href="data/plans/${s.abbr}.csv.gz" download>Census-block assignment file (.csv.gz)</a><br>
-    Selected candidate #${s.chosen_seed} (seed angle ${(7.5 * s.chosen_seed).toFixed(1)}°). ${s.partisan_step
-      ? "Chosen by the symmetric partisan-bias rule among eligible plans."
-      : "State law bars partisan data here, so the most compact eligible plan was chosen; no election data were used."}
+    Selected plan: seed angle ${s.chosen_seed}°. ${searchTxt(s)}
     ${s.prison_adjusted ? " This state counts prisoners at home addresses, so its enacted map was balanced on adjusted counts; its raw-count range is not a defect." : ""} Without the county rule, straight lines alone would split ${s.pure_splits} counties.</p>`;
   if (s.seats > 1) drawStrip(s);
   if (s.ensemble.length > 1) drawEnsemble(s);
 }
 
 const ORIGIN = window.ORIGIN, ORIGIN_DEFAULT = window.ORIGIN_DEFAULT;
+
+function searchTxt(s) {
+  const tr = s.search || [];
+  if (!tr.length) return "";
+  const last = tr[tr.length - 1];
+  const found = tr.findIndex((t) => t.best[0] === last.best[0] && Math.abs(t.best[1] - last.best[1]) < 1e-9);
+  return `The search tried ${tr.map((t) => t.grid).join(", then ")} angles and stopped when a doubling found nothing better; this plan was first found on the ${tr[found].grid}-angle grid.`;
+}
 
 function districtWhy(s, plan, i, formula) {
   const det = plan.detail && plan.detail[i];
@@ -751,11 +758,11 @@ function drawEnsemble(s) {
     g += `<text x="${x(t)}" y="${h - m.b + 14}" text-anchor="middle" style="fill:${muted};font-size:10px">${t.toFixed(2)}×</text>`;
   });
   g += `<line x1="${m.l}" x2="${w - m.r}" y1="${y(0)}" y2="${y(0)}" stroke="${css("--axis")}"/>`;
-  g += `<text x="${(m.l + w - m.r) / 2}" y="${h - 4}" text-anchor="middle" style="fill:${muted};font-size:10px">Spread vs. most compact eligible plan</text>`;
-  g += `<text transform="translate(10,${(m.t + h - m.b) / 2}) rotate(-90)" text-anchor="middle" style="fill:${muted};font-size:10px">Partisan bias (seats)</text>`;
+  g += `<text x="${(m.l + w - m.r) / 2}" y="${h - 4}" text-anchor="middle" style="fill:${muted};font-size:10px">Spread vs. most compact valid plan</text>`;
+  g += `<text transform="translate(10,${(m.t + h - m.b) / 2}) rotate(-90)" text-anchor="middle" style="fill:${muted};font-size:10px">Bias (audit only)</text>`;
   pts.slice().sort((a, b) => a.chosen - b.chosen).forEach((d) => {
-    g += `<circle cx="${x(d.moi)}" cy="${y(d.bias)}" r="${d.chosen ? 6 : 4.5}" fill="${d.gated ? css("--accent") : css("--surface")}" stroke="${d.gated ? css("--surface") : muted}" stroke-width="${d.gated ? 2 : 1.5}">
-      <title>Candidate #${d.seed}: ${d.moi.toFixed(3)}× spread, bias ${favor(d.bias, 0, "% seats")}, ${d.seatsD} D-leaning seats, ${d.splits} county splits${d.chosen ? " (selected)" : ""}</title></circle>`;
+    g += `<circle cx="${x(d.moi)}" cy="${y(d.bias)}" r="${d.chosen ? 6 : 4.5}" fill="${d.valid ? css("--accent") : css("--surface")}" stroke="${d.valid ? css("--surface") : muted}" stroke-width="${d.valid ? 2 : 1.5}">
+      <title>Seed ${d.seed}°: ${d.moi.toFixed(3)}× spread, bias ${favor(d.bias, 0, "% seats")}, ${d.seatsD} D-leaning seats, ${d.splits} county splits${d.chosen ? " (selected)" : ""}</title></circle>`;
     if (d.chosen) g += `<circle cx="${x(d.moi)}" cy="${y(d.bias)}" r="10" fill="none" stroke="${ink}" stroke-width="2"/>
       <text x="${x(d.moi) + 13}" y="${y(d.bias)}" dominant-baseline="central" style="fill:${ink};font-size:10.5px;font-weight:600">selected</text>`;
   });
@@ -833,8 +840,8 @@ function renderFindings() {
     <p><b>Shape.</b> The formula's districts average a Polsby–Popper score of ${n.oursPP.toFixed(2)}, against ${n.enPP.toFixed(2)} for the enacted maps, and are more compact in ${moreCompact} of the ${S.length} multi-district states.</p>
     <p><b>Equal population.</b> Every plan is built from census blocks. In ${n.exact} of 50 states the largest and smallest districts differ by at most one person; the widest gap anywhere is ${n.maxRange} people, left by the rule's refusal to split an extra county or municipality just to move a handful of residents.</p>
     <p><b>Boundaries on the ground.</b> Every line follows a county, municipal, precinct or census-block boundary. Nationally the formula splits ${fmt(n.oursSplits)} counties (enacted maps: ${fmt(n.enSplits)}), ${fmt(n.oursMuni)} municipalities (${fmt(n.enMuni)}) and ${fmt(n.oursPrec)} precincts (${fmt(n.enPrec)}). It splits fewer counties in ${fewerSplits} of ${S.length} multi-district states.</p>
-    <p><b>Partisan symmetry.</b> In the ${big} states with four or more seats, the average absolute partisan bias is ${pct(absBias("ours"))} of seats under the formula and ${pct(absBias("enacted"))} under the enacted maps. The formula is closer to symmetric in ${lowerBias} of them and further in ${higherBias}. Summed across all states, bias at a 50–50 vote is ${seatsFavor(n.oursBias)} for the formula and ${seatsFavor(n.enBias)} for the enacted maps.</p>
-    <p><b>Seats.</b> On the 2016–20 statewide composite, the formula gives ${n.oursD} Democratic-leaning and ${435 - n.oursD} Republican-leaning districts. The enacted 2026 maps give ${n.enD} and ${435 - n.enD}, and strict state-by-state proportionality would give about ${n.propD.toFixed(0)} Democratic seats. The formula does not aim at proportionality, and the gap that remains largely reflects where voters live.</p>
+    <p><b>Partisan audit.</b> The rule never reads election data; these figures are measured afterwards. In the ${big} states with four or more seats, the average absolute partisan bias is ${pct(absBias("ours"))} of seats under the formula and ${pct(absBias("enacted"))} under the enacted maps. The formula is closer to symmetric in ${lowerBias} of them and further in ${higherBias}. Summed across all states, bias at a 50–50 vote is ${seatsFavor(n.oursBias)} for the formula and ${seatsFavor(n.enBias)} for the enacted maps.</p>
+    <p><b>Seats.</b> On the 2016–20 statewide composite, the formula gives ${n.oursD} Democratic-leaning and ${435 - n.oursD} Republican-leaning districts. The enacted 2026 maps give ${n.enD} and ${435 - n.enD}, and strict state-by-state proportionality would give about ${n.propD.toFixed(0)} Democratic seats. The formula does not aim at any seat count, and the gap that remains reflects where voters live.</p>
     <p><b>Representation of minority communities.</b> The formula produces ${n.oursMM} majority-minority districts, against ${n.enMM} in the enacted maps. That is the honest cost of race-blind drawing, and it is why the method includes a formulaic remedy for any court-ordered Voting Rights Act district.</p>`;
 }
 

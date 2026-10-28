@@ -25,7 +25,7 @@ import shapely.geometry
 from pyproj import Transformer
 from shapely.geometry import mapping
 
-from build import ALPHA, K, MAXDEV, NO_PARTISAN, YEARS, select
+from build import K, MAXDEV, YEARS
 from blocks import load_blocks
 from geometry import project, states_shoreline
 from load import RAW
@@ -116,41 +116,59 @@ def district_details(a, other, other_labels, b, p, fips, k, target, formula):
     return out
 
 
-LAW_CHANGE = {
-    "IA": ("Iowa Const. art. III §37 forbids dividing any county in a congressional district.",
-           "Amend art. III §37 to allow a county to be divided where needed for equal population or compactness, "
-           "or write the Neutral Lines rule into the constitution."),
-    "WV": ("W. Va. Const. art. I §4 requires congressional districts formed of contiguous counties.",
-           "Amend art. I §4 to allow county divisions where needed for equal population or compactness."),
-    "OH": ("Ohio Const. art. XIX §2(B) limits county splits and requires keeping Cleveland and Cincinnati whole.",
-           "Amend art. XIX §2(B) to let the published rule decide splits, keeping its preference for whole counties and cities."),
-}
-PARTISAN_LAW = {
-    "IA": "Iowa Code §42.4(5) bars using previous election results.",
-    "MT": "Montana's 2021 law (HB 506) bars previous election results except as a court remedy.",
-    "NE": "Nebraska's redistricting guidelines (LR 134) bar political data.",
-    "NM": "N.M. Stat. §1-3A-7 bars the advisory committee from using partisan data.",
-    "CA": "Cal. Const. art. XXI §2(e) forbids drawing for or against a party, which a selection step on election results could be argued to do.",
-    "FL": "Fla. Const. art. III §20 forbids intent to favor a party, and selecting on election results creates a record opponents could cite.",
-}
+def seats(c):
+    """Democratic-leaning seats, averaged over the audit's statewide races."""
+    el = c["elections"]
+    return float(np.mean([el[y]["seatsD"] for y in YEARS if y in el]))
 
 
-def alternatives(abbr, res, unconstrained):
-    """What the formula would produce if a state's law were changed."""
+def tuning_audit(res):
+    """What a free choice among this state's valid candidates could do, for the
+    'can it be tuned?' audit. The rule itself never reads these numbers."""
+    c = res["cands"]
+    if res["k"] == 1:
+        s = seats(c[0]) if "elections" in c[0] else 0.0
+        return dict(rule=s, most_r=s, most_d=s, compact_only=s)
+    S = [seats(c[i]) for i in res["gate"]]
+    compact = min(res["gate"], key=lambda i: c[i]["moi"])
+    return dict(rule=r(seats(c[res["chosen"]]), 3), most_r=r(min(S), 3), most_d=r(max(S), 3),
+                compact_only=r(seats(c[compact]), 3))
+
+
+def competitive(shares, lo=0.45, hi=0.55):
+    s = np.asarray(shares)
+    return int(((s >= lo) & (s <= hi)).sum())
+
+
+def responsiveness(shares):
+    """Seats gained per point of statewide vote, under a uniform 1-point swing each way."""
+    s = np.asarray(shares)
+    return float(((s + 0.01 > 0.5).sum() - (s - 0.01 > 0.5).sum()) / 2)
+
+
+def percentile(x, xs):
+    """Share of the ensemble below x, counting ties as half."""
+    xs = np.asarray(xs, float)
+    return float(((xs < x).sum() + 0.5 * (xs == x).sum()) / len(xs))
+
+
+def typicality(res):
+    """Where the rule's plan falls among every valid candidate the search found,
+    on outcomes the rule never reads. 0.5 is the middle of the ensemble."""
+    c, valid = res["cands"], res["gate"]
+    if res["k"] == 1 or len(valid) < 2:
+        return None
+    me = c[res["chosen"]]
+    metrics = dict(
+        seats=lambda x: x["elections"]["comp"]["seatsD"],
+        competitive=lambda x: competitive(x["elections"]["comp"]["shares"]),
+        minority=lambda x: int((np.asarray(x["minority"]) > 0.5).sum()))
     out = {}
-    if abbr in unconstrained:
-        out["unconstrained"] = dict(unconstrained[abbr], law=LAW_CHANGE[abbr][0], change=LAW_CHANGE[abbr][1])
-    if abbr in NO_PARTISAN and res["k"] > 1:
-        sym, _, _ = select(res["cands"], True)
-        if sym != res["chosen"]:
-            def est(i):
-                el = res["cands"][i]["elections"]
-                return dict(seed=res["cands"][i]["seed"], seatsD=el["comp"]["seatsD"], eg=r(el["comp"]["eg"]),
-                            bias=r(np.mean([el[y]["bias"] for y in YEARS if y in el])),
-                            county_splits=res["cands"][i]["county_splits"])
-            out["symmetric"] = dict(chosen=est(res["chosen"]), alternative=est(sym), law=PARTISAN_LAW[abbr],
-                                    change="A statute or amendment expressly allowing a party-symmetric fairness test among "
-                                           "pre-certified neutral plans, applied only after the plans are drawn.")
+    for key, f in metrics.items():
+        xs = [f(c[i]) for i in valid]
+        out[key] = dict(rule=r(f(me), 3), pct=r(percentile(f(me), xs), 3),
+                        median=r(float(np.median(xs)), 3), lo=r(min(xs), 3), hi=r(max(xs), 3))
+    out["n"] = len(valid)
     return out
 
 
@@ -170,17 +188,23 @@ def plan_out(m, order):
         pp=[r(x) for x in np.asarray(m["pp"])[order]], reock=[r(x) for x in np.asarray(m["reock"])[order]],
         minority=[r(x) for x in np.asarray(m["minority"])[order]],
         black=[r(x) for x in np.asarray(m["black"])[order]], hisp=[r(x) for x in np.asarray(m["hisp"])[order]],
+        asian=[r(x) for x in np.asarray(m["asian"])[order]],
         mm_districts=int((np.asarray(m["minority"]) > 0.5).sum()),
+        majority=dict(black=int((np.asarray(m["black"]) > 0.5).sum()), hisp=int((np.asarray(m["hisp"]) > 0.5).sum()),
+                      asian=int((np.asarray(m["asian"]) > 0.5).sum())),
+        competitive=competitive(m["elections"]["comp"]["shares"]),
+        responsiveness=r(responsiveness(m["elections"]["comp"]["shares"]), 2),
+        retention=r(m["retention"], 4) if "retention" in m else None,
         elections=el,
-        checks=[dict(id=c[0], label=c[1], status=c[2], detail=c[3]) for c in m["checks"]])
+        objective=dict(county_splits=m["county_splits"], moi_km2=r(m["moi"], 3)),
+        checks=[dict(id=c[0], label=c[1], status=c[2], detail=c[3]) for c in m["checks"]],
+        state_law=[dict(id=c[0], label=c[1], status=c[2], detail=c[3]) for c in m["state_law"]])
 
 
 def main(only=None):
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "plans").mkdir(exist_ok=True)
     feats, efeats, sfeats, states = [], [], [], []
-    ufile = BUILD / "unconstrained.json"
-    unconstrained = json.loads(ufile.read_text()) if ufile.exists() else {}
     for fips, abbr, name, k in STATES:
         if only and abbr not in only:
             continue
@@ -218,7 +242,7 @@ def main(only=None):
                 ens.append(dict(
                     seed=x["seed"], moi=r(x["moi"] / best, 5), splits=x["county_splits"],
                     contiguous=bool(x["contiguous"]), maxdev=r(x["maxdev"], 5),
-                    gated=i in res["gate"], chosen=i == res["chosen"],
+                    valid=i in res["gate"], chosen=i == res["chosen"],
                     bias=r(np.mean([el[y]["bias"] for y in YEARS if y in el])),
                     mm=r(np.mean([el[y]["mm"] for y in YEARS if y in el])),
                     eg=r(el["comp"]["eg"]), seatsD=el["comp"]["seatsD"]))
@@ -226,8 +250,11 @@ def main(only=None):
         lon, lat = inv.transform(c["C"][order, 0], c["C"][order, 1])
         cert = dict(
             state=abbr, seats=k, projection=res["proj"], seed=c["seed"],
-            theta_degrees=r(np.degrees(c["theta"]), 2),
-            rule=("Counties in county_rule are whole. Elsewhere: municipalities, then precincts, "
+            search=res.get("search", []),
+            objective=dict(county_splits=O["county_splits"], moi_km2=r(O["moi"], 3)),
+            rule=("Selected: among contiguous candidates within 0.3% at the county stage, fewest split "
+                  "counties, then smallest moment of inertia (see search). "
+                  "Counties in county_rule are whole. Elsewhere: municipalities, then precincts, "
                   "then census blocks, each whole unless released (refinement_log), assigned by "
                   "argmin_j |x - c_j|^2 - w_j at the unit's population centre (projection km), "
                   "then boundary transfers. The block assignment file is authoritative."),
@@ -257,16 +284,16 @@ def main(only=None):
         states.append(dict(
             abbr=abbr, name=name, fips=fips, seats=k, pop=int(np.sum(O["pop"])),
             has_vtd=bool(sc["has_vtd"]), chosen_seed=c["seed"], candidates=len(res["uniq"]),
-            gate=len(res["gate"]), pure_splits=c["pure"]["splits"],
-            partisan_step=bool(res.get("partisan_step", True)),
+            valid=len(res["gate"]), tried=len(res["cands"]), pure_splits=c["pure"]["splits"],
+            search=res.get("search", []), tuning=tuning_audit(res), typicality=typicality(res),
             prison_adjusted=bool(E.get("prison_adjusted", False)),
             ours=dict(plan_out(O, order), detail=O_det),
             enacted=dict(plan_out(E, np.arange(len(E["labels"]))), detail=E_det),
-            enacted_labels=E["labels"], ensemble=ens, alternatives=alternatives(abbr, res, unconstrained)))
+            enacted_labels=E["labels"], ensemble=ens))
         print(abbr, flush=True)
 
     summary = dict(generated=str(date.today()),
-                   params=dict(K=K, alpha=ALPHA, maxdev=MAXDEV, years=YEARS, simplify_km=TOL_KM),
+                   params=dict(first_grid=K, maxdev=MAXDEV, audit_years=YEARS, simplify_km=TOL_KM),
                    states=states)
     (OUT / "summary.json").write_text(json.dumps(summary, separators=(",", ":")))
     for fname, fs in [("districts", feats), ("enacted", efeats), ("states", sfeats)]:

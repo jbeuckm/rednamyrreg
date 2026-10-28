@@ -16,7 +16,7 @@ STRONG_MCD = {"CT", "ME", "MA", "MI", "MN", "NH", "NJ", "NY", "PA", "RI", "VT", 
 YEARS = ["16", "18", "20"]
 VOTE_COLS = ["pre_20_dem_bid", "pre_20_rep_tru", "ndv", "nrv"] + \
     [f"{x}_{y}" for y in YEARS for x in ("adv", "arv")]
-VAP_COLS = ["vap", "vap_white", "vap_black", "vap_hisp"]
+VAP_COLS = ["vap", "vap_white", "vap_black", "vap_hisp", "vap_asian"]
 
 
 @lru_cache(maxsize=1)

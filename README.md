@@ -2,6 +2,17 @@
 
 *Rednamyrreg* is "gerrymander" spelled backwards. The public proposal is called **Neutral Lines**.
 
+## The rules, in plain words
+
+1. **Same size.** Every district has the same number of people. Everyone counts.
+2. **One piece.** Every district is one connected piece.
+3. **Blindfolded.** The map never looks at how people vote, what race they are, or where politicians live.
+4. **Don't cut places apart.** Cut as few counties as possible. If a county has to be cut, keep its cities and towns whole. If a town has to be cut, keep its voting precincts whole.
+5. **Keep people close to the middle.** If two maps cut the same number of counties, pick the one where people live closest to the middle of their district.
+6. **Once every 10 years.** Make a new map only after each census. Anyone can check the math, and if someone finds a better map under these rules, theirs wins.
+
+The exact version of each rule is in [The rule](#the-rule) below.
+
 ## Mission
 
 **Find the fairest congressional districts that the largest possible share of Americans can agree to, and that a state could actually adopt, administer and defend in court.**
@@ -10,23 +21,23 @@ Each part of that mission rules something out:
 
 - **"Fairest" means fair in a way that can be proved, not merely claimed.** No map can guarantee fair outcomes for every arrangement of voters: Alexeev & Mixon (2018) proved that equal population, compactness and a bounded efficiency gap cannot always hold together. So fairness rests on the *process*:
   - the rule is written before anyone sees the data;
-  - it is blind to party, race and incumbents while drawing;
+  - it is one rule for every state, with no adjustable settings;
+  - it is blind to party, race and incumbents, both while drawing and while choosing between maps;
+  - it gives one answer: the plan that splits the fewest counties, then is the most compact, so nobody picks the outcome;
   - it is deterministic, so anyone can rerun it and get the same result;
-  - it publishes a certificate that anyone can check;
-  - its only use of election data is a bounded, party-symmetric final choice.
-- **"Agreement among all Americans" means designing for the other side's trust.** Voters of every party must be able to accept a map whose seat count they dislike. That requires process arguments over outcome arguments, local integrity (keep my county, town and precinct whole) and symmetry: if the parties swapped vote shares, they should swap seat shares. Where one state's change would cost one party, it is paired with a state where the change costs the other party (the Neutral Lines Compact), so no one disarms alone.
+  - it publishes a certificate that anyone can check.
+- **"Agreement among all Americans" means designing for the other side's trust.** Voters of every party must be able to accept a map whose seat count they dislike. That requires process arguments over outcome arguments, local integrity (keep my county, town and precinct whole), and a rule with no dial anyone could turn toward a side. Partisan fairness is measured and published, never used to choose. Adopted nationally, the rule changes every state at once, so no one disarms alone.
 - **"A viable, practical candidate" means passing every legal and administrative test a real plan faces.** The bar includes:
   - equal population to the person, on whole census blocks;
   - contiguity on true geometry;
   - lines along county, municipal, precinct or block boundaries;
   - few split precincts and no tiny ballot-secrecy fragments;
-  - each state's own law, including where it forbids partisan data;
   - a plan published as a standard block assignment file that election offices can load.
 
 ## Focus
 
 1. **Compute** a complete 435-district plan from 2020 Census blocks with one published rule (`pipeline/`).
-2. **Validate** it, and the maps actually in use for November 2026, with the same automated legal and practical checklist.
+2. **Validate** it, and the maps actually in use for November 2026, with the same automated legal and practical checklist, and test whether the rule could be tuned to favor a party.
 3. **Critique** the 2025–26 redraws and the reform proposals now in play, judging each for legality, compliance and its ability to build consensus. That includes our own approach. See [ASSESSMENT.md](ASSESSMENT.md).
 4. **Plan adoption**: name and framing, initiative, commission, court and federal paths, and the two-sided compact. The full plan is on the site.
 5. **Publish everything**, including where our plan does worse than an enacted map, because credibility with skeptics is the scarcest resource in redistricting.
@@ -44,8 +55,8 @@ This repository holds:
 
 The site has three pages:
 - `index.html`: the interactive map, built on MapLibre GL with OpenFreeMap / OpenStreetMap basemaps. It shows the formula plan, the 2026 maps and the history, with per-district explanations.
-- `fairness.html`: the plan from every perspective, legality state by state, and the assessment.
-- `state.html?st=XX`: one page per state. Each has the case for adoption, every district explained, a federal and state legal analysis, what a change in state law would allow, and the step-by-step process to adopt the plan there, with links to the official sources.
+- `fairness.html`: the plan from every perspective, the tuning test, federal legality state by state, and the assessment.
+- `state.html?st=XX`: one page per state. Each has every district explained, the federal legal analysis, the state rules a national standard would replace, and the process to adopt the plan there before a federal law, with links to the official sources.
 
 ## The rule
 
@@ -62,15 +73,19 @@ The centers *c_j* are the population centers of their districts, and the weights
 3. **Boundary transfers settle the last few hundred people.** They run along a spanning tree of district borders: whole precincts move first, then blocks are peeled off one precinct per border.
 4. **Single-block moves finish to the person.** A move is allowed only if it keeps districts contiguous and avoids new splits or tiny precinct pieces.
 
-**State-law modules** (`pipeline/statelaw.py`) handle states whose own law forbids parts of the general rule:
-- **Iowa and West Virginia:** whole counties only (Iowa Const. art. III §37; W. Va. Const. art. I §4).
-- **Ohio:** the full Art. XIX §2(B) rules. These cap county splits, keep Cleveland and Cincinnati whole, and allow two districts to share at most one county under 400,000.
-- **Colorado and Arizona:** the final selection maximizes competitive districts, as their constitutions ask.
+**Choosing the plan.** Each candidate starts from a seed angle on an even grid over 0–180°. A candidate is valid if it is contiguous and every district is within 0.3% at the county stage. The plan is the valid candidate that splits the **fewest counties**, then has the **smallest moment of inertia**; ties go to the smaller angle. The grid starts at 24 angles and doubles (48, 96, …) until a doubling finds no better plan. Most states stop at 48 angles; Wisconsin's search, the longest, ended at 1,536. The code stops at 3,072 as a safety limit, which no state reaches. No election, race or incumbent data are read at any step. Election data are loaded afterwards, only to audit the result.
 
-Choosing among the 24 deterministic candidate plans:
+**One national rule.** The same rule runs in all 50 states, with no state-specific modules. It is meant to be adopted by Congress under Art. I §4, replacing each state's own congressional criteria. `score.py` still reports how each plan measures against the main current state rules (Iowa and West Virginia whole counties, Ohio Art. XIX), so readers can see what a national standard would replace.
 
-- **Eligibility.** A candidate must be contiguous and within 0.3% at the county stage. Of those, the rule keeps plans near the fewest county splits, then plans within 5% of the most compact.
-- **Selection.** The rule picks the plan with the smallest party-symmetric partisan bias, averaged over the 2016, 2018 and 2020 statewide races. In IA, MT, NE, NM, CA and FL, where state law bars or restricts partisan data, it picks the most compact plan instead.
+**Checked against every idea of fairness.** We surveyed what Americans, both parties, civil-rights and reform groups, courts, researchers and other democracies mean by a fair map (`fairness.html#ideas`). Where an idea could be met without adding a setting someone could tune, it became part of the rule:
+
+- **Who counts:** every resident, with people in prison counted at their last home address, from a national Census Bureau tabulation the act would require. The 2020 demonstration uses raw counts everywhere, because that file does not exist yet.
+- **Fixed national definitions:** counties; municipalities (incorporated places, plus towns in the twelve town-government states); the Census Bureau's voting districts as precincts; blocks. Districts connect along shared block edges, and water inside a state connects.
+- **A public check of the data:** census counts and boundary files are published for correction before the rule runs. Corrections change data, never lines.
+- **Once per census:** no mid-decade redraws except by court order.
+- **Voting Rights Act remedies by formula:** if a court finds a Section 2 violation, the districts its judgment requires are fixed and the rule redraws the rest of the state.
+
+Ideas that need judgment or election data (competitiveness, proportionality, partisan symmetry, minority opportunity, typicality among neutral maps) are measured and published, never used to draw. Some ideas contradict each other outright, and the site says which way the rule goes and why.
 
 ## Reproduce
 
@@ -78,14 +93,14 @@ Choosing among the 24 deterministic candidate plans:
 python3 -m venv .venv && .venv/bin/pip install -r pipeline/requirements.txt
 pipeline/download.sh             # ~10 GB of Census + VEST/ALARM data into data/raw/
 cd pipeline
-../.venv/bin/python build.py     # county-level candidates and selection -> data/build/XX.pkl
+../.venv/bin/python build.py     # county-level search and selection -> data/build/XX.pkl
 ../.venv/bin/python refine.py    # municipality / precinct / block refinement -> data/build/refined/
 ../.venv/bin/python score.py     # block-level scoring + validation of both plans -> data/build/scored/
 ../.venv/bin/python export.py    # site data -> docs/data/
 ../.venv/bin/python -I history.py && ../.venv/bin/python export.py --history   # historical maps
 ```
 
-Every step also accepts state codes, such as `refine.py NC PA`. `WORKERS=n` sets the number of parallel processes (default 4 for `build.py`, 3 for `refine.py` and `score.py`). `build.py --reselect` re-applies the selection rule to saved candidates without recomputing them.
+Every step also accepts state codes, such as `refine.py NC PA`. `WORKERS=n` sets the number of parallel processes (default 4 for `build.py`, 3 for `refine.py` and `score.py`). `build.py` reuses candidates already saved in `data/build/`, so a rerun only computes new angles.
 
 The 120th-Congress block equivalency file (`cd120.zip`) is not fetched by `download.sh`. Download it from the Census Bureau's [mapping files page](https://www.census.gov/geographies/mapping-files/2027/dec/rdo/120-congressional-district-bef.html) into `data/raw/cd120/`, then split it by state into `data/raw/cd120/bystate/`.
 
@@ -97,7 +112,7 @@ The 120th-Congress block equivalency file (`cd120.zip`) is not fetched by `downl
 | `enacted.geojson` | Districts in use for November 2026 (Census 120th-Congress block equivalency file) |
 | `summary.json` | Per-state metrics for both plans, the validation checklist and the candidate ensemble |
 | `plans/XX.csv.gz` | **Block assignment file**: 2020 block GEOID → district (the authoritative plan) |
-| `plans/XX.json` | Certificate: projection, centers, weights, whole counties, split counties, refinement log |
+| `plans/XX.json` | Certificate: objective, search trace, projection, centers, weights, whole counties, split counties, refinement log |
 | `history/` | 15 historical maps (13th–119th Congress) and 34 annotated districts |
 | `process/` | For each state: who has authority, legal basis, criteria, mid-decade rules, every adoption path (with signature counts and deadlines), the best window, and official links |
 
@@ -112,7 +127,8 @@ The 120th-Congress block equivalency file (`cd120.zip`) is not fetched by `downl
 - **Compactness:** flags districts below the litigated range (PP < 0.10, Reock < 0.20) when they are also worse than the enacted map's least compact district.
 - **Splits:** county, municipality and precinct splits compared with the enacted map.
 - **Tiny precinct pieces:** split-precinct pieces with 1–99 residents (a ballot-secrecy concern).
-- **State limits:** Ohio's Art. XIX county-split caps and Iowa's 1% limit.
+- **Current state rules (reported, not enforced):** Iowa and West Virginia whole counties, Iowa's 1% limit, Ohio's Art. XIX caps.
+- **Audit only (never used to draw):** partisan bias, efficiency gap, mean–median, competitive districts, responsiveness, majority-Black, -Hispanic, -Asian and majority-minority districts, core retention against the current map, and where the rule's plan falls among all the valid plans the search found.
 
 ## Data
 
@@ -122,6 +138,7 @@ The 120th-Congress block equivalency file (`cd120.zip`) is not fetched by `downl
 
 ## Limits
 
-- The plans use raw Census counts. States that count prisoners at their home addresses would run the same rule on their adjusted counts.
+- The plans use raw Census counts. The national rule counts prisoners at their last home address, which needs a national tabulation that does not exist yet.
 - Communities of interest without legal boundaries are not protected.
-- Partisan measures describe how districts leaned in the 2016–20 statewide races. They are not forecasts.
+- Partisan measures describe how districts leaned in the 2016–20 statewide races. They are not forecasts, and the rule never uses them.
+- Compact, neutral maps lean Republican where Democrats cluster in cities. The rule does not correct for this, because any correction needs a fairness dial that could be tuned.
